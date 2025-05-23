@@ -1,0 +1,21 @@
+{
+  "type": "yumecraft:example",
+  "generator": {
+    "type" : "yumecraft:fractal",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "preset": "minecraft:overworld",
+      "biome": "yumecraft:example"
+    },
+    "world_height": 128,
+    "fractal": {
+      "type": "yumecraft:mandelbrot",
+      "max_iterations": 7,
+      "scale": 100,
+      "extends_in_third_dimension": true
+    },
+    "default_block": {
+      "Name": "yumecraft:bluestone"
+    }
+  }
+}

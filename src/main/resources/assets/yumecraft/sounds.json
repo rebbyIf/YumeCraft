@@ -1,0 +1,33 @@
+{
+  "music.000": {
+    "subtitle": "ループ「青光」 By 音師竹内",
+    "sounds" : [
+      {
+        "name": "yumecraft:music/mus_000",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "music.001": {
+    "subtitle": "sound2a_ By LSD",
+    "sounds" : [
+      {
+        "name": "yumecraft:music/mus_001",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "music.001.slowed90": {
+    "subtitle": "sound2a_ By LSD",
+    "sounds" : [
+      {
+        "name": "yumecraft:music/mus_001",
+        "pitch": 0.9,
+        "stream": true,
+        "preload": true
+      }
+    ]
+  }
+}

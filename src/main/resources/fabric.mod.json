@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "yumecraft",
+	"version": "${version}",
+	"name": "YumeCraft",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/yumecraft/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.rebby.yumecraft.YumeCraft"
+		],
+		"client": [
+			"dev.rebby.yumecraft.YumeCraftClient"
+		],
+		"fabric-datagen": [
+			"dev.rebby.yumecraft.YumeCraftDataGenerator"
+		]
+	},
+	"mixins": [
+		"yumecraft.mixins.json",
+		{
+			"config": "yumecraft.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

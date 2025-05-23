@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:max",
+    "argument1": -1,
+    "argument2": "yumecraft:example2/layer1"
+  },
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:max",
+      "argument1": -0.1,
+      "argument2": "yumecraft:example2/layer2"
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:max",
+        "argument1": -0.1,
+        "argument2": "yumecraft:example2/layer3"
+      },
+      "argument2": 0
+    }
+  }
+}

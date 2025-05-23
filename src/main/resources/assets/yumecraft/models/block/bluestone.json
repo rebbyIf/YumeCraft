@@ -1,0 +1,8 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "yumecraft:block/bluestone",
+		"particle": "yumecraft:block/bluestone"
+	}
+}

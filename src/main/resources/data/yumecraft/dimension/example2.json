@@ -1,0 +1,11 @@
+{
+  "type": "yumecraft:example",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "yumecraft:example"
+    },
+    "settings": "yumecraft:example2"
+  }
+}

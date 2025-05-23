@@ -1,0 +1,39 @@
+{
+  "temperature": 0,
+  "downfall": 0,
+  "has_precipitation": false,
+  "temperature_modifier": "none",
+  "effects": {
+    "sky_color": 0,
+    "fog_color": 64,
+    "water_color": 64,
+    "water_fog_color": 64,
+    "grass_color": 64,
+    "foliage_color": 64,
+    "ambient_sound": "yumecraft:music.001.slowed90",
+    "particle": {
+      "options": {
+        "type": "yumecraft:lingering_bubble"
+      },
+      "probability": 0.11
+    }
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "yumecraft:example2/twisting_vine_patches"
+    ]
+  ]
+}

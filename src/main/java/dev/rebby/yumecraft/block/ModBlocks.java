@@ -4,6 +4,7 @@ import dev.rebby.yumecraft.YumeCraft;
 import dev.rebby.yumecraft.items.ModItems;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -23,6 +24,12 @@ public class ModBlocks {
                     .strength(3.0f, 12.0f)
                     .requiresTool()
                     .sounds(BlockSoundGroup.STONE)));
+
+    public static final Block BUBBLING_MAGMA_BLOCK = registerWithItem("bubbling_magma",
+            new BubblingMagmaBlock(AbstractBlock.Settings.create()
+                    .strength(1.0f, 12.0f)
+                    .requiresTool()
+                    .ticksRandomly()));
 
     public static <T extends Block> T register(String name, T block) {
         return Registry.register(Registries.BLOCK, YumeCraft.id(name),block);

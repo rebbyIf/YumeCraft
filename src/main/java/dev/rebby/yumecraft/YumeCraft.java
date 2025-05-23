@@ -1,5 +1,6 @@
 package dev.rebby.yumecraft;
 
+import dev.rebby.yumecraft.block.entity.ModBlockEntityTypes;
 import dev.rebby.yumecraft.block.ModBlocks;
 import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.particle.ModParticles;
@@ -33,6 +34,7 @@ public class YumeCraft implements ModInitializer {
 		ModDensityFunctions.init();
 		ModItems.init();
 		ModBlocks.init();
+		ModBlockEntityTypes.init();
 		ModParticles.init();
 		ModSounds.init();
 		LOGGER.info("Hello Fabric world!");

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "yumecraft:bluestone"
+    "yumecraft:bluestone",
+    "yumecraft:bubbling_magma"
   ]
 }

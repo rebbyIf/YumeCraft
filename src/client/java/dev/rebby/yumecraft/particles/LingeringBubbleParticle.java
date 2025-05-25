@@ -18,7 +18,7 @@ public class LingeringBubbleParticle extends AscendingParticle {
     ) {
         super (world, x, y, z, 0.2f, 0.0f, 0.2f,
                 velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider, 1.0f,
-                30, 0.01f, true);
+                30, 0, true);
     }
 
     @Environment(EnvType.CLIENT)

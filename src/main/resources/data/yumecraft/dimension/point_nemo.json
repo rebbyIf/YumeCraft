@@ -1,11 +1,11 @@
 {
-  "type": "yumecraft:example",
+  "type": "yumecraft:point_nemo",
   "generator": {
     "type": "minecraft:noise",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "yumecraft:example"
+      "biome": "yumecraft:point_nemo"
     },
-    "settings": "yumecraft:example2"
+    "settings": "yumecraft:point_nemo"
   }
 }

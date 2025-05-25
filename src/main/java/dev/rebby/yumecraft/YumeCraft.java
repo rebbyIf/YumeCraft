@@ -5,6 +5,7 @@ import dev.rebby.yumecraft.block.ModBlocks;
 import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.particle.ModParticles;
 import dev.rebby.yumecraft.sound.ModSounds;
+import dev.rebby.yumecraft.util.DimensionalTeleportationHandler;
 import dev.rebby.yumecraft.world.gen.FractalChunkGenerator;
 import dev.rebby.yumecraft.world.gen.densityfunction.ModDensityFunctions;
 import dev.rebby.yumecraft.world.gen.fractal.FractalTypes;
@@ -29,6 +30,9 @@ public class YumeCraft implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+
+		DimensionalTeleportationHandler.init();
+
 		Registry.register(Registries.CHUNK_GENERATOR, Identifier.of(MOD_ID, "fractal"), FractalChunkGenerator.CODEC);
 		FractalTypes.init();
 		ModDensityFunctions.init();

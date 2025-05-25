@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:add",
+  "argument1": "yumecraft:point_nemo/terrain",
+  "argument2": -0.1
+}

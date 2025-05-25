@@ -1,9 +1,9 @@
 {
   "default_block": {
-    "Name": "yumecraft:bluestone"
+    "Name": "minecraft:stone"
   },
   "default_fluid": {
-    "Name": "minecraft:water"
+    "Name": "minecraft:air"
   },
   "sea_level": 0,
   "disable_mob_generation": true,
@@ -30,8 +30,8 @@
     "erosion": 0,
     "depth": 0,
     "ridges": 0,
-    "initial_density_without_jaggedness": 0,
-    "final_density": "yumecraft:example2/terrain"
+    "initial_density_without_jaggedness": "yumecraft:point_nemo/final",
+    "final_density": "yumecraft:point_nemo/final"
   },
   "spawn_target": [],
   "surface_rule": {

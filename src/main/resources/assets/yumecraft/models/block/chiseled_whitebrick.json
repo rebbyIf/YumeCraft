@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "yumecraft:block/chiseled_whitebrick",
+    "particle": "yumecraft:block/chiseled_whitebrick"
+  }
+}

@@ -6,9 +6,11 @@ import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.particle.ModParticles;
 import dev.rebby.yumecraft.sound.ModSounds;
 import dev.rebby.yumecraft.util.DimensionalTeleportationHandler;
-import dev.rebby.yumecraft.world.gen.FractalChunkGenerator;
-import dev.rebby.yumecraft.world.gen.densityfunction.ModDensityFunctions;
+import dev.rebby.yumecraft.world.gen.chunk_generator.FractalChunkGenerator;
+import dev.rebby.yumecraft.world.gen.chunk_generator.ModChunkGenerators;
+import dev.rebby.yumecraft.world.gen.density_function.ModDensityFunctions;
 import dev.rebby.yumecraft.world.gen.fractal.FractalTypes;
+import dev.rebby.yumecraft.world.gen.structure.InfiniteStructureTypes;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.registry.Registries;
@@ -33,9 +35,10 @@ public class YumeCraft implements ModInitializer {
 
 		DimensionalTeleportationHandler.init();
 
-		Registry.register(Registries.CHUNK_GENERATOR, Identifier.of(MOD_ID, "fractal"), FractalChunkGenerator.CODEC);
+		InfiniteStructureTypes.init();
 		FractalTypes.init();
 		ModDensityFunctions.init();
+		ModChunkGenerators.register();
 		ModItems.init();
 		ModBlocks.init();
 		ModBlockEntityTypes.init();

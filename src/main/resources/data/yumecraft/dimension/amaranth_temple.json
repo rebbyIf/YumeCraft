@@ -1,0 +1,26 @@
+{
+  "type": "yumecraft:amaranth_temple",
+  "generator": {
+    "type": "yumecraft:structure",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "yumecraft:amaranth_temple"
+    },
+    "structure" : {
+      "type": "yumecraft:density_based",
+      "min_y": 0,
+      "max_y": 200,
+      "factor": 2,
+      "density_function" : "yumecraft:amaranth_temple/test",
+      "structure_pieces": [
+        {
+          "min_inclusive": 0.0,
+          "max_inclusive": 2.0,
+          "location": "yumecraft:amaranth_temple/base"
+        }
+      ]
+    },
+    "minimum_y": 0,
+    "world_height": 256
+  }
+}

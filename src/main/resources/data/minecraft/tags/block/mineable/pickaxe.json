@@ -3,6 +3,8 @@
   "values": [
     "yumecraft:bluestone",
     "yumecraft:blue_cobble",
-    "yumecraft:bubbling_magma"
+    "yumecraft:bubbling_magma",
+    "yumecraft:whitebrick",
+    "yumecraft:chiseled_whitebrick"
   ]
 }

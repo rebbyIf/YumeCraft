@@ -1,4 +1,4 @@
-package dev.rebby.yumecraft.world.gen.densityfunction;
+package dev.rebby.yumecraft.world.gen.density_function;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "yumecraft:bluestone",
-    "yumecraft:bubbling_magma"
+    "yumecraft:bubbling_magma",
+    "yumecraft:whitebrick",
+    "yumecraft:chiseled_whitebrick"
   ]
 }

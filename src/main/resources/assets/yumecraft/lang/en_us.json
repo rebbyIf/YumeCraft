@@ -1,5 +1,7 @@
 {
   "block.yumecraft.bluestone": "Bluestone",
   "block.yumecraft.blue_cobble": "Blue Cobble",
-  "block.yumecraft.bubbling_magma" : "Bubbling Magma"
+  "block.yumecraft.bubbling_magma" : "Bubbling Magma",
+  "block.yumecraft.whitebrick": "Whitebrick",
+  "block.yumecraft.chiseled_whitebrick": "Chiseled Whitebrick"
 }

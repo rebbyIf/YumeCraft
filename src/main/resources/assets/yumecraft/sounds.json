@@ -29,5 +29,16 @@
         "preload": true
       }
     ]
+  },
+  "step.000": {
+    "subtitle" : "575-ashioto 1-2",
+    "sounds": [
+      {
+        "name": "yumecraft:step/step_000-0"
+      },
+      {
+        "name": "yumecraft:step/step_000-1"
+      }
+    ]
   }
 }

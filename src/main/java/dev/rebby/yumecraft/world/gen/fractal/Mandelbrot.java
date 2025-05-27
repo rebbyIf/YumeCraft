@@ -5,36 +5,14 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.Vec2f;
 
-public class Mandelbrot implements Fractal{
+public record Mandelbrot(int maxIter, int scale, boolean extendsInThirdDimension) implements Fractal {
 
     public static final MapCodec<Mandelbrot> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Codec.INT.fieldOf("max_iterations").forGetter(Mandelbrot::getMaxIter),
-                    Codec.INT.fieldOf("scale").forGetter(Mandelbrot::getScale),
+                    Codec.INT.fieldOf("max_iterations").forGetter(Mandelbrot::maxIter),
+                    Codec.INT.fieldOf("scale").forGetter(Mandelbrot::scale),
                     Codec.BOOL.fieldOf("extends_in_third_dimension").forGetter(Mandelbrot::extendsInThirdDimension)
             ).apply(instance, Mandelbrot::new));
-
-    private final int maxIter;
-    private final int scale;
-    private final boolean extendsInThirdDimension;
-
-    public Mandelbrot(int maxIter, int scale, boolean extendsInThirdDimension) {
-        this.maxIter = maxIter;
-        this.scale = scale;
-        this.extendsInThirdDimension = extendsInThirdDimension;
-    }
-
-    public int getMaxIter(){
-        return maxIter;
-    }
-
-    public int getScale(){
-        return scale;
-    }
-
-    public boolean extendsInThirdDimension(){
-        return extendsInThirdDimension;
-    }
 
     @Override
     public float getValue(float x, float y, float z) {
@@ -85,8 +63,8 @@ public class Mandelbrot implements Fractal{
         return sum;
     }
 
-    private Vec2f squareImaginary( Vec2f i) {
-        return new Vec2f( i.x * i.x - i.y * i.y, 2 * i.x * i.y);
+    private Vec2f squareImaginary(Vec2f i) {
+        return new Vec2f(i.x * i.x - i.y * i.y, 2 * i.x * i.y);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package dev.rebby.yumecraft.world.gen;
+package dev.rebby.yumecraft.world.gen.chunk_generator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

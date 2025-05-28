@@ -2,6 +2,7 @@ package dev.rebby.yumecraft.world.gen.structure;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.structure.StructureTemplateManager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
@@ -11,8 +12,6 @@ public interface InfiniteStructure {
 
     Codec<InfiniteStructure> INFINITE_STRUCTURE_CODEC = InfiniteStructureType.REGISTRY.getCodec()
             .dispatch("type",InfiniteStructure::getType, InfiniteStructureType::codec);
-
-    void load();
 
 
     void generate(StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Chunk chunk);
@@ -25,6 +24,8 @@ public interface InfiniteStructure {
      */
     @Nullable
     VerticalBlockSample getColumnSample(int x, int z);
+
+    double getSample(BlockPos pos);
 
     InfiniteStructureType<?> getType();
 }

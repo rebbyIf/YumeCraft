@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "yumecraft:block/whitebrick",
+    "side": "yumecraft:block/whitebrick",
+    "top": "yumecraft:block/whitebrick"
+  }
+}

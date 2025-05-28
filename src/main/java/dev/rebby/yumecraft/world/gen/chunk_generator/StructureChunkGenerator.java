@@ -19,8 +19,10 @@ import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkNoiseSampler;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.noise.NoiseConfig;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -113,6 +115,7 @@ public class StructureChunkGenerator extends ChunkGenerator {
 
     @Override
     public void getDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
-
+        DecimalFormat decimalFormat = new DecimalFormat("0.000");
+        text.add("Infinite structure density: "+ decimalFormat.format(infiniteStructure.getSample(pos)));
     }
 }

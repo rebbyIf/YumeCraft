@@ -2,6 +2,7 @@ package dev.rebby.yumecraft;
 
 import dev.rebby.yumecraft.block.entity.ModBlockEntityTypes;
 import dev.rebby.yumecraft.block.ModBlocks;
+import dev.rebby.yumecraft.items.ModItemGroups;
 import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.particle.ModParticles;
 import dev.rebby.yumecraft.sound.ModSounds;
@@ -41,6 +42,7 @@ public class YumeCraft implements ModInitializer {
 		ModChunkGenerators.register();
 		ModItems.init();
 		ModBlocks.init();
+		ModItemGroups.init();
 		ModBlockEntityTypes.init();
 		ModParticles.init();
 		ModSounds.init();

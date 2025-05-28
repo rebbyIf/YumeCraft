@@ -9,7 +9,7 @@
   "argument2": {
     "type": "minecraft:y_clamped_gradient",
     "from_y": 0,
-    "to_y": 200,
+    "to_y": 100,
     "from_value": 1,
     "to_value": -1.1
   }

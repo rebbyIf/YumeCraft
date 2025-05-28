@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.LocalRandom;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
@@ -25,7 +26,7 @@ public class NoiseDensity implements DensityFunction {
     public static final CodecHolder<NoiseDensity> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
 
     public NoiseDensity(DensityFunction.Noise noise, double xzScale, double yScale){
-        DoublePerlinNoiseSampler doublePerlinNoiseSampler = DoublePerlinNoiseSampler.create(new LocalRandom(1L), noise.noiseData().value());
+        DoublePerlinNoiseSampler doublePerlinNoiseSampler = DoublePerlinNoiseSampler.create(new CheckedRandom(1L), noise.noiseData().value());
         this.noise = new DensityFunction.Noise(noise.noiseData(), doublePerlinNoiseSampler);
         this.xzScale = xzScale;
         this.yScale = yScale;

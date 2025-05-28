@@ -4,6 +4,9 @@
     "yumecraft:bluestone",
     "yumecraft:bubbling_magma",
     "yumecraft:whitebrick",
-    "yumecraft:chiseled_whitebrick"
+    "yumecraft:chiseled_whitebrick",
+    "yumecraft:whitebrick_stairs",
+    "yumecraft:whitebrick_slab",
+    "yumecraft:chiseled_whitebrick_slab"
   ]
 }

@@ -5,6 +5,8 @@ import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.sound.ModSounds;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -39,6 +41,15 @@ public class ModBlocks {
 
     public static final Block CHISELED_WHITEBRICK = registerWithItem("chiseled_whitebrick",
             new Block(AbstractBlock.Settings.copy(WHITEBRICK)));
+
+    public static final StairsBlock WHITEBRICK_STAIRS = registerWithItem("whitebrick_stairs",
+            new StairsBlock(WHITEBRICK.getDefaultState(), AbstractBlock.Settings.copy(WHITEBRICK)));
+
+    public static final SlabBlock WHITEBRICK_SLAB = registerWithItem("whitebrick_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(WHITEBRICK)));
+
+    public static final SlabBlock CHISELED_WHITEBRICK_SLAB = registerWithItem("chiseled_whitebrick_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(WHITEBRICK)));
 
     public static <T extends Block> T register(String name, T block) {
         return Registry.register(Registries.BLOCK, YumeCraft.id(name),block);

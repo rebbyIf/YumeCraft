@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "yumecraft:block/whitebrick_slab"
+    },
+    "type=double": {
+      "model": "yumecraft:block/whitebrick"
+    },
+    "type=top": {
+      "model": "yumecraft:block/whitebrick_slab_top"
+    }
+  }
+}

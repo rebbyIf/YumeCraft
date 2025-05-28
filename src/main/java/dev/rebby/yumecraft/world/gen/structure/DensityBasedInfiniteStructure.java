@@ -1,6 +1,7 @@
 package dev.rebby.yumecraft.world.gen.structure;
 
 import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
@@ -12,30 +13,28 @@ import net.minecraft.structure.StructureTemplate;
 import net.minecraft.structure.StructureTemplateManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
-import net.minecraft.util.math.random.LocalRandom;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
-import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, RegistryEntry<DensityFunction> densityFunctionEntry, List<DensityBasedInfiniteStructure.Structure> structures) implements InfiniteStructure{
+public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, RegistryEntry<DensityFunction> densityFunctionEntry,
+                                            Map<String, Pair<Double, Double>> values, List<DensityBasedInfiniteStructure.Structure> structures) implements InfiniteStructure{
 
     public static final Codec<Either<Identifier, StructureTemplate>> LOCATION_CODEC = Codec.of(
             DensityBasedInfiniteStructure.Structure::encodeLocation, Identifier.CODEC.map(Either::left));
 
     public static final MapCodec<DensityBasedInfiniteStructure.Structure> STRUCTURE_CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    Codec.DOUBLE.fieldOf("min_inclusive").forGetter(DensityBasedInfiniteStructure.Structure::min_inclusive),
-                    Codec.DOUBLE.fieldOf("max_inclusive").forGetter(DensityBasedInfiniteStructure.Structure::max_inclusive),
-                    LOCATION_CODEC.fieldOf("location").forGetter(DensityBasedInfiniteStructure.Structure::location))
+                    LOCATION_CODEC.fieldOf("location").forGetter(DensityBasedInfiniteStructure.Structure::location),
+                    BlockPos.CODEC.fieldOf("size").forGetter(DensityBasedInfiniteStructure.Structure::size),
+                    BlockPos.CODEC.fieldOf("offset").forGetter(DensityBasedInfiniteStructure.Structure::offset),
+                    Codec.STRING.listOf().fieldOf("grid").forGetter(DensityBasedInfiniteStructure.Structure::grid3D))
                     .apply(instance, DensityBasedInfiniteStructure.Structure::new));
 
     public static final MapCodec<DensityBasedInfiniteStructure> CODEC = RecordCodecBuilder.mapCodec(
@@ -44,35 +43,12 @@ public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, Registr
                     Codec.INT.fieldOf("max_y").forGetter(DensityBasedInfiniteStructure::maxY),
                     Codec.intRange(2, 4).fieldOf("factor").forGetter(DensityBasedInfiniteStructure::fac),
                     DensityFunction.REGISTRY_ENTRY_CODEC.fieldOf("density_function").forGetter(DensityBasedInfiniteStructure::densityFunctionEntry),
-                    STRUCTURE_CODEC.codec().listOf().fieldOf("structure_pieces").forGetter(DensityBasedInfiniteStructure::structures))
+                    Codec.unboundedMap(Codec.STRING,
+                            Codec.pair(Codec.DOUBLE.fieldOf("minimum").codec(),
+                                    Codec.DOUBLE.fieldOf("maximum").codec()))
+                            .fieldOf("values").forGetter(DensityBasedInfiniteStructure::values),
+                    STRUCTURE_CODEC.codec().listOf().fieldOf("structures").forGetter(DensityBasedInfiniteStructure::structures))
                     .apply(instance, DensityBasedInfiniteStructure::new));
-
-    @Override
-    public void load() {
-        densityFunctionEntry.value().apply(new DensityFunction.DensityFunctionVisitor() {
-            private final Map<DensityFunction, DensityFunction> unwrapped = new HashMap<>();
-
-            private DensityFunction unwrap(DensityFunction densityFunction) {
-                if (densityFunction instanceof DensityFunctionTypes.RegistryEntryHolder registryEntryHolder) {
-                    return (DensityFunction) registryEntryHolder.function().value();
-                } else if (densityFunction instanceof DensityFunctionTypes.Wrapper wrapper) {
-                    return wrapper.wrapped();
-                } else {
-                    return densityFunction;
-                }
-            }
-
-            public DensityFunction apply(DensityFunction densityFunction) {
-                return (DensityFunction)this.unwrapped.computeIfAbsent(densityFunction, this::unwrap);
-            }
-
-            @Override
-            public DensityFunction.Noise apply(DensityFunction.Noise noiseDensityFunction) {
-                DoublePerlinNoiseSampler doublePerlinNoiseSampler = DoublePerlinNoiseSampler.create(new LocalRandom(1L), noiseDensityFunction.noiseData().value());
-                return new DensityFunction.Noise(noiseDensityFunction.noiseData(), doublePerlinNoiseSampler);
-            }
-        });
-    }
 
     @Override
     public void generate(StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Chunk chunk) {
@@ -85,7 +61,7 @@ public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, Registr
                     double density = densityFunctionEntry.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
                     //System.out.println("Y = "+pos.getY()+", density: "+density);
                     for (DensityBasedInfiniteStructure.Structure structure : structures) {
-                        if (structure.place(density, pos, structureTemplateManager, world)){
+                        if (structure.place(scale, pos, densityFunctionEntry.value(), structureTemplateManager, world, values)){
 
                             break;
                         }
@@ -101,11 +77,16 @@ public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, Registr
     }
 
     @Override
+    public double getSample(BlockPos pos) {
+        return densityFunctionEntry.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
+    }
+
+    @Override
     public InfiniteStructureType<?> getType() {
         return InfiniteStructureTypes.DENSITY_BASED_STRUCTURE;
     }
 
-    public record Structure(double min_inclusive, double max_inclusive, Either<Identifier, StructureTemplate> location) {
+    public record Structure(Either<Identifier, StructureTemplate> location, BlockPos size, BlockPos offset, List<String> grid3D) {
 
         // Copied from minecraft's source
         private static <T> DataResult<T> encodeLocation(Either<Identifier, StructureTemplate> location, DynamicOps<T> ops, T prefix) {
@@ -119,10 +100,34 @@ public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, Registr
             return this.location.map(structureTemplateManager::getTemplateOrBlank, Function.identity());
         }
 
-        private boolean place(double density, BlockPos pos, StructureTemplateManager structureTemplateManager, ServerWorldAccess world) {
-            if (density > max_inclusive || density < min_inclusive) {
+        private boolean place(int scale, BlockPos pos, DensityFunction densityFunction, StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Map<String, Pair<Double, Double>> values) {
+            if (size.getX() * size.getX() * size.getZ() > grid3D.size()) {
                 return false;
             }
+
+            int index = 0;
+            for (int j = 0; j < size.getY(); j++) {
+                for (int i = 0; i < size.getX(); i++) {
+                    for (int k = 0; k < size.getZ(); k++) {
+                        Pair<Double, Double> range = values.get(grid3D.get(index));
+                        if (range != null) {
+                            if (range.getFirst() > range.getSecond()) {
+                                return false;
+                            }
+
+                            BlockPos gridLoc = offset.add(i, j, k);
+                            BlockPos loc = pos.add(gridLoc.getX() * scale, gridLoc.getY() * scale, gridLoc.getZ() * scale);
+                            double density = densityFunction.sample(new DensityFunction.UnblendedNoisePos(loc.getX(), loc.getY(), loc.getZ()));
+                            if (density < range.getFirst() || density >= range.getSecond()) {
+                                return false;
+                            }
+                        }
+
+                        index++;
+                    }
+                }
+            }
+
 
             //System.out.println("Printing Structure");
 
@@ -134,7 +139,7 @@ public record DensityBasedInfiniteStructure(int minY, int maxY, int fac, Registr
 //            if (is)
 //                System.out.println("Printing Structure");
 
-            return true;
+            return is;
         }
     }
 }

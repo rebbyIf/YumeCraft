@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "yumecraft:chiseled_whitebrick",
+          "functions": [],
+          "conditions": []
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "yumecraft:blocks/chiseled_whitebrick"
+}

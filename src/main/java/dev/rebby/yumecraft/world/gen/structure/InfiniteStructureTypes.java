@@ -20,6 +20,8 @@ public class InfiniteStructureTypes {
 
         Codec<InfiniteStructure> structureCodec = structureTypeCodec.dispatch("type", InfiniteStructure::getType, InfiniteStructureType::codec);
 
-        YumeCraft.LOGGER.info("Registering Fractals for " + YumeCraft.MOD_ID);
+        InfiniteStructure.CheckValueTypes.init();
+
+        YumeCraft.LOGGER.info("Registering Infinite Structures for " + YumeCraft.MOD_ID);
     }
 }

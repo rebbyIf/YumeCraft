@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.rebby.yumecraft.world.gen.structure.InfiniteStructure;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.structure.StructureTemplateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
@@ -44,12 +45,16 @@ public class StructureChunkGenerator extends ChunkGenerator {
     private final InfiniteStructure infiniteStructure;
     private final int minY;
     private final int worldHeight;
+    private StructureTemplateManager structureTemplateManager;
+    private Long seed;
 
     public StructureChunkGenerator(BiomeSource biomeSource, InfiniteStructure infiniteStructure, int minY, int worldHeight) {
         super(biomeSource);
         this.infiniteStructure = infiniteStructure;
         this.minY = minY;
         this.worldHeight = worldHeight;
+        structureTemplateManager = null;
+        seed = null;
         //this.infiniteStructure.load();
     }
 
@@ -65,9 +70,15 @@ public class StructureChunkGenerator extends ChunkGenerator {
 
     @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
+        if (seed == null) {
+            seed = region.getSeed();
+        }
         MinecraftServer server = region.getServer();
         if (server != null) {
-            infiniteStructure.generate(server.getStructureTemplateManager(), region, chunk);
+            if (structureTemplateManager == null) {
+                structureTemplateManager = server.getStructureTemplateManager();
+            }
+            infiniteStructure.generate(structureTemplateManager, region, chunk);
         }
         else {
             System.out.println("Error: cannot find server");
@@ -115,6 +126,11 @@ public class StructureChunkGenerator extends ChunkGenerator {
 
     @Override
     public void getDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
+        if (structureTemplateManager != null && seed != null) {
+            infiniteStructure.generateDebugHudText(text, noiseConfig, pos, structureTemplateManager, seed);
+            return;
+        }
+
         DecimalFormat decimalFormat = new DecimalFormat("0.000");
         text.add("Infinite structure density: "+ decimalFormat.format(infiniteStructure.getSample(pos)));
     }

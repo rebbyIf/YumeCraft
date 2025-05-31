@@ -1,7 +1,6 @@
 package dev.rebby.yumecraft.world.gen.structure;
 
 import com.mojang.datafixers.util.Either;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
@@ -21,8 +20,10 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
+import net.minecraft.world.gen.noise.NoiseConfig;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 
@@ -33,6 +34,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
 
     public static final MapCodec<Structure> STRUCTURE_CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
+                            Codec.string(0,100).optionalFieldOf("name", "unnamed").forGetter(Structure::name),
                             DataPool.createCodec(STRUCTURE_TEMPLATE_CODEC).fieldOf("elements").forGetter(Structure::structurePool),
                             BlockPos.CODEC.fieldOf("bounding_size").forGetter(Structure::boundingSize),
                             BlockPos.CODEC.optionalFieldOf("size", new BlockPos(1,1,1)).forGetter(Structure::size),
@@ -47,22 +49,23 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
                             Codec.INT.fieldOf("max_y").forGetter(DensityBasedInfiniteStructure::maxY),
                             Codec.intRange(2, 4).fieldOf("factor").forGetter(DensityBasedInfiniteStructure::fac),
                             DensityFunction.REGISTRY_ENTRY_CODEC.fieldOf("density_function").forGetter(DensityBasedInfiniteStructure::densityFunctionEntry),
-                            Codec.unboundedMap(Codec.STRING,
-                                            Codec.pair(Codec.DOUBLE.fieldOf("minimum").codec(),
-                                                    Codec.DOUBLE.fieldOf("maximum").codec()))
-                                    .fieldOf("values").forGetter(DensityBasedInfiniteStructure::values),
+                            Codec.unboundedMap(Codec.STRING, CheckValue.VALUE_CODEC).fieldOf("values").forGetter(DensityBasedInfiniteStructure::values),
                             STRUCTURE_CODEC.codec().listOf().fieldOf("structures").forGetter(DensityBasedInfiniteStructure::structures))
                     .apply(instance, DensityBasedInfiniteStructure::new));
+
+    public static final String STRUCTURE_ALREADY_PLACED = "This structure has already been placed!";
+    public static final String STRUCTURE_CAN_BE_PLACED = "Structure can be placed!";
+
     private final int minY;
     private final int maxY;
     private final int fac;
     private final RegistryEntry<DensityFunction> densityFunctionEntry;
-    private final Map<String, Pair<Double, Double>> values;
+    private final Map<String, CheckValue> values;
     private final List<Structure> structures;
     private final NotRandom setRandom;
 
     public DensityBasedInfiniteStructure(int minY, int maxY, int fac, RegistryEntry<DensityFunction> densityFunctionEntry,
-                                         Map<String, Pair<Double, Double>> values, List<Structure> structures) {
+                                         Map<String, CheckValue> values, List<Structure> structures) {
         this.minY = minY;
         this.maxY = maxY;
         this.fac = fac;
@@ -90,7 +93,6 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
                     //System.out.println("Y = "+pos.getY()+", density: "+density);
                     for (Structure structure : structures) {
                         if (structure.place(scale, pos, densityFunctionEntry.value(), structureTemplateManager, world, values, setRandom)) {
-
                             break;
                         }
                     }
@@ -107,6 +109,29 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
     @Override
     public double getSample(BlockPos pos) {
         return densityFunctionEntry.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
+    }
+
+    @Override
+    public void generateDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos, StructureTemplateManager structureTemplateManager, long seed) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.000");
+        text.add("Infinite structure density: "+ decimalFormat.format(getSample(pos)));
+
+        int scale = (int) Math.pow(2, fac);
+        BlockPos startPos = new BlockPos(pos.getX() / scale, pos.getY() / scale, pos.getZ() / scale).multiply(scale);
+
+        String output = "No structures!";
+        String name = "unnamed";
+        for (Structure structure : structures) {
+             output = structure.canPlace(scale, startPos, densityFunctionEntry.value(),
+                    structureTemplateManager, seed, values, setRandom);
+             name = structure.name;
+
+            if (output.equals(STRUCTURE_ALREADY_PLACED) || output.equals(STRUCTURE_CAN_BE_PLACED)) {
+                break;
+            }
+        }
+
+        text.add(name + ": " + output);
     }
 
     @Override
@@ -130,7 +155,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
         return densityFunctionEntry;
     }
 
-    public Map<String, Pair<Double, Double>> values() {
+    public Map<String, CheckValue> values() {
         return values;
     }
 
@@ -168,7 +193,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
     }
 
 
-    public record Structure(DataPool<Either<Identifier, StructureTemplate>> structurePool, BlockPos boundingSize,
+    public record Structure(String name, DataPool<Either<Identifier, StructureTemplate>> structurePool, BlockPos boundingSize,
                             BlockPos size, BlockPos location, boolean alternate, List<String> grid3D) {
 
         // Copied from minecraft's source
@@ -190,23 +215,28 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
             return optionalStructure.map(identifierStructureTemplateEither -> identifierStructureTemplateEither.map(structureTemplateManager::getTemplateOrBlank, Function.identity())).orElse(null);
         }
 
-        private boolean checkPlace(BlockPos pos, int scale, Map<String, Pair<Double, Double>> values, DensityFunction densityFunction) {
+        private boolean checkPlace(BlockPos pos, int scale, Map<String, CheckValue> values, DensityFunction densityFunction) {
+            BlockPos min = pos.subtract(location.multiply(scale));
+            BlockPos max = min.add(boundingSize.multiply(scale));
+
             int index = 0;
             for (int j = 0; j < boundingSize.getY(); j++) {
                 for (int i = 0; i < boundingSize.getX(); i++) {
                     for (int k = 0; k < boundingSize.getZ(); k++) {
-                        Pair<Double, Double> range = values.get(grid3D.get(index));
-                        if (range != null) {
-                            if (range.getFirst() > range.getSecond()) {
+                        CheckValue value = values.get(grid3D.get(index));
+                        if (value != null) {
+                            BlockPos gridLoc = location.multiply(-1).add(i, j, k).multiply(scale);
+                            BlockPos loc = pos.add(gridLoc);
+                            boolean result = value.check(densityFunction, loc, min, max, scale);
+                            if (!result && value.doesOverrideIfFalse()) {
                                 return false;
                             }
 
-                            BlockPos gridLoc = location.multiply(-1).add(i, j, k);
-                            BlockPos loc = pos.add(gridLoc.getX() * scale, gridLoc.getY() * scale, gridLoc.getZ() * scale);
-                            double density = densityFunction.sample(new DensityFunction.UnblendedNoisePos(loc.getX(), loc.getY(), loc.getZ()));
-                            if (density < range.getFirst() || density >= range.getSecond()) {
-                                return false;
+                            if (result && value.doesOverrideIfTrue()) {
+                                return true;
                             }
+
+
                         }
 
                         index++;
@@ -216,12 +246,74 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
             return true;
         }
 
+        private String canPlace(int scale, BlockPos pos, DensityFunction densityFunction,
+                                StructureTemplateManager structureTemplateManager, long seed,
+                                Map<String, CheckValue> values, NotRandom random){
+            if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size()) {
+                return "Bounding Size out of bounds!";
+            }
+
+
+
+            BlockPos boundingSize = size.multiply(scale);
+
+            BlockPos distanceFromOrigin = new BlockPos(pos.getX() % boundingSize.getX(),
+                    pos.getY() % boundingSize.getY(),
+                    pos.getZ() % boundingSize.getZ());
+
+            if (alternate) {
+                int rand1 = random.setValue(seed).nextInt();
+                int rand2 = random.setValue(rand1 + pos.getX()).nextInt();
+                int offset = random.setValue(rand2 + pos.getZ()).nextInt(size.getY()) * scale;
+
+                distanceFromOrigin = new BlockPos(distanceFromOrigin.getX(),
+                        (distanceFromOrigin.getY() + offset) % boundingSize.getY(),
+                        distanceFromOrigin.getZ());
+            }
+
+
+            if (!distanceFromOrigin.equals(BlockPos.ORIGIN)) {
+                StructureTemplate originStructure = getStructure(structureTemplateManager, pos.subtract(distanceFromOrigin), seed, random);
+
+                //                    System.out.println("Distance from origin: "+ distanceFromOrigin);
+                //                    if (originStructure == null) {
+                //                        System.out.println("Original Structure null!");
+                //                    } else {
+                //                        System.out.println("Original structure size: " + originStructure.getSize());
+                //                    }
+                if (!checkPlace(pos.subtract(distanceFromOrigin), scale, values, densityFunction)){
+                    return "Origin does not match the grid!";
+                }
+
+                if (originStructure == null || originStructure.getSize().equals(Vec3i.ZERO))
+                    return "Original structure is empty!";
+
+                return STRUCTURE_ALREADY_PLACED;
+            }
+
+            if (!checkPlace(pos, scale, values, densityFunction)) {
+                return "This place does not match the grid!";
+            }
+
+            StructureTemplate structureTemplate = getStructure(structureTemplateManager, pos, seed, random);
+
+            if (structureTemplate == null) {
+                return "No structure found!";
+            }
+
+            if (structureTemplate.getSize().equals(Vec3i.ZERO)) {
+                return "Structure is empty";
+            }
+
+            return STRUCTURE_CAN_BE_PLACED;
+        }
+
         private boolean place(int scale, BlockPos pos, DensityFunction densityFunction,
                               StructureTemplateManager structureTemplateManager, ServerWorldAccess world,
-                              Map<String, Pair<Double, Double>> values, NotRandom random) {
+                              Map<String, CheckValue> values, NotRandom random) {
 
-            if (boundingSize.getX() * boundingSize.getX() * boundingSize.getZ() > grid3D.size()) {
-                return false;
+            if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size()) {
+                //return false;
             }
 
 //            for (Weighted.Present<Either<Identifier, StructureTemplate>> entry : structurePool.getEntries()) {
@@ -298,6 +390,159 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
             boolean is = structureTemplate.place(world, pos, pos, structurePlacementData, world.getRandom(), 2);
 
             return is;
+        }
+    }
+
+    public record CheckDefaultValue(double min, double max) implements CheckValue {
+
+        public static final MapCodec<CheckDefaultValue> DEFAULT_VALUE_CODEC = RecordCodecBuilder.mapCodec(instance ->
+                instance.group(
+                        Codec.DOUBLE.fieldOf("minimum").forGetter(CheckDefaultValue::min),
+                        Codec.DOUBLE.fieldOf("maximum").forGetter(CheckDefaultValue::max))
+                        .apply(instance, CheckDefaultValue::new));
+
+        @Override
+        public boolean check(DensityFunction check, BlockPos loc, BlockPos minLoc, BlockPos maxLoc, int scale) {
+            double density = check.sample(new DensityFunction.UnblendedNoisePos(loc.getX(), loc.getY(), loc.getZ()));
+
+            return density >= min && density < max;
+        }
+
+        @Override
+        public boolean doesOverrideIfTrue() {
+            return false;
+        }
+
+        @Override
+        public boolean doesOverrideIfFalse() {
+            return true;
+        }
+
+        @Override
+        public CheckValueType<?> getType() {
+            return CheckValueTypes.DEFAULT;
+        }
+    }
+
+    public record CheckPlaneForSingleValue(double min, double max, String axis) implements CheckValue {
+
+        public static final MapCodec<CheckPlaneForSingleValue> PLANE_SINGLE_VALUE_CODEC = RecordCodecBuilder.mapCodec(instance ->
+                instance.group(
+                        Codec.DOUBLE.fieldOf("minimum").forGetter(CheckPlaneForSingleValue::min),
+                        Codec.DOUBLE.fieldOf("maximum").forGetter(CheckPlaneForSingleValue::max),
+                        Codec.STRING.fieldOf("axis").forGetter(CheckPlaneForSingleValue::axis))
+                        .apply(instance, CheckPlaneForSingleValue::new));
+
+        @Override
+        public boolean check(DensityFunction check, BlockPos loc, BlockPos minLoc, BlockPos maxLoc, int scale) {
+            switch (axis) {
+                case "x" -> {
+                    for (int j = minLoc.getY(); j < maxLoc.getY(); j += scale) {
+                        for (int k = minLoc.getZ(); k < maxLoc.getZ(); k += scale) {
+                            double density = check.sample(new DensityFunction.UnblendedNoisePos(loc.getX(), j, k));
+                            if (density >= min && density < max) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                case "y" -> {
+                    for (int i = minLoc.getX(); i < maxLoc.getX(); i += scale) {
+                        for (int k = minLoc.getZ(); k < maxLoc.getZ(); k += scale) {
+                            double density = check.sample(new DensityFunction.UnblendedNoisePos(i, loc.getY(), k));
+                            if (density >= min && density < max) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                case "z" -> {
+                    for (int i = minLoc.getX(); i < maxLoc.getX(); i += scale) {
+                        for (int j = minLoc.getY(); j < maxLoc.getY(); j += scale) {
+                            double density = check.sample(new DensityFunction.UnblendedNoisePos(i, j, loc.getZ()));
+                            if (density >= min && density < max) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                default -> throw new IllegalArgumentException("Error: axis does not equal any true axis of location");
+            }
+
+            return false;
+        }
+
+        @Override
+        public boolean doesOverrideIfTrue() {
+            return false;
+        }
+
+        @Override
+        public boolean doesOverrideIfFalse() {
+            return true;
+        }
+
+        @Override
+        public CheckValueType<?> getType() {
+            return CheckValueTypes.PLANE_FOR_SINGLE_VALUE;
+        }
+    }
+
+    public record CheckAxisForSingleValue(double min, double max, String axis) implements CheckValue {
+
+        public static final MapCodec<CheckAxisForSingleValue> AXIS_SINGLE_VALUE_CODEC = RecordCodecBuilder.mapCodec(instance ->
+                instance.group(
+                                Codec.DOUBLE.fieldOf("minimum").forGetter(CheckAxisForSingleValue::min),
+                                Codec.DOUBLE.fieldOf("maximum").forGetter(CheckAxisForSingleValue::max),
+                                Codec.STRING.fieldOf("axis").forGetter(CheckAxisForSingleValue::axis))
+                        .apply(instance, CheckAxisForSingleValue::new));
+
+        @Override
+        public boolean check(DensityFunction check, BlockPos loc, BlockPos minLoc, BlockPos maxLoc, int scale) {
+            switch (axis) {
+                case "x" -> {
+                    for (int i = minLoc.getX(); i < maxLoc.getX(); i += scale) {
+                        double density = check.sample(new DensityFunction.UnblendedNoisePos(i, loc.getY(), loc.getZ()));
+                        if (density >= min && density < max) {
+                            return true;
+                        }
+                    }
+                }
+                case "y" -> {
+                    for (int j = minLoc.getY(); j < maxLoc.getY(); j += scale) {
+                        double density = check.sample(new DensityFunction.UnblendedNoisePos(loc.getX(), j, loc.getZ()));
+                        if (density >= min && density < max) {
+                            return true;
+                        }
+                    }
+                }
+                case "z" -> {
+                    for (int k = minLoc.getZ(); k < maxLoc.getZ(); k += scale) {
+                        double density = check.sample(new DensityFunction.UnblendedNoisePos(loc.getX(), loc.getY(), k));
+                        if (density >= min && density < max) {
+                            return true;
+                        }
+                    }
+                }
+                default -> throw new IllegalArgumentException("Error: axis does not equal any true axis of location");
+            }
+
+            return false;
+        }
+
+        @Override
+        public boolean doesOverrideIfTrue() {
+            return false;
+        }
+
+        @Override
+        public boolean doesOverrideIfFalse() {
+            return true;
+        }
+
+        @Override
+        public CheckValueType<?> getType() {
+            return CheckValueTypes.AXIS_FOR_SINGLE_VALUE;
         }
     }
 }

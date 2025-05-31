@@ -13,16 +13,364 @@
       "factor": 2,
       "density_function": "yumecraft:amaranth_temple/final",
       "values": {
+
+        "1": {
+          "type": "yumecraft:default",
+          "minimum": -10.0,
+          "maximum": 0.0
+        },
         "0": {
+          "type": "yumecraft:default",
           "minimum": 0.0,
           "maximum": 10.0
         },
-        "1": {
-          "minimum": -10.0,
-          "maximum": 0.0
+        "2": {
+          "type": "yumecraft:default",
+          "minimum": 0.0,
+          "maximum": 0.3
+        },
+        "2y": {
+          "type": "yumecraft:axis_for_value",
+          "minimum": 0.0,
+          "maximum": 0.3,
+          "axis": "y"
+        },
+        "3": {
+          "type": "yumecraft:default",
+          "minimum": 0.3,
+          "maximum": 10.0
         }
       },
+
       "structures": [
+
+        {
+          "name": "Northwest inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/northwest",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [3,4,3],
+          "size": [1,3,1],
+          "location": [1,0,1],
+          "grid": [
+            "2y", "2y", "0",
+            "2y", "3", "3",
+            "0", "3", "0",
+
+            "0", "0", "0",
+            "0", "3", "3",
+            "0", "3", "0",
+
+            "0", "0", "0",
+            "0", "3", "3",
+            "0", "3", "0",
+
+            "0", "0", "0",
+            "0", "3", "3",
+            "0", "3", "0"
+          ]
+        },
+        {
+          "name": "Southwest inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/southwest",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [3,4,3],
+          "size": [1,3,1],
+          "location": [1,0,1],
+          "grid": [
+            "0", "2y", "2y",
+            "3", "3", "2y",
+            "0", "3", "0",
+
+            "0", "0", "0",
+            "3", "3", "0",
+            "0", "3", "0",
+
+            "0", "0", "0",
+            "3", "3", "0",
+            "0", "3", "0",
+
+            "0", "0", "0",
+            "3", "3", "0",
+            "0", "3", "0"
+          ]
+        },
+        {
+          "name": "Southeast inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/southeast",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [3,4,3],
+          "size": [1,3,1],
+          "location": [1,0,1],
+          "grid": [
+            "0", "3", "0",
+            "3", "3", "2y",
+            "0", "2y", "2y",
+
+            "0", "3", "0",
+            "3", "3", "0",
+            "0", "0", "0",
+
+            "0", "3", "0",
+            "3", "3", "0",
+            "0", "0", "0",
+
+            "0", "3", "0",
+            "3", "3", "0",
+            "0", "0", "0"
+          ]
+        },
+        {
+          "name": "Northeast inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/northeast",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [3,4,3],
+          "size": [1,3,1],
+          "location": [1,0,1],
+          "grid": [
+            "0", "3", "0",
+            "2y", "3", "3",
+            "2y", "2y", "0",
+
+            "0", "3", "0",
+            "0", "3", "3",
+            "0", "0", "0",
+
+            "0", "3", "0",
+            "0", "3", "3",
+            "0", "0", "0",
+
+            "0", "3", "0",
+            "0", "3", "3",
+            "0", "0", "0"
+          ]
+        },
+        {
+          "name": "North inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/north",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [1,4,3],
+          "size": [1,3,1],
+          "location": [0,0,1],
+          "grid": [
+            "2y", "3", "3",
+
+            "0", "3", "3",
+
+            "0", "3", "3",
+
+            "0", "3", "3"
+          ]
+        },
+        {
+          "name": "South inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/south",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [1,4,3],
+          "size": [1,3,1],
+          "location": [0,0,1],
+          "grid": [
+            "3", "3", "2y",
+
+            "3", "3", "0",
+
+            "3", "3", "0",
+
+            "3", "3", "0"
+          ]
+        },
+        {
+          "name": "West inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/west",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [3,4,1],
+          "size": [1,3,1],
+          "location": [1,0,0],
+          "grid": [
+            "2y",
+            "3",
+            "3",
+
+            "0",
+            "3",
+            "3",
+
+            "0",
+            "3",
+            "3",
+
+            "0",
+            "3",
+            "3"
+          ]
+        },
+        {
+          "name": "East inner temple",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/east",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [3,4,1],
+          "size": [1,3,1],
+          "location": [1,0,0],
+          "grid": [
+            "3",
+            "3",
+            "2y",
+
+            "3",
+            "3",
+            "0",
+
+            "3",
+            "3",
+            "0",
+
+            "3",
+            "3",
+            "0"
+          ]
+        },
+        {
+          "name": "Inner temple base",
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/inner_temple/base",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [1,4,1],
+          "size": [1,3,1],
+          "location": [0,0,0],
+          "grid": [
+            "3",
+
+            "3",
+
+            "3",
+
+            "3"
+          ]
+        },
+        {
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/stairway/east",
+              "weight": 1
+            },
+            {
+              "data": "yumecraft:amaranth_temple/stairway/north",
+              "weight": 1
+            },
+            {
+              "data": "yumecraft:amaranth_temple/stairway/south",
+              "weight": 1
+            },
+            {
+              "data": "yumecraft:amaranth_temple/stairway/west",
+              "weight": 1
+            },
+            {
+              "data": "minecraft:empty",
+              "weight": 32
+            }
+          ],
+          "bounding_size": [3,4,3],
+          "size": [1,2,1],
+          "location": [1,1,1],
+          "alternate": true,
+          "grid": [
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2",
+
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2",
+
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2",
+
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2"
+          ]
+        },
+        {
+          "elements": [
+            {
+              "data": "yumecraft:amaranth_temple/stairway/top_north",
+              "weight": 1
+            },
+            {
+              "data": "yumecraft:amaranth_temple/stairway/top_east",
+              "weight": 1
+            },
+            {
+              "data": "yumecraft:amaranth_temple/stairway/top_south",
+              "weight": 1
+            },
+            {
+              "data": "yumecraft:amaranth_temple/stairway/top_west",
+              "weight": 1
+            },
+            {
+              "data": "minecraft:empty",
+              "weight": 48
+            }
+          ],
+          "bounding_size": [3,4,3],
+          "size": [1,2,1],
+          "location": [1,1,1],
+          "alternate": true,
+          "grid": [
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2",
+
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2",
+
+            "2", "2", "2",
+            "2", "2", "2",
+            "2", "2", "2",
+
+            "-", "1", "-",
+            "1", "1", "1",
+            "-", "1", "-"
+          ]
+        },
         {
           "elements": [
             {
@@ -413,39 +761,6 @@
             "0",
             "0",
             "1"
-          ]
-        },
-        {
-          "elements": [
-            {
-              "data": "yumecraft:amaranth_temple/stairway",
-              "weight": 1
-            },
-            {
-              "data": "minecraft:empty",
-              "weight": 5
-            }
-          ],
-          "bounding_size": [3,4,3],
-          "size": [1,2,1],
-          "location": [1,1,1],
-          "alternate": true,
-          "grid": [
-            "0", "0", "0",
-            "0", "0", "0",
-            "0", "0", "0",
-
-            "0", "0", "0",
-            "0", "0", "0",
-            "0", "0", "0",
-
-            "0", "0", "0",
-            "0", "0", "0",
-            "0", "0", "0",
-
-            "0", "0", "0",
-            "0", "0", "0",
-            "0", "0", "0"
           ]
         },
         {

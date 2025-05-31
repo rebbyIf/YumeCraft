@@ -1,0 +1,10 @@
+// 1.21	2025-05-31T14:53:52.3878115	YumeCraft/Block Loot Tables
+4222827f4c1465fccd6406af0158ef13e764c439 data\yumecraft\loot_table\blocks\blue_cobble.json
+78a0fe5332d4b3eb0d4802931772d1ab51193496 data\yumecraft\loot_table\blocks\whitebrick_slab.json
+78a0fe5332d4b3eb0d4802931772d1ab51193496 data\yumecraft\loot_table\blocks\chiseled_whitebrick_slab.json
+538d40685bc8c141e6e1140e382c68357017aad8 data\yumecraft\loot_table\blocks\whitebrick.json
+4ba400f23a216b32eaccd327cdd2d9597277a2ef data\yumecraft\loot_table\blocks\chiseled_whitebrick.json
+d1cfe99bb1856d815f7a9ec0d773258134dc3382 data\yumecraft\loot_table\blocks\chiseled_whitebrick_wall.json
+03b279161b60b86afe4d781d37564c74368cd984 data\yumecraft\loot_table\blocks\bluestone.json
+1101dddf980587b3e39f9fdf2f19b25b04e6f457 data\yumecraft\loot_table\blocks\whitebrick_wall.json
+5ad1bcb4810ae7bd6f64c89765f3679191f6f255 data\yumecraft\loot_table\blocks\whitebrick_stairs.json

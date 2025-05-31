@@ -19,6 +19,7 @@ public class ModItemGroups {
             .icon(ModBlocks.WHITEBRICK.asItem()::getDefaultStack)
             .entries(((displayContext, entries) -> Registries.BLOCK.getIds()
                     .stream()
+                    .sorted()
                     .filter(key -> key.getNamespace().equals(YumeCraft.MOD_ID))
                     .map(Registries.BLOCK::getOrEmpty)
                     .map(Optional::orElseThrow)

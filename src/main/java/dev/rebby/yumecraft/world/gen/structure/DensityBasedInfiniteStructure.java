@@ -89,7 +89,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
             for (int y = minY; y < maxY; y += scale) {
                 for (int z = 0; z < 16; z += scale) {
                     BlockPos pos = chunk.getPos().getStartPos().add(x, y, z);
-                    double density = densityFunctionEntry.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
+                    //double density = densityFunctionEntry.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
                     //System.out.println("Y = "+pos.getY()+", density: "+density);
                     for (Structure structure : structures) {
                         if (structure.place(scale, pos, densityFunctionEntry.value(), structureTemplateManager, world, values, setRandom)) {
@@ -257,9 +257,9 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
 
             BlockPos boundingSize = size.multiply(scale);
 
-            BlockPos distanceFromOrigin = new BlockPos(pos.getX() % boundingSize.getX(),
-                    pos.getY() % boundingSize.getY(),
-                    pos.getZ() % boundingSize.getZ());
+            BlockPos distanceFromOrigin = new BlockPos(Math.abs(pos.getX()) % boundingSize.getX(),
+                    Math.abs(pos.getY()) % boundingSize.getY(),
+                    Math.abs(pos.getZ()) % boundingSize.getZ());
 
             if (alternate) {
                 int rand1 = random.setValue(seed).nextInt();
@@ -313,7 +313,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
                               Map<String, CheckValue> values, NotRandom random) {
 
             if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size()) {
-                //return false;
+                return false;
             }
 
 //            for (Weighted.Present<Either<Identifier, StructureTemplate>> entry : structurePool.getEntries()) {
@@ -338,9 +338,9 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
 
             BlockPos boundingSize = size.multiply(scale);
 
-            BlockPos distanceFromOrigin = new BlockPos(pos.getX() % boundingSize.getX(),
-                    pos.getY() % boundingSize.getY(),
-                    pos.getZ() % boundingSize.getZ());
+            BlockPos distanceFromOrigin = new BlockPos(Math.abs(pos.getX()) % boundingSize.getX(),
+                    Math.abs(pos.getY()) % boundingSize.getY(),
+                    Math.abs(pos.getZ()) % boundingSize.getZ());
 
             if (alternate) {
                 int rand1 = random.setValue(world.toServerWorld().getSeed()).nextInt();
@@ -387,7 +387,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
             structurePlacementData.setUpdateNeighbors(false);
             structurePlacementData.setIgnoreEntities(true);
 
-            boolean is = structureTemplate.place(world, pos, pos, structurePlacementData, world.getRandom(), 2);
+            boolean is = structureTemplate.place(world, pos, pos, structurePlacementData, world.getRandom(), 1);
 
             return is;
         }

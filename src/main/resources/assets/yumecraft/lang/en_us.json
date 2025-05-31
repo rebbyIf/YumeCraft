@@ -7,5 +7,7 @@
   "block.yumecraft.whitebrick_stairs": "Whitebrick Stairs",
   "block.yumecraft.whitebrick_slab": "Whitebrick Slab",
   "block.yumecraft.chiseled_whitebrick_slab": "Chiseled Whitebrick Slab",
+  "block.yumecraft.whitebrick_wall": "Whitebrick Wall",
+  "block.yumecraft.chiseled_whitebrick_wall": "Chiseled Whitebrick Wall",
   "itemGroup.yumecraft.block_group": "Yumecraft Blocks"
 }

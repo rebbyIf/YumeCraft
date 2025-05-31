@@ -3,10 +3,7 @@ package dev.rebby.yumecraft.block;
 import dev.rebby.yumecraft.YumeCraft;
 import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.sound.ModSounds;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -50,6 +47,12 @@ public class ModBlocks {
 
     public static final SlabBlock CHISELED_WHITEBRICK_SLAB = registerWithItem("chiseled_whitebrick_slab",
             new SlabBlock(AbstractBlock.Settings.copy(WHITEBRICK)));
+
+    public static final WallBlock WHITEBRICK_WALL = registerWithItem("whitebrick_wall",
+            new WallBlock(AbstractBlock.Settings.copy(WHITEBRICK).solid()));
+
+    public static final WallBlock CHISELED_WHITEBRICK_WALL = registerWithItem("chiseled_whitebrick_wall",
+            new WallBlock(AbstractBlock.Settings.copy(WHITEBRICK)));
 
     public static <T extends Block> T register(String name, T block) {
         return Registry.register(Registries.BLOCK, YumeCraft.id(name),block);

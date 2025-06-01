@@ -7,6 +7,7 @@ import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.particle.ModParticles;
 import dev.rebby.yumecraft.sound.ModSounds;
 import dev.rebby.yumecraft.util.DimensionalTeleportationHandler;
+import dev.rebby.yumecraft.util.LoadingWorldHandler;
 import dev.rebby.yumecraft.world.gen.chunk_generator.FractalChunkGenerator;
 import dev.rebby.yumecraft.world.gen.chunk_generator.ModChunkGenerators;
 import dev.rebby.yumecraft.world.gen.density_function.ModDensityFunctions;
@@ -34,6 +35,7 @@ public class YumeCraft implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+		LoadingWorldHandler.init();
 		DimensionalTeleportationHandler.init();
 
 		InfiniteStructureTypes.init();

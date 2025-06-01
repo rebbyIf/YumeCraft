@@ -10,6 +10,7 @@ import net.minecraft.registry.SimpleRegistry;
 import net.minecraft.structure.StructureTemplateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
@@ -24,7 +25,7 @@ public interface InfiniteStructure {
             .dispatch("type",InfiniteStructure::getType, InfiniteStructureType::codec);
 
 
-    void generate(StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Chunk chunk);
+    void generate(NoiseConfig noiseConfig, StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Chunk chunk);
 
     /**
      * Creates a vertical column of blocks for checking worldgen.
@@ -38,6 +39,9 @@ public interface InfiniteStructure {
     double getSample(BlockPos pos);
 
     void generateDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos, StructureTemplateManager structureTemplateManager, long seed);
+
+    @Nullable
+    MultiNoiseUtil.MultiNoiseSampler returnNoiseSampler();
 
     InfiniteStructureType<?> getType();
 

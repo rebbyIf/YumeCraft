@@ -7,12 +7,16 @@ import dev.rebby.yumecraft.world.gen.structure.InfiniteStructure;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.structure.StructureTemplateManager;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.biome.source.BiomeSupplier;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import net.minecraft.world.chunk.BelowZeroRetrogen;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
@@ -59,6 +63,23 @@ public class StructureChunkGenerator extends ChunkGenerator {
     }
 
     @Override
+    public CompletableFuture<Chunk> populateBiomes(NoiseConfig noiseConfig, Blender blender, StructureAccessor structureAccessor, Chunk chunk) {
+        return CompletableFuture.supplyAsync(Util.debugSupplier("init_structure_biomes", () -> {
+            this.populateBiomes(blender, chunk);
+            return chunk;
+        }), Util.getMainWorkerExecutor());
+    }
+
+    private void populateBiomes(Blender blender, Chunk chunk) {
+
+        BiomeSupplier biomeSupplier = BelowZeroRetrogen.getBiomeSupplier(blender.getBiomeSupplier(this.biomeSource), chunk);
+        MultiNoiseUtil.MultiNoiseSampler noiseSampler = infiniteStructure.returnNoiseSampler();
+        if (noiseSampler != null) {
+            chunk.populateBiomes(biomeSupplier, noiseSampler);
+        }
+    }
+
+    @Override
     protected MapCodec<? extends ChunkGenerator> getCodec() {
         return CODEC;
     }
@@ -70,6 +91,7 @@ public class StructureChunkGenerator extends ChunkGenerator {
 
     @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
+
         if (seed == null) {
             seed = region.getSeed();
         }
@@ -78,7 +100,7 @@ public class StructureChunkGenerator extends ChunkGenerator {
             if (structureTemplateManager == null) {
                 structureTemplateManager = server.getStructureTemplateManager();
             }
-            infiniteStructure.generate(structureTemplateManager, region, chunk);
+            infiniteStructure.generate(noiseConfig, structureTemplateManager, region, chunk);
         }
         else {
             System.out.println("Error: cannot find server");

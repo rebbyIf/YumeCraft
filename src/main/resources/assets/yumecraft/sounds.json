@@ -40,5 +40,15 @@
         "name": "yumecraft:step/step_000-1"
       }
     ]
+  },
+  "amb.000": {
+    "subtitle": "Tiny Droplets",
+    "sounds": [
+      {
+        "name": "yumecraft:ambient/amb_000",
+        "stream": true,
+        "preload": true
+      }
+    ]
   }
 }

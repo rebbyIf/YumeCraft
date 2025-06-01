@@ -3,6 +3,8 @@ package dev.rebby.yumecraft.world.gen.density_function;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.rebby.yumecraft.util.LoadingWorldHandler;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.math.random.CheckedRandom;
@@ -12,7 +14,7 @@ import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 
 public class NoiseDensity implements DensityFunction {
 
-    private final DensityFunction.Noise noise;
+    private DensityFunction.Noise noise;
     private final double xzScale;
     private final double yScale;
 
@@ -26,10 +28,18 @@ public class NoiseDensity implements DensityFunction {
     public static final CodecHolder<NoiseDensity> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
 
     public NoiseDensity(DensityFunction.Noise noise, double xzScale, double yScale){
-        DoublePerlinNoiseSampler doublePerlinNoiseSampler = DoublePerlinNoiseSampler.create(new CheckedRandom(1L), noise.noiseData().value());
-        this.noise = new DensityFunction.Noise(noise.noiseData(), doublePerlinNoiseSampler);
+//        if (LoadingWorldHandler.seed == null) {
+//            throw new NullPointerException("Seed was found null!");
+//        }
+
+        this.noise = new DensityFunction.Noise(noise.noiseData());
         this.xzScale = xzScale;
         this.yScale = yScale;
+
+        ServerWorldEvents.LOAD.register((server, world) -> {
+            DoublePerlinNoiseSampler doublePerlinNoiseSampler = DoublePerlinNoiseSampler.create(new CheckedRandom(world.getSeed()), noise.noiseData().value());
+            this.noise = new DensityFunction.Noise(noise.noiseData(), doublePerlinNoiseSampler);
+        });
     }
 
     public Noise getNoise() {

@@ -15,6 +15,8 @@ public class ModSounds {
 
     public static final SoundEvent STEP_000 = registerSoundEvent("step.000");
 
+    public static final SoundEvent AMB_000 = registerSoundEvent("amb.000");
+
     public static final BlockSoundGroup WHITEBRICK = new BlockSoundGroup(1, 1,
             BlockSoundGroup.STONE.getBreakSound(),
             STEP_000,

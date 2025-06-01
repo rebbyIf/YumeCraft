@@ -8,6 +8,11 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.rebby.yumecraft.util.NotRandom;
 import dev.rebby.yumecraft.util.PCGRandom;
+import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.StructureTemplate;
@@ -16,7 +21,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
@@ -76,7 +83,9 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
     }
 
     @Override
-    public void generate(StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Chunk chunk) {
+    public void generate(NoiseConfig noiseConfig, StructureTemplateManager structureTemplateManager, ServerWorldAccess world, Chunk chunk) {
+
+        DensityFunction densityFunction = densityFunctionEntry.value();
 
         int scale = (int) Math.pow(2, fac);
 
@@ -92,7 +101,7 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
                     //double density = densityFunctionEntry.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
                     //System.out.println("Y = "+pos.getY()+", density: "+density);
                     for (Structure structure : structures) {
-                        if (structure.place(scale, pos, densityFunctionEntry.value(), structureTemplateManager, world, values, setRandom)) {
+                        if (structure.place(scale, pos, densityFunction, structureTemplateManager, world, values, setRandom)) {
                             break;
                         }
                     }
@@ -132,6 +141,13 @@ public final class DensityBasedInfiniteStructure implements InfiniteStructure {
         }
 
         text.add(name + ": " + output);
+    }
+
+    @Override
+    public MultiNoiseUtil.MultiNoiseSampler returnNoiseSampler() {
+        DensityFunction densityFunction = densityFunctionEntry.value();
+        return new MultiNoiseUtil.MultiNoiseSampler(densityFunction, densityFunction, densityFunction,
+                densityFunction, densityFunction, densityFunction, new ArrayList<MultiNoiseUtil.NoiseHypercube>());
     }
 
     @Override

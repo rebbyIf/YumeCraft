@@ -3,8 +3,33 @@
   "generator": {
     "type": "yumecraft:structure",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "yumecraft:amaranth_temple"
+      "biomes": [
+        {
+          "biome": "yumecraft:amaranth_temple",
+          "parameters": {
+            "continentalness": 0.4,
+            "depth": 0.4,
+            "erosion": 0.4,
+            "humidity": 0.4,
+            "offset": 0.4,
+            "temperature": 0.4,
+            "weirdness": 0.4
+          }
+        },
+        {
+          "biome": "yumecraft:amaranth_temple_inner",
+          "parameters": {
+            "continentalness": 0.41,
+            "depth": 0.41,
+            "erosion": 0.41,
+            "humidity": 0.41,
+            "offset": 0.41,
+            "temperature": 0.41,
+            "weirdness": 0.41
+          }
+        }
+      ],
+      "type": "minecraft:multi_noise"
     },
     "structure" : {
       "type": "yumecraft:density_based",
@@ -27,17 +52,17 @@
         "2": {
           "type": "yumecraft:default",
           "minimum": 0.0,
-          "maximum": 0.3
+          "maximum": 0.4
         },
         "2y": {
           "type": "yumecraft:axis_for_value",
           "minimum": 0.0,
-          "maximum": 0.3,
+          "maximum": 0.4,
           "axis": "y"
         },
         "3": {
           "type": "yumecraft:default",
-          "minimum": 0.3,
+          "minimum": 0.4,
           "maximum": 10.0
         }
       },

@@ -87,24 +87,26 @@ public class StructureChunkGenerator extends ChunkGenerator {
     @Override
     public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk, GenerationStep.Carver carverStep) {
 
+
+        if (this.seed == null) {
+            this.seed = chunkRegion.getSeed();
+        }
+        MinecraftServer server = chunkRegion.getServer();
+        if (server != null) {
+            if (structureTemplateManager == null) {
+                structureTemplateManager = server.getStructureTemplateManager();
+            }
+            infiniteStructure.generate(noiseConfig, structureTemplateManager, chunkRegion, chunk);
+        }
+        else {
+            System.out.println("Error: cannot find server");
+        }
     }
 
     @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
 
-        if (seed == null) {
-            seed = region.getSeed();
-        }
-        MinecraftServer server = region.getServer();
-        if (server != null) {
-            if (structureTemplateManager == null) {
-                structureTemplateManager = server.getStructureTemplateManager();
-            }
-            infiniteStructure.generate(noiseConfig, structureTemplateManager, region, chunk);
-        }
-        else {
-            System.out.println("Error: cannot find server");
-        }
+
     }
 
     @Override
@@ -119,6 +121,7 @@ public class StructureChunkGenerator extends ChunkGenerator {
 
     @Override
     public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
+
         return CompletableFuture.completedFuture(chunk);
     }
 

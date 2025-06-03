@@ -1,6 +1,7 @@
 {
-  "type": "yumecraft:noise",
-  "noise": "yumecraft:amaranth_temple/noise_1",
-  "xz_scale": 1,
-  "y_scale": 1
+  "type": "minecraft:y_clamped_gradient",
+  "from_y": 0,
+  "to_y": 80,
+  "from_value": 1,
+  "to_value": -1
 }

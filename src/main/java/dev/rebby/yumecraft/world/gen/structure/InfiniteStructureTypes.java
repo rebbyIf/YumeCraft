@@ -2,6 +2,8 @@ package dev.rebby.yumecraft.world.gen.structure;
 
 import com.mojang.serialization.Codec;
 import dev.rebby.yumecraft.YumeCraft;
+import dev.rebby.yumecraft.world.gen.structure.check_value.CheckValueTypes;
+import dev.rebby.yumecraft.world.gen.structure.piece.StructurePieceTypes;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
@@ -20,7 +22,9 @@ public class InfiniteStructureTypes {
 
         Codec<InfiniteStructure> structureCodec = structureTypeCodec.dispatch("type", InfiniteStructure::getType, InfiniteStructureType::codec);
 
-        InfiniteStructure.CheckValueTypes.init();
+        StructurePieceTypes.init();
+
+        CheckValueTypes.init();
 
         YumeCraft.LOGGER.info("Registering Infinite Structures for " + YumeCraft.MOD_ID);
     }

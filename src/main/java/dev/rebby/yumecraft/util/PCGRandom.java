@@ -20,7 +20,7 @@ public class PCGRandom extends NotRandom{
 
     @Override
     public int nextInt() {
-        return (int) (nextDouble() * Integer.MAX_VALUE);
+        return Math.min((int) (nextDouble() * Integer.MAX_VALUE), Integer.MAX_VALUE);
     }
 
     @Override
@@ -28,11 +28,11 @@ public class PCGRandom extends NotRandom{
         if (bound <= 0) {
             throw new IllegalArgumentException("Bound must be positive");
         }
-        return (int) (nextDouble() * bound);
+        return Math.min((int) (nextDouble() * bound), bound - 1);
     }
     @Override
     public long nextLong() {
-        return (long) (nextDouble() * Long.MAX_VALUE);
+        return Math.min((long) (nextDouble() * Long.MAX_VALUE), Long.MAX_VALUE);
     }
 
     @Override

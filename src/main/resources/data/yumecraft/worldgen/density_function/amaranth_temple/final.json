@@ -4,13 +4,13 @@
     "type": "yumecraft:noise",
     "noise": "yumecraft:amaranth_temple/noise_1",
     "xz_scale": 1,
-    "y_scale": 1
+    "y_scale": 0
   },
   "argument2": {
     "type": "minecraft:y_clamped_gradient",
-    "from_y": 0,
+    "from_y": 10,
     "to_y": 100,
-    "from_value": 1,
+    "from_value": 1.1,
     "to_value": -1.1
   }
 

@@ -27,7 +27,7 @@ import java.util.function.Function;
 public record LayeredGridStructure(String name, DataPool<Either<Identifier, StructureTemplate>> basePool,
                                    DataPool<Either<Identifier, StructureTemplate>> middlePool,
                                    DataPool<Either<Identifier, StructureTemplate>> topPool, BlockPos boundingSize,
-                                   BlockPos size, BlockPos location, int minY, int maxY,
+                                   BlockPos size, BlockPos location, int minY, int maxY, int yOffset,
                                    List<String> grid3D) implements StructurePiece {
 
     public static final MapCodec<LayeredGridStructure> LAYERED_GRID_STRUCTURE_CODEC = RecordCodecBuilder.mapCodec(
@@ -41,6 +41,7 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
                             BlockPos.CODEC.fieldOf("location").forGetter(LayeredGridStructure::location),
                             Codec.INT.optionalFieldOf("min_y", 0).forGetter(LayeredGridStructure::minY),
                             Codec.INT.fieldOf("max_y").forGetter(LayeredGridStructure::maxY),
+                            Codec.INT.optionalFieldOf("y_offset", 0).forGetter(LayeredGridStructure::yOffset),
                             Codec.STRING.listOf().fieldOf("grid").forGetter(LayeredGridStructure::grid3D))
                     .apply(instance, LayeredGridStructure::new));
 
@@ -87,17 +88,20 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
 
         if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size() ||
                 maxY % boundingScale.getY() != 0 || minY % boundingScale.getY() != 0 ||
-                maxY - boundingScale.getY() * 3 <= minY) {
+                maxY - boundingScale.getY() * 3 - yOffset * scale <= minY + yOffset * scale ||
+                yOffset >= size.getY()) {
             throw new IndexOutOfBoundsException("Scaling out of bounds for structure " + getName());
         }
 
-        if (pos.getY() > maxY - boundingScale.getY() || pos.getY() < minY) {
+        if (pos.getY() > maxY - boundingScale.getY() - yOffset*scale || pos.getY() < minY + yOffset*scale) {
             return "Structure is out of bounds!";
         }
 
         BlockPos distanceFromOrigin = new BlockPos(Math.abs(pos.getX()) % boundingScale.getX(),
-                Math.abs(pos.getY()) % boundingScale.getY(),
+                Math.abs(pos.getY() + yOffset*scale) % boundingScale.getY(),
                 Math.abs(pos.getZ()) % boundingScale.getZ());
+
+
 
         BlockPos origin = pos.subtract(distanceFromOrigin);
 
@@ -111,9 +115,9 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
 
         boolean hasBase = false;
         BlockPos.Mutable basePos = new BlockPos.Mutable(origin.getX(),
-                maxY - boundingScale.getY() * 3, origin.getZ());
+                maxY - boundingScale.getY() * 3 - yOffset*scale, origin.getZ());
 
-        for (int y = maxY - boundingScale.getY() * 3; y >= minY; y -= boundingScale.getY()) {
+        for (int y = maxY - boundingScale.getY() * 3 - yOffset*scale; y >= minY + yOffset*scale; y -= boundingScale.getY()) {
             basePos.setY(y);
             if (checkPlace(basePos.toImmutable(), scale, values, densityFunction)) {
 
@@ -131,7 +135,7 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
 
         int rand1 = random.setValue(seed).nextInt();
         int rand2 = random.setValue(rand1 + origin.getX()).nextInt();
-        int setY = (random.setValue(rand2 + origin.getZ()).nextInt((maxY - boundingScale.getY() * 3 - basePos.getY()) / boundingScale.getY()) + 3) * boundingScale.getY();
+        int setY = (random.setValue(rand2 + origin.getZ()).nextInt((maxY - basePos.getY() - yOffset*scale) / boundingScale.getY())+3) * boundingScale.getY();
 
         if (origin.getY() > setY + basePos.getY() || origin.getY() < basePos.getY()) {
             return "Structure piece not in range!";
@@ -140,7 +144,7 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
         DataPool<Either<Identifier, StructureTemplate>> templatePool = middlePool;
         if (basePos.equals(origin)) {
             templatePool = basePool;
-        } else if (setY + basePos.getY() == origin.getY()) {
+        } else if (setY + basePos.getY() == origin.getY() || origin.getY() == maxY - boundingScale.getY() - yOffset*scale) {
             templatePool = topPool;
         }
 
@@ -171,16 +175,17 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
 
         if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size() ||
                 maxY % boundingScale.getY() != 0 || minY % boundingScale.getY() != 0 ||
-                maxY - boundingScale.getY() * 3 <= minY) {
+                maxY - boundingScale.getY() * 3 - yOffset * scale <= minY + yOffset * scale ||
+                yOffset >= size.getY()) {
             throw new IndexOutOfBoundsException("Scaling out of bounds for structure " + getName());
         }
 
-        if (pos.getY() > maxY - boundingScale.getY() || pos.getY() < minY) {
+        if (pos.getY() > maxY - boundingScale.getY() - yOffset*scale || pos.getY() < minY + yOffset*scale) {
             return false;
         }
 
         BlockPos distanceFromOrigin = new BlockPos(Math.abs(pos.getX()) % boundingScale.getX(),
-                Math.abs(pos.getY()) % boundingScale.getY(),
+                Math.abs(pos.getY() + yOffset*scale) % boundingScale.getY(),
                 Math.abs(pos.getZ()) % boundingScale.getZ());
 
 
@@ -197,9 +202,9 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
 
         boolean hasBase = false;
         BlockPos.Mutable basePos = new BlockPos.Mutable(origin.getX(),
-                maxY - boundingScale.getY() * 3, origin.getZ());
+                maxY - boundingScale.getY() * 3 - yOffset*scale, origin.getZ());
 
-        for (int y = maxY - boundingScale.getY() * 3; y >= minY; y -= boundingScale.getY()) {
+        for (int y = maxY - boundingScale.getY() * 3 - yOffset*scale; y >= minY + yOffset*scale; y -= boundingScale.getY()) {
             basePos.setY(y);
             if (checkPlace(basePos.toImmutable(), scale, values, densityFunction)) {
 
@@ -217,7 +222,7 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
 
         int rand1 = random.setValue(world.toServerWorld().getSeed()).nextInt();
         int rand2 = random.setValue(rand1 + origin.getX()).nextInt();
-        int setY = (random.setValue(rand2 + origin.getZ()).nextInt((maxY - boundingScale.getY() * 3 - basePos.getY()) / boundingScale.getY())+3) * boundingScale.getY();
+        int setY = (random.setValue(rand2 + origin.getZ()).nextInt((maxY - basePos.getY() - yOffset*scale) / boundingScale.getY())+3) * boundingScale.getY();
 
         if (origin.getY() > setY + basePos.getY() || origin.getY() < basePos.getY()) {
             return false;
@@ -226,7 +231,7 @@ public record LayeredGridStructure(String name, DataPool<Either<Identifier, Stru
         DataPool<Either<Identifier, StructureTemplate>> templatePool = middlePool;
         if (basePos.equals(origin)) {
             templatePool = basePool;
-        } else if (setY + basePos.getY() == origin.getY()) {
+        } else if (setY + basePos.getY() == origin.getY() || origin.getY() == maxY - boundingScale.getY() - yOffset*scale) {
             templatePool = topPool;
         }
 

@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "yumecraft:amaranth_temple/noise_1",
+    "points": [
+      {
+        "location": -1,
+        "derivative": 0,
+        "value": -1
+      },
+      {
+        "location": -0.1,
+        "derivative": 0,
+        "value": -0.8
+      },
+      {
+        "location": 0,
+        "derivative": 2,
+        "value": -0.7
+      },
+      {
+        "location": 0.1,
+        "derivative": 5,
+        "value": 0.5
+      },
+      {
+        "location": 0.2,
+        "derivative": 1,
+        "value": 0.7
+      },
+      {
+        "location": 0.3,
+        "derivative": -4,
+        "value": 0
+      },
+      {
+        "location": 0.4,
+        "derivative": -1,
+        "value": -0.4
+      },
+      {
+        "location": 1,
+        "derivative": 0,
+        "value": -0.5
+      }
+    ]
+  }
+}

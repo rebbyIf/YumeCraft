@@ -1,15 +1,10 @@
 {
   "type": "minecraft:add",
-  "argument1": {
-    "type": "yumecraft:noise",
-    "noise": "yumecraft:amaranth_temple/noise_1",
-    "xz_scale": 1,
-    "y_scale": 0
-  },
+  "argument1": "yumecraft:amaranth_temple/spline_1",
   "argument2": {
     "type": "minecraft:y_clamped_gradient",
-    "from_y": 10,
-    "to_y": 100,
+    "from_y": 24,
+    "to_y": 120,
     "from_value": 1.1,
     "to_value": -1.1
   }

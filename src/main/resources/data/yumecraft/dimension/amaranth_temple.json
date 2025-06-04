@@ -34,9 +34,9 @@
     "structure" : {
       "type": "yumecraft:density_based",
       "min_y": 0,
-      "max_y": 200,
+      "max_y": 256,
       "factor": 2,
-      "density_function": "yumecraft:amaranth_temple/test",
+      "density_function": "yumecraft:amaranth_temple/final",
       "values": {
 
         "1": {
@@ -99,6 +99,60 @@
           "location": [1,0,1],
           "min_y": 0,
           "max_y": 120,
+          "grid": [
+            "0", "0", "0", "0", "0", "0",
+            "0", "0", "0", "0", "0", "0",
+            "0", "0", "0", "0", "0", "0",
+            "0", "0", "0", "0", "0", "0",
+            "0", "0", "0", "0", "0", "0",
+            "0", "0", "0", "0", "0", "0",
+
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1",
+            "1", "1", "1", "1", "1", "1"
+          ]
+        },
+        {
+          "type": "yumecraft:layered_grid",
+          "name": "Grand Pillar Alternate",
+          "base_elements": [
+            {
+              "data": "yumecraft:amaranth_temple/grand_pillar/base",
+              "weight": 2
+            },
+            {
+              "data": "minecraft:empty",
+              "weight": 1
+            }
+          ],
+          "middle_elements": [
+            {
+              "data": "yumecraft:amaranth_temple/grand_pillar/middle",
+              "weight": 1
+            }
+          ],
+          "top_elements": [
+            {
+              "data": "yumecraft:amaranth_temple/grand_pillar/top",
+              "weight": 1
+            }
+          ],
+          "bounding_size": [6,3,6],
+          "size": [4,2,4],
+          "location": [1,0,1],
+          "min_y": 0,
+          "max_y": 120,
+          "y_offset": 1,
           "grid": [
             "0", "0", "0", "0", "0", "0",
             "0", "0", "0", "0", "0", "0",

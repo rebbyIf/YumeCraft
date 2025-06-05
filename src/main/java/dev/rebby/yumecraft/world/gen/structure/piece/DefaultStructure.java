@@ -13,20 +13,16 @@ import net.minecraft.structure.StructureTemplateManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
 
 public record DefaultStructure(String name, DataPool<Either<Identifier, StructureTemplate>> structurePool,
                                BlockPos boundingSize,
-                               BlockPos size, BlockPos location, List<String> grid3D) implements StructurePiece {
+                               BlockPos size, BlockPos location, int yOffset, List<String> grid3D) implements StructurePiece {
 
     public static final MapCodec<DefaultStructure> DEFAULT_STRUCTURE_CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
@@ -35,6 +31,7 @@ public record DefaultStructure(String name, DataPool<Either<Identifier, Structur
                             BlockPos.CODEC.fieldOf("bounding_size").forGetter(DefaultStructure::boundingSize),
                             BlockPos.CODEC.optionalFieldOf("size", new BlockPos(1, 1, 1)).forGetter(DefaultStructure::size),
                             BlockPos.CODEC.fieldOf("location").forGetter(DefaultStructure::location),
+                            Codec.INT.optionalFieldOf("y_offset", 0).forGetter(DefaultStructure::yOffset),
                             Codec.STRING.listOf().fieldOf("grid").forGetter(DefaultStructure::grid3D))
                     .apply(instance, DefaultStructure::new));
 
@@ -77,21 +74,27 @@ public record DefaultStructure(String name, DataPool<Either<Identifier, Structur
             return "Bounding Size out of bounds!";
         }
 
+        if (yOffset >= size.getY()) {
+            return "y-offset out of bounds!";
+        }
+
+        BlockPos offsetPos = pos.add(0, -yOffset*scale, 0);
+
 
         BlockPos boundingSize = size.multiply(scale);
 
-        BlockPos distanceFromOrigin = new BlockPos(Math.abs(pos.getX()) % boundingSize.getX(),
-                Math.abs(pos.getY()) % boundingSize.getY(),
-                Math.abs(pos.getZ()) % boundingSize.getZ());
+        BlockPos distanceFromOrigin = new BlockPos(Math.abs(offsetPos.getX()) % boundingSize.getX(),
+                Math.abs(offsetPos.getY()) % boundingSize.getY(),
+                Math.abs(offsetPos.getZ()) % boundingSize.getZ());
 
 
         if (!distanceFromOrigin.equals(BlockPos.ORIGIN)) {
 
-            if (!checkPlace(pos.subtract(distanceFromOrigin), scale, values, densityFunction)) {
+            if (!checkPlace(offsetPos, scale, values, densityFunction)) {
                 return "Origin does not match the grid!";
             }
 
-            if (!StructurePiece.checkStructure(pos.subtract(distanceFromOrigin), seed,
+            if (!StructurePiece.checkStructure(offsetPos, seed,
                     random, structurePool))
                 return "Original structure is empty!";
 
@@ -103,7 +106,7 @@ public record DefaultStructure(String name, DataPool<Either<Identifier, Structur
         }
 
 
-        if (!StructurePiece.checkStructure(pos.subtract(distanceFromOrigin), seed,
+        if (!StructurePiece.checkStructure(pos, seed,
                 random, structurePool)) {
             return "No structure found!";
         }
@@ -115,15 +118,18 @@ public record DefaultStructure(String name, DataPool<Either<Identifier, Structur
                          StructureTemplateManager structureTemplateManager, ServerWorldAccess world,
                          Map<String, CheckValue> values, NotRandom random) {
 
-        if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size()) {
-            return false;
+        if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size() ||
+                yOffset >= size.getY()) {
+            throw new IndexOutOfBoundsException("Scaling out of bounds for structure " + getName());
         }
+
+        BlockPos offsetPos = pos.add(0, -yOffset * scale, 0);
 
         BlockPos boundingSize = size.multiply(scale);
 
-        BlockPos distanceFromOrigin = new BlockPos(Math.abs(pos.getX()) % boundingSize.getX(),
-                Math.abs(pos.getY()) % boundingSize.getY(),
-                Math.abs(pos.getZ()) % boundingSize.getZ());
+        BlockPos distanceFromOrigin = new BlockPos(Math.abs(offsetPos.getX()) % boundingSize.getX(),
+                Math.abs(offsetPos.getY()) % boundingSize.getY(),
+                Math.abs(offsetPos.getZ()) % boundingSize.getZ());
 
 
         if (!distanceFromOrigin.equals(BlockPos.ORIGIN)) {
@@ -140,7 +146,7 @@ public record DefaultStructure(String name, DataPool<Either<Identifier, Structur
         }
 
 
-        if (!StructurePiece.checkStructure(pos.subtract(distanceFromOrigin), world.toServerWorld().getSeed(),
+        if (!StructurePiece.checkStructure(pos, world.toServerWorld().getSeed(),
                 random, structurePool)) {
             return false;
         }

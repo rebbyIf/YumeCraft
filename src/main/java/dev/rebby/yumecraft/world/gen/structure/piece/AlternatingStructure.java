@@ -124,7 +124,7 @@ public record AlternatingStructure(String name, DataPool<Either<Identifier, Stru
                          Map<String, CheckValue> values, NotRandom random) {
 
         if (boundingSize.getX() * boundingSize.getY() * boundingSize.getZ() > grid3D.size()) {
-            return false;
+            throw new IndexOutOfBoundsException("Scaling out of bounds for structure " + getName());
         }
 
         BlockPos boundingSize = size.multiply(scale);

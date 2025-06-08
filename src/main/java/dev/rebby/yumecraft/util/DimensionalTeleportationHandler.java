@@ -82,7 +82,7 @@ public class DimensionalTeleportationHandler {
                 DimensionalTeleportationHandler handler = handlers.get(i);
                 if (handler.user.equals(entity)) {
                     System.out.println("Found player!");
-                    handler.state = handler.state.loadDimension(ModDimensions.POINT_NEMO);
+                    handler.state = handler.state.loadDimension(ModDimensions.VERDANT_TEMPLE);
                     System.out.println("Loaded Dimension");
                     return;
 
@@ -100,7 +100,7 @@ public class DimensionalTeleportationHandler {
                 DimensionalTeleportationHandler handler = handlers.get(i);
                 if (handler.user.equals(entity)) {
                     System.out.println("Found player!");
-                    handler.state = handler.state.teleportToDimension(ModDimensions.POINT_NEMO);
+                    handler.state = handler.state.teleportToDimension(ModDimensions.VERDANT_TEMPLE);
                     System.out.println("New Dimension");
                     return;
 
@@ -243,6 +243,9 @@ public class DimensionalTeleportationHandler {
             if (dimId.equals(ModDimensions.POINT_NEMO)) {
                 newState = new TeleportToSetTopState(new BlockPos(0,0,0), 12,
                         user.getYaw(), user.getPitch());
+            }
+            else if (dimId.equals(ModDimensions.VERDANT_TEMPLE)) {
+                newState = new TeleportToSetTopState(user.getBlockPos(), 8, user.getYaw(), user.getPitch());
             }
             else {
                 return this;

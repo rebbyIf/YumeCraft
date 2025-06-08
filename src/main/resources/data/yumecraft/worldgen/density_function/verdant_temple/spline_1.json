@@ -1,7 +1,7 @@
 {
   "type": "minecraft:spline",
   "spline": {
-    "coordinate": "yumecraft:amaranth_temple/noise_1",
+    "coordinate": "yumecraft:verdant_temple/noise_1",
     "points": [
       {
         "location": -1,

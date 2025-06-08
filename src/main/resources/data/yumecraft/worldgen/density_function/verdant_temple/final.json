@@ -1,6 +1,6 @@
 {
   "type": "minecraft:add",
-  "argument1": "yumecraft:amaranth_temple/spline_1",
+  "argument1": "yumecraft:verdant_temple/spline_1",
   "argument2": {
     "type": "minecraft:y_clamped_gradient",
     "from_y": 24,

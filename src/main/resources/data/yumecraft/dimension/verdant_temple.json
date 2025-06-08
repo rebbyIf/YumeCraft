@@ -1,11 +1,11 @@
 {
-  "type": "yumecraft:amaranth_temple",
+  "type": "yumecraft:verdant_temple",
   "generator": {
     "type": "yumecraft:structure",
     "biome_source": {
       "biomes": [
         {
-          "biome": "yumecraft:amaranth_temple",
+          "biome": "yumecraft:verdant_temple",
           "parameters": {
             "continentalness": 0.3,
             "depth": 0.3,
@@ -17,7 +17,7 @@
           }
         },
         {
-          "biome": "yumecraft:amaranth_temple_inner",
+          "biome": "yumecraft:verdant_temple_inner",
           "parameters": {
             "continentalness": 0.31,
             "depth": 0.31,
@@ -36,7 +36,7 @@
       "min_y": 0,
       "max_y": 256,
       "factor": 2,
-      "density_function": "yumecraft:amaranth_temple/final",
+      "density_function": "yumecraft:verdant_temple/final",
       "values": {
 
         "1": {
@@ -74,7 +74,7 @@
           "name": "Grand Pillar",
           "base_elements": [
             {
-              "data": "yumecraft:amaranth_temple/grand_pillar/base",
+              "data": "yumecraft:verdant_temple/grand_pillar/base",
               "weight": 2
             },
             {
@@ -84,13 +84,13 @@
           ],
           "middle_elements": [
             {
-              "data": "yumecraft:amaranth_temple/grand_pillar/middle",
+              "data": "yumecraft:verdant_temple/grand_pillar/middle",
               "weight": 1
             }
           ],
           "top_elements": [
             {
-              "data": "yumecraft:amaranth_temple/grand_pillar/top",
+              "data": "yumecraft:verdant_temple/grand_pillar/top",
               "weight": 1
             }
           ],
@@ -127,7 +127,7 @@
           "name": "Grand Pillar Alternate",
           "base_elements": [
             {
-              "data": "yumecraft:amaranth_temple/grand_pillar/base",
+              "data": "yumecraft:verdant_temple/grand_pillar/base",
               "weight": 2
             },
             {
@@ -137,13 +137,13 @@
           ],
           "middle_elements": [
             {
-              "data": "yumecraft:amaranth_temple/grand_pillar/middle",
+              "data": "yumecraft:verdant_temple/grand_pillar/middle",
               "weight": 1
             }
           ],
           "top_elements": [
             {
-              "data": "yumecraft:amaranth_temple/grand_pillar/top",
+              "data": "yumecraft:verdant_temple/grand_pillar/top",
               "weight": 1
             }
           ],
@@ -181,7 +181,7 @@
           "name": "Garden",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/garden",
+              "data": "yumecraft:verdant_temple/garden",
               "weight": 1
             }
           ],
@@ -216,7 +216,7 @@
           "name": "Garden Alt",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/garden",
+              "data": "yumecraft:verdant_temple/garden",
               "weight": 1
             }
           ],
@@ -252,11 +252,11 @@
           "name": "Inner temple pool",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/pool",
+              "data": "yumecraft:verdant_temple/inner_temple/pool",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/chandelier",
+              "data": "yumecraft:verdant_temple/inner_temple/chandelier",
               "weight": 2
             },
             {
@@ -303,7 +303,7 @@
           "name": "Inner temple alternate base",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/alternate_base",
+              "data": "yumecraft:verdant_temple/inner_temple/alternate_base",
               "weight": 1
             }
           ],
@@ -337,7 +337,7 @@
           "name": "Northwest inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/northwest",
+              "data": "yumecraft:verdant_temple/inner_temple/northwest",
               "weight": 1
             }
           ],
@@ -367,7 +367,7 @@
           "name": "Southwest inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/southwest",
+              "data": "yumecraft:verdant_temple/inner_temple/southwest",
               "weight": 1
             }
           ],
@@ -397,7 +397,7 @@
           "name": "Southeast inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/southeast",
+              "data": "yumecraft:verdant_temple/inner_temple/southeast",
               "weight": 1
             }
           ],
@@ -427,7 +427,7 @@
           "name": "Northeast inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/northeast",
+              "data": "yumecraft:verdant_temple/inner_temple/northeast",
               "weight": 1
             }
           ],
@@ -457,7 +457,7 @@
           "name": "North inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/north",
+              "data": "yumecraft:verdant_temple/inner_temple/north",
               "weight": 1
             }
           ],
@@ -479,7 +479,7 @@
           "name": "South inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/south",
+              "data": "yumecraft:verdant_temple/inner_temple/south",
               "weight": 1
             }
           ],
@@ -501,7 +501,7 @@
           "name": "West inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/west",
+              "data": "yumecraft:verdant_temple/inner_temple/west",
               "weight": 1
             }
           ],
@@ -531,7 +531,7 @@
           "name": "East inner temple",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/east",
+              "data": "yumecraft:verdant_temple/inner_temple/east",
               "weight": 1
             }
           ],
@@ -561,7 +561,7 @@
           "name": "Inner temple base",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/inner_temple/base",
+              "data": "yumecraft:verdant_temple/inner_temple/base",
               "weight": 1
             }
           ],
@@ -582,19 +582,19 @@
           "type": "yumecraft:alternating",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/stairway/east",
+              "data": "yumecraft:verdant_temple/stairway/east",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/stairway/north",
+              "data": "yumecraft:verdant_temple/stairway/north",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/stairway/south",
+              "data": "yumecraft:verdant_temple/stairway/south",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/stairway/west",
+              "data": "yumecraft:verdant_temple/stairway/west",
               "weight": 1
             },
             {
@@ -627,19 +627,19 @@
           "type": "yumecraft:alternating",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/stairway/top_north",
+              "data": "yumecraft:verdant_temple/stairway/top_north",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/stairway/top_east",
+              "data": "yumecraft:verdant_temple/stairway/top_east",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/stairway/top_south",
+              "data": "yumecraft:verdant_temple/stairway/top_south",
               "weight": 1
             },
             {
-              "data": "yumecraft:amaranth_temple/stairway/top_west",
+              "data": "yumecraft:verdant_temple/stairway/top_west",
               "weight": 1
             },
             {
@@ -672,7 +672,7 @@
           "type": "yumecraft:default",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/lower_southwest",
+              "data": "yumecraft:verdant_temple/lower_southwest",
               "weight": 1
             }
           ],
@@ -696,7 +696,7 @@
           "type": "yumecraft:default",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/lower_northwest",
+              "data": "yumecraft:verdant_temple/lower_northwest",
               "weight": 1
             }
           ],
@@ -720,7 +720,7 @@
           "type": "yumecraft:default",
           "elements": [
             {
-              "data": "yumecraft:amaranth_temple/lower_northeast",
+              "data": "yumecraft:verdant_temple/lower_northeast",
               "weight": 1
             }
           ],
@@ -743,7 +743,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/lower_southeast",
+            "data": "yumecraft:verdant_temple/lower_southeast",
             "weight": 1
           }],
           "bounding_size": [3,3,3],
@@ -765,7 +765,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_southwest",
+            "data": "yumecraft:verdant_temple/upper_southwest",
             "weight": 1
           }],
           "bounding_size": [3,3,3],
@@ -787,7 +787,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_northwest",
+            "data": "yumecraft:verdant_temple/upper_northwest",
             "weight": 1
           }],
           "bounding_size": [3,3,3],
@@ -809,7 +809,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_northeast",
+            "data": "yumecraft:verdant_temple/upper_northeast",
             "weight": 1
           }],
           "bounding_size": [3,3,3],
@@ -831,7 +831,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_southeast",
+            "data": "yumecraft:verdant_temple/upper_southeast",
             "weight": 1
           }],
           "bounding_size": [3,3,3],
@@ -853,7 +853,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/lower_south",
+            "data": "yumecraft:verdant_temple/lower_south",
             "weight": 1
           }],
           "bounding_size": [1,3,3],
@@ -869,7 +869,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_south",
+            "data": "yumecraft:verdant_temple/upper_south",
             "weight": 1
           }],
           "bounding_size": [1,3,3],
@@ -885,7 +885,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/lower_north",
+            "data": "yumecraft:verdant_temple/lower_north",
             "weight": 1
           }],
           "bounding_size": [1,3,3],
@@ -901,7 +901,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_north",
+            "data": "yumecraft:verdant_temple/upper_north",
             "weight": 1
           }],
           "bounding_size": [1,3,3],
@@ -917,7 +917,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/lower_west",
+            "data": "yumecraft:verdant_temple/lower_west",
             "weight": 1
           }],
           "bounding_size": [3,3,1],
@@ -939,7 +939,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_west",
+            "data": "yumecraft:verdant_temple/upper_west",
             "weight": 1
           }],
           "bounding_size": [3,3,1],
@@ -961,7 +961,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/lower_east",
+            "data": "yumecraft:verdant_temple/lower_east",
             "weight": 1
           }],
           "bounding_size": [3,3,1],
@@ -983,7 +983,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper_east",
+            "data": "yumecraft:verdant_temple/upper_east",
             "weight": 1
           }],
           "bounding_size": [3,3,1],
@@ -1005,7 +1005,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/south",
+            "data": "yumecraft:verdant_temple/south",
             "weight": 1
           }],
           "bounding_size": [1,1,3],
@@ -1017,7 +1017,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/north",
+            "data": "yumecraft:verdant_temple/north",
             "weight": 1
           }],
           "bounding_size": [1,1,3],
@@ -1029,7 +1029,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/west",
+            "data": "yumecraft:verdant_temple/west",
             "weight": 1
           }],
           "bounding_size": [3,1,1],
@@ -1043,7 +1043,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/east",
+            "data": "yumecraft:verdant_temple/east",
             "weight": 1
           }],
           "bounding_size": [3,1,1],
@@ -1057,7 +1057,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/lower",
+            "data": "yumecraft:verdant_temple/lower",
             "weight": 1
           }],
           "bounding_size": [1,3,1],
@@ -1071,7 +1071,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/upper",
+            "data": "yumecraft:verdant_temple/upper",
             "weight": 1
           }],
           "bounding_size": [1,3,1],
@@ -1085,7 +1085,7 @@
         {
           "type": "yumecraft:default",
           "elements": [{
-            "data": "yumecraft:amaranth_temple/base",
+            "data": "yumecraft:verdant_temple/base",
             "weight": 1
           }],
           "bounding_size": [1,1,1],

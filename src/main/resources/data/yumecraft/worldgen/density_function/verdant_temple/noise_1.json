@@ -1,6 +1,6 @@
 {
   "type": "yumecraft:noise",
-  "noise": "yumecraft:amaranth_temple/noise_1",
+  "noise": "yumecraft:verdant_temple/noise_1",
   "xz_scale": 1,
   "y_scale": 0
 }

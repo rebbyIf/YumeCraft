@@ -77,13 +77,28 @@ public class DimensionalTeleportationHandler {
                 return;
             }
 
-            System.out.println("Finding players in size " + handlers.size());
+            YumeCraft.LOGGER.info("Finding sleeping players in size {}", handlers.size());
+
             for (int i = 0; i < handlers.size(); i++) {
                 DimensionalTeleportationHandler handler = handlers.get(i);
                 if (handler.user.equals(entity)) {
-                    System.out.println("Found player!");
-                    handler.state = handler.state.loadDimension(ModDimensions.VERDANT_TEMPLE);
-                    System.out.println("Loaded Dimension");
+                    YumeCraft.LOGGER.info("Found sleeping player!");
+                    NotRandom random = new PCGRandom(handler.user.age);
+                    int d = random.setValue(random.nextLong() + i).nextInt(2);
+                    String dim;
+                    switch (d) {
+                        case 0:
+                            dim = ModDimensions.POINT_NEMO;
+                            break;
+                        case 1:
+                            dim = ModDimensions.VERDANT_TEMPLE;
+                            break;
+                        default:
+                            return;
+                    }
+
+                    handler.state = handler.state.loadDimension(dim);
+                    YumeCraft.LOGGER.info("Loaded Dimension");
                     return;
 
                 }
@@ -95,13 +110,13 @@ public class DimensionalTeleportationHandler {
                 return;
             }
 
-            System.out.println("Finding players in size " + handlers.size());
+            YumeCraft.LOGGER.info("Finding waking players in size {}", handlers.size());
             for (int i = 0; i < handlers.size(); i++) {
                 DimensionalTeleportationHandler handler = handlers.get(i);
                 if (handler.user.equals(entity)) {
-                    System.out.println("Found player!");
-                    handler.state = handler.state.teleportToDimension(ModDimensions.VERDANT_TEMPLE);
-                    System.out.println("New Dimension");
+                    YumeCraft.LOGGER.info("Found waking player!");
+                    handler.state = handler.state.teleportToDimension();
+                    YumeCraft.LOGGER.info("Teleported to new Dimension");
                     return;
 
                 }
@@ -164,13 +179,13 @@ public class DimensionalTeleportationHandler {
             for (int z = -distance; z <= distance; z++) {
                 BlockPos valuePos = pos.add(x, 0, z);
                 int value = getMaxCurveFromTop(world, valuePos, c);
-                System.out.print(value + " ");
+                //System.out.print(value + " ");
                 if ((x != 0 || z != 0) && min > value) {
                     min = value;
                     minPos = valuePos;
                 }
             }
-            System.out.println();
+            //System.out.println();
         }
 
         return getHightestBlockPos(world, minPos);
@@ -201,10 +216,13 @@ public class DimensionalTeleportationHandler {
     }
 
     private State findWorldState(World world) {
-        System.out.println("Finding world state...");
-        System.out.println(world.getRegistryKey().getValue().getPath());
-        if (world.getRegistryKey().getValue().getPath().equals("overworld")) {
-            System.out.println("OverworldState");
+        YumeCraft.LOGGER.info("Finding world state...");
+        String namespace = world.getRegistryKey().getValue().getNamespace();
+        String path = world.getRegistryKey().getValue().getPath();
+        YumeCraft.LOGGER.info("{}:{}", namespace, path);
+
+        if (namespace.equals("minecraft") && path.equals("overworld")) {
+            YumeCraft.LOGGER.info("OverworldState");
             return new OverworldState();
         }
 
@@ -217,7 +235,7 @@ public class DimensionalTeleportationHandler {
 
     private abstract class State{
 
-        public abstract State teleportToDimension(String dimId);
+        public abstract State teleportToDimension();
 
         public abstract State loadDimension(String dimId);
 
@@ -232,7 +250,7 @@ public class DimensionalTeleportationHandler {
         }
 
         @Override
-        public State teleportToDimension(String dimId) {
+        public State teleportToDimension() {
             return this;
         }
 
@@ -242,16 +260,16 @@ public class DimensionalTeleportationHandler {
 
             if (dimId.equals(ModDimensions.POINT_NEMO)) {
                 newState = new TeleportToSetTopState(new BlockPos(0,0,0), 12,
-                        user.getYaw(), user.getPitch());
+                        user.getYaw(), user.getPitch(), dimId);
             }
             else if (dimId.equals(ModDimensions.VERDANT_TEMPLE)) {
-                newState = new TeleportToSetTopState(user.getBlockPos(), 8, user.getYaw(), user.getPitch());
+                newState = new TeleportToSetTopState(user.getBlockPos(), 8, user.getYaw(), user.getPitch(), dimId);
             }
             else {
                 return this;
             }
 
-            System.out.println("Loading Dimension");
+            YumeCraft.LOGGER.info("Loading Dimension");
 
             return newState.loadDimension(dimId);
         }
@@ -263,7 +281,7 @@ public class DimensionalTeleportationHandler {
 
 
         @Override
-        public State teleportToDimension(String dimId) {
+        public State teleportToDimension() {
             return this;
         }
 
@@ -278,22 +296,24 @@ public class DimensionalTeleportationHandler {
         private BlockPos setPos;
         private int distance;
         private float yaw, pitch;
+        private String dimId;
 
-        private TeleportToSetTopState(BlockPos setPos, int distance, float yaw, float pitch) {
+        private TeleportToSetTopState(BlockPos setPos, int distance, float yaw, float pitch, String dimId) {
             this.setPos = setPos;
             this.distance = distance;
             this.yaw = yaw;
             this.pitch = pitch;
+            this.dimId = dimId;
         }
 
         @Override
-        public State teleportToDimension(String dimId) {
+        public State teleportToDimension() {
 
             MinecraftServer server = ((ServerWorld)user.getWorld()).getServer();
             RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, idOf(dimId));
             ServerWorld worldTo = server.getWorld(dimKey);
 
-            System.out.println("trying to teleport...");
+            YumeCraft.LOGGER.info("trying to teleport...");
 
             if (worldTo == null || user.getWorld().getRegistryKey().equals(dimKey)) {
                 return this;
@@ -302,7 +322,7 @@ public class DimensionalTeleportationHandler {
             Vec3d teleportedLoc = getFlattestGroundFromTop(worldTo, setPos, distance, 2)
                     .add(0,1,0).toCenterPos();
 
-            System.out.println("Flattest Point: "+ teleportedLoc.y);
+            YumeCraft.LOGGER.info("Flattest Point: {}", teleportedLoc.y);
 
             TeleportTarget target = new TeleportTarget(worldTo,
                     teleportedLoc,
@@ -320,7 +340,7 @@ public class DimensionalTeleportationHandler {
         @Override
         public State loadDimension(String dimId) {
 
-            System.out.println("Trying to load");
+            YumeCraft.LOGGER.info("Trying to load {}...", dimId);
 
             MinecraftServer server = ((ServerWorld)user.getWorld()).getServer();
             RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, idOf(dimId));
@@ -330,7 +350,7 @@ public class DimensionalTeleportationHandler {
                 return this;
             }
 
-            System.out.println("Can load!");
+            YumeCraft.LOGGER.info("Can load {}!", dimId);
 
             world.getChunkManager().addTicket(ChunkTicketType.PORTAL, new ChunkPos(setPos), distance, setPos);
 

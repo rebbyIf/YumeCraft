@@ -58,8 +58,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Shader dependencies
-	modImplementation ("maven.modrinth:sodium:${project.sodium_version}")
-	modImplementation ("maven.modrinth:iris:${project.iris_version}")
+	//modImplementation ("maven.modrinth:sodium:${project.sodium_version}")
+	//modImplementation ("maven.modrinth:iris:${project.iris_version}")
 
 	
 }

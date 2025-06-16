@@ -3,6 +3,7 @@ package dev.rebby.yumecraft.world.gen.chunk_generator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.rebby.yumecraft.YumeCraft;
 import dev.rebby.yumecraft.world.gen.structure.InfiniteStructure;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
@@ -99,7 +100,7 @@ public class StructureChunkGenerator extends ChunkGenerator {
             infiniteStructure.generate(noiseConfig, structureTemplateManager, chunkRegion, chunk);
         }
         else {
-            System.out.println("Error: cannot find server");
+            YumeCraft.LOGGER.error("Error: cannot find server");
         }
     }
 

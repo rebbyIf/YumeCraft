@@ -84,7 +84,7 @@ public class DimensionalTeleportationHandler {
                 if (handler.user.equals(entity)) {
                     YumeCraft.LOGGER.info("Found sleeping player!");
                     NotRandom random = new PCGRandom(handler.user.age);
-                    int d = random.setValue(random.nextLong() + i).nextInt(2);
+                    int d = random.setValue(random.nextLong() + i).nextInt(5);
                     String dim;
                     switch (d) {
                         case 0:

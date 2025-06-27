@@ -11,7 +11,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "yumecraft:chiseled_whitebrick_slab",
+                  "block": "yumecraft:whitebrick_slab",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "type": "double"
@@ -25,7 +25,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "yumecraft:chiseled_whitebrick_slab"
+          "name": "yumecraft:whitebrick_slab"
         }
       ],
       "rolls": 1.0

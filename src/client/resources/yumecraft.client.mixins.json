@@ -1,11 +1,12 @@
 {
-	"required": true,
-	"package": "dev.rebby.yumecraft.mixin.client",
-	"compatibilityLevel": "JAVA_21",
-	"client": [
-		"ExampleClientMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "dev.rebby.yumecraft.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ExampleClientMixin",
+    "MusicMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

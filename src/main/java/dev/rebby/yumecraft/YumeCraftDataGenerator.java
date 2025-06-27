@@ -1,9 +1,6 @@
 package dev.rebby.yumecraft;
 
-import dev.rebby.yumecraft.datagen.ModBlockLootTableProvider;
-import dev.rebby.yumecraft.datagen.ModBlockTagProvider;
-import dev.rebby.yumecraft.datagen.ModItemTagProvider;
-import dev.rebby.yumecraft.datagen.ModModelProvider;
+import dev.rebby.yumecraft.datagen.*;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
@@ -17,5 +14,6 @@ public class YumeCraftDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModBlockTagProvider::new);
 		pack.addProvider(ModItemTagProvider::new);
 		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModRecipeProvider::new);
 	}
 }

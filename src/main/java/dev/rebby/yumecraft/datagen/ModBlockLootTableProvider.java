@@ -22,7 +22,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.CHISELED_WHITEBRICK);
         addDrop(ModBlocks.CHISELED_WHITEBRICK_WALL);
 
-        addDrop(ModBlocks.WHITEBRICK_SLAB, slabDrops(ModBlocks.CHISELED_WHITEBRICK_SLAB));
+        addDrop(ModBlocks.WHITEBRICK_SLAB, slabDrops(ModBlocks.WHITEBRICK_SLAB));
         addDrop(ModBlocks.CHISELED_WHITEBRICK_SLAB, slabDrops(ModBlocks.CHISELED_WHITEBRICK_SLAB));
     }
 }

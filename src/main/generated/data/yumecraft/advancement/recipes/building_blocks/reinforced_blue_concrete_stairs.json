@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_reinforced_blue_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": "yumecraft:reinforced_blue_concrete"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "yumecraft:reinforced_blue_concrete_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_reinforced_blue_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "yumecraft:reinforced_blue_concrete_stairs"
+    ]
+  }
+}

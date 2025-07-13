@@ -54,6 +54,21 @@ public class ModBlocks {
     public static final WallBlock CHISELED_WHITEBRICK_WALL = registerWithItem("chiseled_whitebrick_wall",
             new WallBlock(AbstractBlock.Settings.copy(WHITEBRICK)));
 
+    public static final Block REINFORCED_BLUE_CONCRETE = registerWithItem("reinforced_blue_concrete",
+            new Block(AbstractBlock.Settings.create()
+                    .strength(4.0f, 9.0f)
+                    .requiresTool()));
+
+    public static final StairsBlock REINFORCED_BLUE_CONCRETE_STAIRS = registerWithItem("reinforced_blue_concrete_stairs",
+            new StairsBlock(REINFORCED_BLUE_CONCRETE.getDefaultState(),
+                    AbstractBlock.Settings.copy(REINFORCED_BLUE_CONCRETE)));
+
+    public static final SlabBlock REINFORCED_BLUE_CONCRETE_SLABS = registerWithItem("reinforced_blue_concrete_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(REINFORCED_BLUE_CONCRETE)));
+
+    public static final EdgeBlock BLUE_CONCRETE_EDGE = registerWithItem("blue_concrete_edge",
+            new EdgeBlock(AbstractBlock.Settings.copy(Blocks.BLUE_CONCRETE)));
+
     public static <T extends Block> T register(String name, T block) {
         return Registry.register(Registries.BLOCK, YumeCraft.id(name),block);
     }

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    },
+    {
+      "item": "minecraft:blue_concrete"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "yumecraft:reinforced_blue_concrete"
+  }
+}

@@ -38,7 +38,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.WHITEBRICK_STAIRS);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.BLUE_COBBLE);
+                .add(ModBlocks.BLUE_COBBLE)
+                .add(ModBlocks.REINFORCED_BLUE_CONCRETE)
+                .add(ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS)
+                .add(ModBlocks.REINFORCED_BLUE_CONCRETE_STAIRS);
 
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.WHITEBRICK_WALL)

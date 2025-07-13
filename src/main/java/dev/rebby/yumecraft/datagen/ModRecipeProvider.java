@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.MagmaBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -32,5 +33,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSlabRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_WHITEBRICK_SLAB, ModBlocks.CHISELED_WHITEBRICK);
         offerWallRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_WHITEBRICK_WALL, ModBlocks.CHISELED_WHITEBRICK);
 
+        offerCompactingRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.REINFORCED_BLUE_CONCRETE, Blocks.BLUE_CONCRETE);
+        createStairsRecipe(ModBlocks.REINFORCED_BLUE_CONCRETE_STAIRS, Ingredient.ofItems(ModBlocks.REINFORCED_BLUE_CONCRETE))
+                .criterion(hasItem(ModBlocks.REINFORCED_BLUE_CONCRETE), conditionsFromItem(ModBlocks.REINFORCED_BLUE_CONCRETE))
+                .offerTo(recipeExporter);
+        offerSlabRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS, ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS);
     }
 }

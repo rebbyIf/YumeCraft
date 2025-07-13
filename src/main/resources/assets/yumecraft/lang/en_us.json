@@ -9,5 +9,9 @@
   "block.yumecraft.chiseled_whitebrick_slab": "Chiseled Whitebrick Slab",
   "block.yumecraft.whitebrick_wall": "Whitebrick Wall",
   "block.yumecraft.chiseled_whitebrick_wall": "Chiseled Whitebrick Wall",
+  "block.yumecraft.reinforced_blue_concrete": "Reinforced Blue Concrete",
+  "block.yumecraft.reinforced_blue_concrete_stairs": "Reinforced Blue Concrete Stairs",
+  "block.yumecraft.reinforced_blue_concrete_slab": "Reinforced Blue Concrete Slab",
+  "block.yumecraft.blue_concrete_edge": "Blue Concrete Edge",
   "itemGroup.yumecraft.block_group": "Yumecraft Blocks"
 }

@@ -4,11 +4,7 @@ import dev.rebby.yumecraft.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MagmaBlock;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.Item;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
@@ -33,10 +29,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSlabRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_WHITEBRICK_SLAB, ModBlocks.CHISELED_WHITEBRICK);
         offerWallRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_WHITEBRICK_WALL, ModBlocks.CHISELED_WHITEBRICK);
 
-        offerCompactingRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.REINFORCED_BLUE_CONCRETE, Blocks.BLUE_CONCRETE);
-        createStairsRecipe(ModBlocks.REINFORCED_BLUE_CONCRETE_STAIRS, Ingredient.ofItems(ModBlocks.REINFORCED_BLUE_CONCRETE))
-                .criterion(hasItem(ModBlocks.REINFORCED_BLUE_CONCRETE), conditionsFromItem(ModBlocks.REINFORCED_BLUE_CONCRETE))
+        /*
+         * Concrete Alt Blocks
+         */
+
+        // Blue
+        createStairsRecipe(ModBlocks.BLUE_CONCRETE_STAIRS, Ingredient.ofItems(Blocks.BLUE_CONCRETE))
+                .criterion(hasItem(Blocks.BLUE_CONCRETE), conditionsFromItem(Blocks.BLUE_CONCRETE))
                 .offerTo(recipeExporter);
-        offerSlabRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS, ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS);
+        offerSlabRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLUE_CONCRETE_SLABS, Blocks.BLUE_CONCRETE);
     }
 }

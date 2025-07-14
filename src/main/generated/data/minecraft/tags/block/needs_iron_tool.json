@@ -1,8 +1,5 @@
 {
   "values": [
-    "yumecraft:blue_cobble",
-    "yumecraft:reinforced_blue_concrete",
-    "yumecraft:reinforced_blue_concrete_slab",
-    "yumecraft:reinforced_blue_concrete_stairs"
+    "yumecraft:blue_cobble"
   ]
 }

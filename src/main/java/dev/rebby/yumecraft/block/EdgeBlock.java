@@ -3,10 +3,7 @@ package dev.rebby.yumecraft.block;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ConnectingBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -30,7 +27,7 @@ import java.util.Map;
 /**
  * Partially copied code from minecraft's source
  */
-public class EdgeBlock extends Block {
+public class EdgeBlock extends TranslucentBlock {
 
     public static final MapCodec<EdgeBlock> CODEC = createCodec(EdgeBlock::new);
 

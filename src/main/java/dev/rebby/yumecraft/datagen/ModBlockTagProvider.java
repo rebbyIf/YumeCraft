@@ -16,32 +16,49 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+
+                // POINT NEMO BLOCKS
                 .add(ModBlocks.BLUESTONE)
                 .add(ModBlocks.BLUE_COBBLE)
                 .add(ModBlocks.BUBBLING_MAGMA_BLOCK)
+
+                //WHITEBRICK
                 .add(ModBlocks.CHISELED_WHITEBRICK)
                 .add(ModBlocks.WHITEBRICK)
                 .add(ModBlocks.CHISELED_WHITEBRICK_WALL)
                 .add(ModBlocks.WHITEBRICK_WALL)
                 .add(ModBlocks.WHITEBRICK_SLAB)
                 .add(ModBlocks.CHISELED_WHITEBRICK_SLAB)
-                .add(ModBlocks.WHITEBRICK_STAIRS);
+                .add(ModBlocks.WHITEBRICK_STAIRS)
+
+                // CONCRETE ALT
+                // Blue
+                .add(ModBlocks.BLUE_CONCRETE_SLABS)
+                .add(ModBlocks.BLUE_CONCRETE_STAIRS)
+                .add(ModBlocks.BLUE_CONCRETE_EDGE);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
+
+                // POINT NEMO
                 .add(ModBlocks.BLUESTONE)
+
+                // WHITEBRICK
                 .add(ModBlocks.CHISELED_WHITEBRICK)
                 .add(ModBlocks.WHITEBRICK)
                 .add(ModBlocks.CHISELED_WHITEBRICK_WALL)
                 .add(ModBlocks.WHITEBRICK_WALL)
                 .add(ModBlocks.WHITEBRICK_SLAB)
                 .add(ModBlocks.CHISELED_WHITEBRICK_SLAB)
-                .add(ModBlocks.WHITEBRICK_STAIRS);
+                .add(ModBlocks.WHITEBRICK_STAIRS)
+
+                // CONCRETE ALT
+                // Blue
+                .add(ModBlocks.BLUE_CONCRETE_SLABS)
+                .add(ModBlocks.BLUE_CONCRETE_STAIRS)
+                .add(ModBlocks.BLUE_CONCRETE_EDGE);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.BLUE_COBBLE)
-                .add(ModBlocks.REINFORCED_BLUE_CONCRETE)
-                .add(ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS)
-                .add(ModBlocks.REINFORCED_BLUE_CONCRETE_STAIRS);
+                .add(ModBlocks.BLUE_COBBLE);
 
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.WHITEBRICK_WALL)

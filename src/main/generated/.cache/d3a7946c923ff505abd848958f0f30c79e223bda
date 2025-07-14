@@ -1,13 +1,13 @@
-// 1.21.1	2025-07-12T20:38:36.5705902	YumeCraft/Block Loot Tables
+// 1.21.1	2025-07-13T23:32:28.5974215	YumeCraft/Block Loot Tables
 4222827f4c1465fccd6406af0158ef13e764c439 data\yumecraft\loot_table\blocks\blue_cobble.json
 78a0fe5332d4b3eb0d4802931772d1ab51193496 data\yumecraft\loot_table\blocks\chiseled_whitebrick_slab.json
+990244f425a4068a2a62a195e8d85d95d3b2d3f8 data\yumecraft\loot_table\blocks\blue_concrete_stairs.json
 538d40685bc8c141e6e1140e382c68357017aad8 data\yumecraft\loot_table\blocks\whitebrick.json
 d1cfe99bb1856d815f7a9ec0d773258134dc3382 data\yumecraft\loot_table\blocks\chiseled_whitebrick_wall.json
-907f220a867633d944e77fe9924eb5119f7687b7 data\yumecraft\loot_table\blocks\reinforced_blue_concrete.json
 fed44321651fcc86aad228f86e9af8900b8b9f63 data\yumecraft\loot_table\blocks\whitebrick_slab.json
-37a01234742ea10fd7a458a2d52c32fb94645e80 data\yumecraft\loot_table\blocks\reinforced_blue_concrete_stairs.json
+fd55c35527604a2b08544f7949c0e4e37cf83988 data\yumecraft\loot_table\blocks\blue_concrete_edge.json
 4ba400f23a216b32eaccd327cdd2d9597277a2ef data\yumecraft\loot_table\blocks\chiseled_whitebrick.json
 03b279161b60b86afe4d781d37564c74368cd984 data\yumecraft\loot_table\blocks\bluestone.json
-8d19b4b0944fc3adf71fceff4eed26634dd67c1e data\yumecraft\loot_table\blocks\reinforced_blue_concrete_slab.json
 1101dddf980587b3e39f9fdf2f19b25b04e6f457 data\yumecraft\loot_table\blocks\whitebrick_wall.json
 5ad1bcb4810ae7bd6f64c89765f3679191f6f255 data\yumecraft\loot_table\blocks\whitebrick_stairs.json
+4d6b79a23f07baea5c7badb49950766ffb4fd922 data\yumecraft\loot_table\blocks\blue_concrete_slab.json

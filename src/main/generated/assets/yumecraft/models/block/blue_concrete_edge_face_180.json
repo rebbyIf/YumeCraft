@@ -1,6 +1,6 @@
 {
-  "parent": "yumecraft:block/edge",
+  "parent": "yumecraft:block/edge_180",
   "textures": {
-    "texture": "yumecraft:block/blue_concrete_edge_face_180"
+    "texture": "yumecraft:block/blue_concrete_edge_face"
   }
 }

@@ -6,12 +6,11 @@ import dev.rebby.yumecraft.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 
 import java.util.Optional;
@@ -20,6 +19,21 @@ public class ModModelProvider extends FabricModelProvider {
 
     public static final Model EDGE = new Model(
             Optional.of(YumeCraft.id("block/edge")),
+            Optional.empty(),
+            TextureKey.TEXTURE
+    );
+    public static final Model EDGE_90 = new Model(
+            Optional.of(YumeCraft.id("block/edge_90")),
+            Optional.empty(),
+            TextureKey.TEXTURE
+    );
+    public static final Model EDGE_180 = new Model(
+            Optional.of(YumeCraft.id("block/edge_180")),
+            Optional.empty(),
+            TextureKey.TEXTURE
+    );
+    public static final Model EDGE_270 = new Model(
+            Optional.of(YumeCraft.id("block/edge_270")),
             Optional.empty(),
             TextureKey.TEXTURE
     );
@@ -52,20 +66,139 @@ public class ModModelProvider extends FabricModelProvider {
         chiseledWhitebrickPool.slab(ModBlocks.CHISELED_WHITEBRICK_SLAB);
         chiseledWhitebrickPool.wall(ModBlocks.CHISELED_WHITEBRICK_WALL);
 
-        BlockStateModelGenerator.BlockTexturePool reinforcedBlueConcretePool =
-                blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_BLUE_CONCRETE);
+        /*
+         * List for all Concrete variants
+         */
 
-        reinforcedBlueConcretePool.stairs(ModBlocks.REINFORCED_BLUE_CONCRETE_STAIRS);
-        reinforcedBlueConcretePool.slab(ModBlocks.REINFORCED_BLUE_CONCRETE_SLABS);
+        Identifier [] concreteEdgeModels = registerOuterEdgeModel("concrete", blockStateModelGenerator);
 
-        registerEdgeBlock(ModBlocks.BLUE_CONCRETE_EDGE, blockStateModelGenerator);
+        // Blue
+        Identifier blueConcreteId = Identifier.ofVanilla("block/blue_concrete");
+        final TextureMap blueConcreteTexture = TextureMap.all(blueConcreteId);
+        registerVanillaStairsVariant(blueConcreteTexture, ModBlocks.BLUE_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(blueConcreteTexture, ModBlocks.BLUE_CONCRETE_SLABS, blueConcreteId, blockStateModelGenerator);
+        registerEdgeBlockWithUniqueModel(ModBlocks.BLUE_CONCRETE_EDGE, blockStateModelGenerator);
+
+        Identifier whiteConcreteId = Identifier.ofVanilla("block/white_concrete");
+        final TextureMap whiteConcreteTexture = TextureMap.all(whiteConcreteId);
+        Models.CUBE_ALL.upload(ModBlocks.WHITE_CONCRETE_EDGE, whiteConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.WHITE_CONCRETE_EDGE, whiteConcreteId, blockStateModelGenerator, concreteEdgeModels);
 
 
     }
 
+    private static void registerVanillaStairsVariant(TextureMap texture, Block block,
+                                                     BlockStateModelGenerator modelGenerator) {
+        final Identifier stairsModelId = Models.STAIRS.upload(block, texture, modelGenerator.modelCollector);
+        final Identifier innerStairsModelId = Models.INNER_STAIRS.upload(block, texture, modelGenerator.modelCollector);
+        final Identifier outerStairsModelId = Models.OUTER_STAIRS.upload(block, texture, modelGenerator.modelCollector);
+        modelGenerator.blockStateCollector.accept(
+                BlockStateModelGenerator.createStairsBlockState(block,
+                        innerStairsModelId,
+                        stairsModelId,
+                        outerStairsModelId
+                ));
+        modelGenerator.registerParentedItemModel(block, stairsModelId);
+    }
+
+    private static void registerVanillaSlabVariant(TextureMap texture, Block block, Identifier vanillaId,
+                                                   BlockStateModelGenerator modelGenerator) {
+        final Identifier slabBottomModelId = Models.SLAB.upload(block, texture, modelGenerator.modelCollector);
+        final Identifier slabTopModelId = Models.SLAB_TOP.upload(block, texture, modelGenerator.modelCollector);
+        modelGenerator.blockStateCollector.accept(
+                BlockStateModelGenerator.createSlabBlockState(block,
+                        slabBottomModelId,
+                        slabTopModelId,
+                        vanillaId)
+        );
+        modelGenerator.registerParentedItemModel(block, slabBottomModelId);
+    }
+
+    private static Identifier [] registerOuterEdgeModel(String modelName, BlockStateModelGenerator blockStateModelGenerator) {
+        Identifier baseId = YumeCraft.id(modelName).withPrefixedPath("block/").withSuffixedPath("_edge");
+
+        return new Identifier[]{
+                EDGE.upload(baseId.withSuffixedPath(SubModelIds.INVENTORY.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.INVENTORY.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE.upload(baseId.withSuffixedPath(SubModelIds.END.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.END.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_90.upload(baseId.withSuffixedPath(SubModelIds.END_90.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.END.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_180.upload(baseId.withSuffixedPath(SubModelIds.END_180.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.END.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_270.upload(baseId.withSuffixedPath(SubModelIds.END_270.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.END.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE.upload(baseId.withSuffixedPath(SubModelIds.CORNER.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.CORNER.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_90.upload(baseId.withSuffixedPath(SubModelIds.CORNER_90.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.CORNER.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_180.upload(baseId.withSuffixedPath(SubModelIds.CORNER_180.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.CORNER.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_270.upload(baseId.withSuffixedPath(SubModelIds.CORNER_270.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.CORNER.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE.upload(baseId.withSuffixedPath(SubModelIds.COLUMN.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.COLUMN.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_90.upload(baseId.withSuffixedPath(SubModelIds.COLUMN_ALT.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.COLUMN.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE.upload(baseId.withSuffixedPath(SubModelIds.FACE.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.FACE.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_90.upload(baseId.withSuffixedPath(SubModelIds.FACE_90.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.FACE.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_180.upload(baseId.withSuffixedPath(SubModelIds.FACE_180.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.FACE.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE_270.upload(baseId.withSuffixedPath(SubModelIds.FACE_270.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.FACE.str)),
+                        blockStateModelGenerator.modelCollector),
+                EDGE.upload(baseId.withSuffixedPath(SubModelIds.BLANK.str),
+                        TextureMap.texture(baseId.withSuffixedPath(SubModelIds.BLANK.str)),
+                        blockStateModelGenerator.modelCollector),
+        };
+    }
+
+    private static void registerEdgeBlock(EdgeBlock block, BlockStateModelGenerator blockStateModelGenerator, Identifier [] subModelIds) {
+
+        Identifier baseModelId = Models.CUBE_ALL.upload(block, TextureMap.all(block), blockStateModelGenerator.modelCollector);
+
+        registerEdgeBlock(block, baseModelId, blockStateModelGenerator, subModelIds);
+    }
+
+    private static void registerEdgeBlock(EdgeBlock block, Identifier baseModelId, BlockStateModelGenerator blockStateModelGenerator, Identifier [] subModelIds) {
+
+        MultipartBlockStateSupplier multipartBlockStateSupplier = MultipartBlockStateSupplier.create(block)
+                .with(BlockStateVariant.create().put(VariantSettings.MODEL, baseModelId));
+        multipartBlockStateSupplier = checkEdgeBlockFace(multipartBlockStateSupplier, Properties.EAST,
+                Properties.UP, Properties.WEST, Properties.DOWN, Properties.NORTH, VariantSettings.Y, VariantSettings.Rotation.R0, subModelIds);
+        multipartBlockStateSupplier = checkEdgeBlockFace(multipartBlockStateSupplier, Properties.SOUTH,
+                Properties.UP, Properties.NORTH, Properties.DOWN, Properties.EAST, VariantSettings.Y, VariantSettings.Rotation.R90, subModelIds);
+        multipartBlockStateSupplier = checkEdgeBlockFace(multipartBlockStateSupplier, Properties.WEST,
+                Properties.UP, Properties.EAST, Properties.DOWN, Properties.SOUTH, VariantSettings.Y, VariantSettings.Rotation.R180, subModelIds);
+        multipartBlockStateSupplier = checkEdgeBlockFace(multipartBlockStateSupplier, Properties.NORTH,
+                Properties.UP, Properties.SOUTH, Properties.DOWN, Properties.WEST, VariantSettings.Y, VariantSettings.Rotation.R270, subModelIds);
+        multipartBlockStateSupplier = checkEdgeBlockFace(multipartBlockStateSupplier, Properties.EAST,
+                Properties.SOUTH, Properties.WEST, Properties.NORTH, Properties.UP, VariantSettings.X, VariantSettings.Rotation.R270, subModelIds);
+        multipartBlockStateSupplier = checkEdgeBlockFace(multipartBlockStateSupplier, Properties.EAST,
+                Properties.NORTH, Properties.WEST, Properties.SOUTH, Properties.DOWN, VariantSettings.X, VariantSettings.Rotation.R90, subModelIds);
+
+        blockStateModelGenerator.blockStateCollector.accept(multipartBlockStateSupplier);
+    }
 
 
-    private static void registerEdgeBlock(EdgeBlock block, BlockStateModelGenerator blockStateModelGenerator) {
+
+    private static void registerEdgeBlockWithUniqueModel(EdgeBlock block, BlockStateModelGenerator blockStateModelGenerator) {
 
         Models.CUBE_ALL.upload(block, TextureMap.all(block), blockStateModelGenerator.modelCollector);
 
@@ -76,44 +209,44 @@ public class ModModelProvider extends FabricModelProvider {
                 EDGE.upload(block, SubModelIds.END.str, TextureMap.texture(Registries.BLOCK.getId(block)
                                 .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.END_90.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END_90.str)),
+                EDGE_90.upload(block, SubModelIds.END_90.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.END_180.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END_180.str)),
+                EDGE_180.upload(block, SubModelIds.END_180.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.END_270.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END_270.str)),
+                EDGE_270.upload(block, SubModelIds.END_270.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.END.str)),
                         blockStateModelGenerator.modelCollector),
                 EDGE.upload(block, SubModelIds.CORNER.str, TextureMap.texture(Registries.BLOCK.getId(block)
                                 .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.CORNER_90.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER_90.str)),
+                EDGE_90.upload(block, SubModelIds.CORNER_90.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.CORNER_180.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER_180.str)),
+                EDGE_180.upload(block, SubModelIds.CORNER_180.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.CORNER_270.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER_270.str)),
+                EDGE_270.upload(block, SubModelIds.CORNER_270.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.CORNER.str)),
                         blockStateModelGenerator.modelCollector),
                 EDGE.upload(block, SubModelIds.COLUMN.str, TextureMap.texture(Registries.BLOCK.getId(block)
                                 .withPrefixedPath("block/").withSuffixedPath(SubModelIds.COLUMN.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.COLUMN_ALT.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.COLUMN_ALT.str)),
+                EDGE_90.upload(block, SubModelIds.COLUMN_ALT.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.COLUMN.str)),
                         blockStateModelGenerator.modelCollector),
                 EDGE.upload(block, SubModelIds.FACE.str, TextureMap.texture(Registries.BLOCK.getId(block)
                                 .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.FACE_90.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE_90.str)),
+                EDGE_90.upload(block, SubModelIds.FACE_90.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.FACE_180.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE_180.str)),
+                EDGE_180.upload(block, SubModelIds.FACE_180.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE.str)),
                         blockStateModelGenerator.modelCollector),
-                EDGE.upload(block, SubModelIds.FACE_270.str, TextureMap.texture(Registries.BLOCK.getId(block)
-                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE_270.str)),
+                EDGE_270.upload(block, SubModelIds.FACE_270.str, TextureMap.texture(Registries.BLOCK.getId(block)
+                                .withPrefixedPath("block/").withSuffixedPath(SubModelIds.FACE.str)),
                         blockStateModelGenerator.modelCollector),
                 EDGE.upload(block, SubModelIds.BLANK.str, TextureMap.texture(Registries.BLOCK.getId(block)
                                 .withPrefixedPath("block/").withSuffixedPath(SubModelIds.BLANK.str)),

@@ -1,0 +1,6 @@
+{
+  "parent": "yumecraft:block/edge",
+  "textures": {
+    "texture": "yumecraft:block/purple_edge_corner"
+  }
+}

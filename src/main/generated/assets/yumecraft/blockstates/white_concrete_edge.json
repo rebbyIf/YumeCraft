@@ -7,7 +7,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_inventory",
+        "model": "yumecraft:block/black_edge_inventory",
         "y": 0
       },
       "when": {
@@ -20,7 +20,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end",
+        "model": "yumecraft:block/black_edge_end",
         "y": 0
       },
       "when": {
@@ -32,7 +32,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_90",
+        "model": "yumecraft:block/black_edge_end_90",
         "y": 0
       },
       "when": {
@@ -45,7 +45,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_180",
+        "model": "yumecraft:block/black_edge_end_180",
         "y": 0
       },
       "when": {
@@ -58,7 +58,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_270",
+        "model": "yumecraft:block/black_edge_end_270",
         "y": 0
       },
       "when": {
@@ -71,7 +71,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner",
+        "model": "yumecraft:block/black_edge_corner",
         "y": 0
       },
       "when": {
@@ -84,7 +84,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_90",
+        "model": "yumecraft:block/black_edge_corner_90",
         "y": 0
       },
       "when": {
@@ -97,7 +97,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_180",
+        "model": "yumecraft:block/black_edge_corner_180",
         "y": 0
       },
       "when": {
@@ -110,7 +110,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_270",
+        "model": "yumecraft:block/black_edge_corner_270",
         "y": 0
       },
       "when": {
@@ -123,7 +123,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column",
+        "model": "yumecraft:block/black_edge_column",
         "y": 0
       },
       "when": {
@@ -136,7 +136,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column_alt",
+        "model": "yumecraft:block/black_edge_column_alt",
         "y": 0
       },
       "when": {
@@ -149,7 +149,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face",
+        "model": "yumecraft:block/black_edge_face",
         "y": 0
       },
       "when": {
@@ -162,7 +162,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_90",
+        "model": "yumecraft:block/black_edge_face_90",
         "y": 0
       },
       "when": {
@@ -175,7 +175,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_180",
+        "model": "yumecraft:block/black_edge_face_180",
         "y": 0
       },
       "when": {
@@ -188,7 +188,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_270",
+        "model": "yumecraft:block/black_edge_face_270",
         "y": 0
       },
       "when": {
@@ -201,7 +201,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_blank",
+        "model": "yumecraft:block/black_edge_blank",
         "y": 0
       },
       "when": {
@@ -214,7 +214,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_inventory",
+        "model": "yumecraft:block/black_edge_inventory",
         "y": 90
       },
       "when": {
@@ -227,7 +227,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end",
+        "model": "yumecraft:block/black_edge_end",
         "y": 90
       },
       "when": {
@@ -239,7 +239,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_90",
+        "model": "yumecraft:block/black_edge_end_90",
         "y": 90
       },
       "when": {
@@ -252,7 +252,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_180",
+        "model": "yumecraft:block/black_edge_end_180",
         "y": 90
       },
       "when": {
@@ -265,7 +265,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_270",
+        "model": "yumecraft:block/black_edge_end_270",
         "y": 90
       },
       "when": {
@@ -278,7 +278,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner",
+        "model": "yumecraft:block/black_edge_corner",
         "y": 90
       },
       "when": {
@@ -291,7 +291,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_90",
+        "model": "yumecraft:block/black_edge_corner_90",
         "y": 90
       },
       "when": {
@@ -304,7 +304,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_180",
+        "model": "yumecraft:block/black_edge_corner_180",
         "y": 90
       },
       "when": {
@@ -317,7 +317,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_270",
+        "model": "yumecraft:block/black_edge_corner_270",
         "y": 90
       },
       "when": {
@@ -330,7 +330,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column",
+        "model": "yumecraft:block/black_edge_column",
         "y": 90
       },
       "when": {
@@ -343,7 +343,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column_alt",
+        "model": "yumecraft:block/black_edge_column_alt",
         "y": 90
       },
       "when": {
@@ -356,7 +356,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face",
+        "model": "yumecraft:block/black_edge_face",
         "y": 90
       },
       "when": {
@@ -369,7 +369,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_90",
+        "model": "yumecraft:block/black_edge_face_90",
         "y": 90
       },
       "when": {
@@ -382,7 +382,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_180",
+        "model": "yumecraft:block/black_edge_face_180",
         "y": 90
       },
       "when": {
@@ -395,7 +395,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_270",
+        "model": "yumecraft:block/black_edge_face_270",
         "y": 90
       },
       "when": {
@@ -408,7 +408,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_blank",
+        "model": "yumecraft:block/black_edge_blank",
         "y": 90
       },
       "when": {
@@ -421,7 +421,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_inventory",
+        "model": "yumecraft:block/black_edge_inventory",
         "y": 180
       },
       "when": {
@@ -434,7 +434,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end",
+        "model": "yumecraft:block/black_edge_end",
         "y": 180
       },
       "when": {
@@ -446,7 +446,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_90",
+        "model": "yumecraft:block/black_edge_end_90",
         "y": 180
       },
       "when": {
@@ -459,7 +459,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_180",
+        "model": "yumecraft:block/black_edge_end_180",
         "y": 180
       },
       "when": {
@@ -472,7 +472,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_270",
+        "model": "yumecraft:block/black_edge_end_270",
         "y": 180
       },
       "when": {
@@ -485,7 +485,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner",
+        "model": "yumecraft:block/black_edge_corner",
         "y": 180
       },
       "when": {
@@ -498,7 +498,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_90",
+        "model": "yumecraft:block/black_edge_corner_90",
         "y": 180
       },
       "when": {
@@ -511,7 +511,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_180",
+        "model": "yumecraft:block/black_edge_corner_180",
         "y": 180
       },
       "when": {
@@ -524,7 +524,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_270",
+        "model": "yumecraft:block/black_edge_corner_270",
         "y": 180
       },
       "when": {
@@ -537,7 +537,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column",
+        "model": "yumecraft:block/black_edge_column",
         "y": 180
       },
       "when": {
@@ -550,7 +550,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column_alt",
+        "model": "yumecraft:block/black_edge_column_alt",
         "y": 180
       },
       "when": {
@@ -563,7 +563,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face",
+        "model": "yumecraft:block/black_edge_face",
         "y": 180
       },
       "when": {
@@ -576,7 +576,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_90",
+        "model": "yumecraft:block/black_edge_face_90",
         "y": 180
       },
       "when": {
@@ -589,7 +589,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_180",
+        "model": "yumecraft:block/black_edge_face_180",
         "y": 180
       },
       "when": {
@@ -602,7 +602,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_270",
+        "model": "yumecraft:block/black_edge_face_270",
         "y": 180
       },
       "when": {
@@ -615,7 +615,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_blank",
+        "model": "yumecraft:block/black_edge_blank",
         "y": 180
       },
       "when": {
@@ -628,7 +628,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_inventory",
+        "model": "yumecraft:block/black_edge_inventory",
         "y": 270
       },
       "when": {
@@ -641,7 +641,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end",
+        "model": "yumecraft:block/black_edge_end",
         "y": 270
       },
       "when": {
@@ -653,7 +653,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_90",
+        "model": "yumecraft:block/black_edge_end_90",
         "y": 270
       },
       "when": {
@@ -666,7 +666,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_180",
+        "model": "yumecraft:block/black_edge_end_180",
         "y": 270
       },
       "when": {
@@ -679,7 +679,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_270",
+        "model": "yumecraft:block/black_edge_end_270",
         "y": 270
       },
       "when": {
@@ -692,7 +692,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner",
+        "model": "yumecraft:block/black_edge_corner",
         "y": 270
       },
       "when": {
@@ -705,7 +705,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_90",
+        "model": "yumecraft:block/black_edge_corner_90",
         "y": 270
       },
       "when": {
@@ -718,7 +718,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_180",
+        "model": "yumecraft:block/black_edge_corner_180",
         "y": 270
       },
       "when": {
@@ -731,7 +731,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_270",
+        "model": "yumecraft:block/black_edge_corner_270",
         "y": 270
       },
       "when": {
@@ -744,7 +744,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column",
+        "model": "yumecraft:block/black_edge_column",
         "y": 270
       },
       "when": {
@@ -757,7 +757,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column_alt",
+        "model": "yumecraft:block/black_edge_column_alt",
         "y": 270
       },
       "when": {
@@ -770,7 +770,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face",
+        "model": "yumecraft:block/black_edge_face",
         "y": 270
       },
       "when": {
@@ -783,7 +783,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_90",
+        "model": "yumecraft:block/black_edge_face_90",
         "y": 270
       },
       "when": {
@@ -796,7 +796,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_180",
+        "model": "yumecraft:block/black_edge_face_180",
         "y": 270
       },
       "when": {
@@ -809,7 +809,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_270",
+        "model": "yumecraft:block/black_edge_face_270",
         "y": 270
       },
       "when": {
@@ -822,7 +822,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_blank",
+        "model": "yumecraft:block/black_edge_blank",
         "y": 270
       },
       "when": {
@@ -835,7 +835,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_inventory",
+        "model": "yumecraft:block/black_edge_inventory",
         "x": 270
       },
       "when": {
@@ -848,7 +848,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end",
+        "model": "yumecraft:block/black_edge_end",
         "x": 270
       },
       "when": {
@@ -860,7 +860,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_90",
+        "model": "yumecraft:block/black_edge_end_90",
         "x": 270
       },
       "when": {
@@ -873,7 +873,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_180",
+        "model": "yumecraft:block/black_edge_end_180",
         "x": 270
       },
       "when": {
@@ -886,7 +886,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_270",
+        "model": "yumecraft:block/black_edge_end_270",
         "x": 270
       },
       "when": {
@@ -899,7 +899,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner",
+        "model": "yumecraft:block/black_edge_corner",
         "x": 270
       },
       "when": {
@@ -912,7 +912,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_90",
+        "model": "yumecraft:block/black_edge_corner_90",
         "x": 270
       },
       "when": {
@@ -925,7 +925,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_180",
+        "model": "yumecraft:block/black_edge_corner_180",
         "x": 270
       },
       "when": {
@@ -938,7 +938,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_270",
+        "model": "yumecraft:block/black_edge_corner_270",
         "x": 270
       },
       "when": {
@@ -951,7 +951,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column",
+        "model": "yumecraft:block/black_edge_column",
         "x": 270
       },
       "when": {
@@ -964,7 +964,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column_alt",
+        "model": "yumecraft:block/black_edge_column_alt",
         "x": 270
       },
       "when": {
@@ -977,7 +977,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face",
+        "model": "yumecraft:block/black_edge_face",
         "x": 270
       },
       "when": {
@@ -990,7 +990,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_90",
+        "model": "yumecraft:block/black_edge_face_90",
         "x": 270
       },
       "when": {
@@ -1003,7 +1003,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_180",
+        "model": "yumecraft:block/black_edge_face_180",
         "x": 270
       },
       "when": {
@@ -1016,7 +1016,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_270",
+        "model": "yumecraft:block/black_edge_face_270",
         "x": 270
       },
       "when": {
@@ -1029,7 +1029,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_blank",
+        "model": "yumecraft:block/black_edge_blank",
         "x": 270
       },
       "when": {
@@ -1042,7 +1042,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_inventory",
+        "model": "yumecraft:block/black_edge_inventory",
         "x": 90
       },
       "when": {
@@ -1055,7 +1055,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end",
+        "model": "yumecraft:block/black_edge_end",
         "x": 90
       },
       "when": {
@@ -1067,7 +1067,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_90",
+        "model": "yumecraft:block/black_edge_end_90",
         "x": 90
       },
       "when": {
@@ -1080,7 +1080,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_180",
+        "model": "yumecraft:block/black_edge_end_180",
         "x": 90
       },
       "when": {
@@ -1093,7 +1093,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_end_270",
+        "model": "yumecraft:block/black_edge_end_270",
         "x": 90
       },
       "when": {
@@ -1106,7 +1106,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner",
+        "model": "yumecraft:block/black_edge_corner",
         "x": 90
       },
       "when": {
@@ -1119,7 +1119,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_90",
+        "model": "yumecraft:block/black_edge_corner_90",
         "x": 90
       },
       "when": {
@@ -1132,7 +1132,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_180",
+        "model": "yumecraft:block/black_edge_corner_180",
         "x": 90
       },
       "when": {
@@ -1145,7 +1145,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_corner_270",
+        "model": "yumecraft:block/black_edge_corner_270",
         "x": 90
       },
       "when": {
@@ -1158,7 +1158,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column",
+        "model": "yumecraft:block/black_edge_column",
         "x": 90
       },
       "when": {
@@ -1171,7 +1171,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_column_alt",
+        "model": "yumecraft:block/black_edge_column_alt",
         "x": 90
       },
       "when": {
@@ -1184,7 +1184,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face",
+        "model": "yumecraft:block/black_edge_face",
         "x": 90
       },
       "when": {
@@ -1197,7 +1197,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_90",
+        "model": "yumecraft:block/black_edge_face_90",
         "x": 90
       },
       "when": {
@@ -1210,7 +1210,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_180",
+        "model": "yumecraft:block/black_edge_face_180",
         "x": 90
       },
       "when": {
@@ -1223,7 +1223,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_face_270",
+        "model": "yumecraft:block/black_edge_face_270",
         "x": 90
       },
       "when": {
@@ -1236,7 +1236,7 @@
     },
     {
       "apply": {
-        "model": "yumecraft:block/concrete_edge_blank",
+        "model": "yumecraft:block/black_edge_blank",
         "x": 90
       },
       "when": {

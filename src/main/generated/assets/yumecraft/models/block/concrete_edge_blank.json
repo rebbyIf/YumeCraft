@@ -1,6 +1,0 @@
-{
-  "parent": "yumecraft:block/edge",
-  "textures": {
-    "texture": "yumecraft:block/concrete_edge_blank"
-  }
-}

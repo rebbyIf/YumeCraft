@@ -1,15 +1,17 @@
 {
-  "type": "minecraft:the_end",
+  "type": "yumecraft:infinite_mall",
   "generator": {
     "type": "minecraft:flat",
     "settings": {
-      "biome": "minecraft:the_end",
-      "lakes": false,
-      "features": false,
+      "biome": "yumecraft:infinite_mall_surface",
       "layers": [
         {
           "height": 1,
           "block": "minecraft:bedrock"
+        },
+        {
+          "height": 63,
+          "block": "minecraft:blue_concrete"
         }
       ]
     }

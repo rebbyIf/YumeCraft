@@ -31,8 +31,18 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.CHISELED_WHITEBRICK_SLAB)
                 .add(ModBlocks.WHITEBRICK_STAIRS)
 
+                // COPPER WALLS
+                .add(ModBlocks.COPPER_WALL)
+                .add(ModBlocks.EXPOSED_COPPER_WALL)
+                .add(ModBlocks.WEATHERED_COPPER_WALL)
+                .add(ModBlocks.OXIDIZED_COPPER_WALL)
+                .add(ModBlocks.WAXED_COPPER_WALL)
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_WALL)
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_WALL)
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_WALL)
+
                 // CONCRETE ALT
-                // Blue
+                // BLUE
                 .add(ModBlocks.BLUE_CONCRETE_SLABS)
                 .add(ModBlocks.BLUE_CONCRETE_STAIRS)
                 .add(ModBlocks.BLUE_CONCRETE_EDGE);
@@ -52,7 +62,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.WHITEBRICK_STAIRS)
 
                 // CONCRETE ALT
-                // Blue
+                // BLUE
                 .add(ModBlocks.BLUE_CONCRETE_SLABS)
                 .add(ModBlocks.BLUE_CONCRETE_STAIRS)
                 .add(ModBlocks.BLUE_CONCRETE_EDGE);
@@ -62,7 +72,17 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.WHITEBRICK_WALL)
-                .add(ModBlocks.CHISELED_WHITEBRICK_WALL);
+                .add(ModBlocks.CHISELED_WHITEBRICK_WALL)
+
+                // COPPER WALLS
+                .add(ModBlocks.COPPER_WALL)
+                .add(ModBlocks.EXPOSED_COPPER_WALL)
+                .add(ModBlocks.WEATHERED_COPPER_WALL)
+                .add(ModBlocks.OXIDIZED_COPPER_WALL)
+                .add(ModBlocks.WAXED_COPPER_WALL)
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_WALL)
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_WALL)
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_WALL);
 
     }
 }

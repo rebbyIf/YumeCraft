@@ -16,8 +16,22 @@ public class YumeCraftClient implements ClientModInitializer {
 		ClientSideParticles.register();
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+				ModBlocks.WHITE_CONCRETE_EDGE,
+				ModBlocks.LIGHT_GRAY_CONCRETE_EDGE,
+				ModBlocks.GRAY_CONCRETE_EDGE,
+				ModBlocks.BLACK_CONCRETE_EDGE,
+				ModBlocks.ORANGE_CONCRETE_EDGE,
+				ModBlocks.MAGENTA_CONCRETE_EDGE,
+				ModBlocks.LIGHT_BLUE_CONCRETE_EDGE,
+				ModBlocks.YELLOW_CONCRETE_EDGE,
+				ModBlocks.LIME_CONCRETE_EDGE,
+				ModBlocks.PINK_CONCRETE_EDGE,
+				ModBlocks.CYAN_CONCRETE_EDGE,
+				ModBlocks.PURPLE_CONCRETE_EDGE,
 				ModBlocks.BLUE_CONCRETE_EDGE,
-				ModBlocks.WHITE_CONCRETE_EDGE
+				ModBlocks.BROWN_CONCRETE_EDGE,
+				ModBlocks.GREEN_CONCRETE_EDGE,
+				ModBlocks.RED_CONCRETE_EDGE
 		);
 
 	}

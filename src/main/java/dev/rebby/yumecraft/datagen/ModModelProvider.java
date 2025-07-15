@@ -6,7 +6,6 @@ import dev.rebby.yumecraft.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.BooleanProperty;
@@ -44,6 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        // Point Nemo Blocks
+
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLUESTONE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLUE_COBBLE);
 
@@ -52,6 +53,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.BUBBLING_MAGMA_BLOCK, bubblingMagmaModelId);
         blockStateModelGenerator.registerSimpleState(ModBlocks.BUBBLING_MAGMA_BLOCK);
+
+        // Verdant Temple Blocks
 
         BlockStateModelGenerator.BlockTexturePool whitebrickPool =
                 blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.WHITEBRICK);
@@ -66,25 +69,169 @@ public class ModModelProvider extends FabricModelProvider {
         chiseledWhitebrickPool.slab(ModBlocks.CHISELED_WHITEBRICK_SLAB);
         chiseledWhitebrickPool.wall(ModBlocks.CHISELED_WHITEBRICK_WALL);
 
+        // Copper Walls
+
+        final TextureMap copperBlockTexture = TextureMap.all(Identifier.ofVanilla("block/copper_block"));
+        final TextureMap exposedCopperTexture = TextureMap.all(Identifier.ofVanilla("block/exposed_copper"));
+        final TextureMap weatheredCopperTexture = TextureMap.all(Identifier.ofVanilla("block/weathered_copper"));
+        final TextureMap oxidizedCopperTexture = TextureMap.all(Identifier.ofVanilla("block/oxidized_copper"));
+
+        registerVanillaWallVariant(copperBlockTexture, ModBlocks.COPPER_WALL, blockStateModelGenerator);
+        registerVanillaWallVariant(copperBlockTexture, ModBlocks.WAXED_COPPER_WALL, blockStateModelGenerator);
+
+        registerVanillaWallVariant(exposedCopperTexture, ModBlocks.EXPOSED_COPPER_WALL, blockStateModelGenerator);
+        registerVanillaWallVariant(exposedCopperTexture, ModBlocks.WAXED_EXPOSED_COPPER_WALL, blockStateModelGenerator);
+
+        registerVanillaWallVariant(weatheredCopperTexture, ModBlocks.WEATHERED_COPPER_WALL, blockStateModelGenerator);
+        registerVanillaWallVariant(weatheredCopperTexture, ModBlocks.WAXED_WEATHERED_COPPER_WALL, blockStateModelGenerator);
+
+        registerVanillaWallVariant(oxidizedCopperTexture, ModBlocks.OXIDIZED_COPPER_WALL, blockStateModelGenerator);
+        registerVanillaWallVariant(oxidizedCopperTexture, ModBlocks.WAXED_OXIDIZED_COPPER_WALL, blockStateModelGenerator);
+
         /*
          * List for all Concrete variants
          */
 
-        Identifier [] concreteEdgeModels = registerOuterEdgeModel("concrete", blockStateModelGenerator);
+        // For white, light gray, & gray
+        Identifier [] blackEdgeModels = registerOuterEdgeModel("black", blockStateModelGenerator);
+        // For brown & black
+        Identifier [] whiteEdgeModels = registerOuterEdgeModel("white", blockStateModelGenerator);
+        // For light blue, cyan, & blue
+        Identifier [] blueEdgeModels = registerOuterEdgeModel("blue", blockStateModelGenerator);
+        // For orange, yellow & red
+        Identifier [] redEdgeModels = registerOuterEdgeModel("red", blockStateModelGenerator);
+        // For magenta, pink, & purple
+        Identifier [] purpleEdgeModels = registerOuterEdgeModel("purple", blockStateModelGenerator);
+        // For lime & green
+        Identifier [] greenEdgeModels = registerOuterEdgeModel("green", blockStateModelGenerator);
+
+        // White
+        Identifier whiteConcreteId = Identifier.ofVanilla("block/white_concrete");
+        final TextureMap whiteConcreteTexture = TextureMap.all(whiteConcreteId);
+        registerVanillaStairsVariant(whiteConcreteTexture, ModBlocks.WHITE_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(whiteConcreteTexture, ModBlocks.WHITE_CONCRETE_SLABS, whiteConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.WHITE_CONCRETE_EDGE, whiteConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.WHITE_CONCRETE_EDGE, whiteConcreteId, blockStateModelGenerator, blackEdgeModels);
+
+        // LIGHT GRAY
+        Identifier lightGrayConcreteId = Identifier.ofVanilla("block/light_gray_concrete");
+        final TextureMap lightGrayConcreteTexture = TextureMap.all(lightGrayConcreteId);
+        registerVanillaStairsVariant(lightGrayConcreteTexture, ModBlocks.LIGHT_GRAY_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(lightGrayConcreteTexture, ModBlocks.LIGHT_GRAY_CONCRETE_SLABS, lightGrayConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.LIGHT_GRAY_CONCRETE_EDGE, lightGrayConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.LIGHT_GRAY_CONCRETE_EDGE, lightGrayConcreteId, blockStateModelGenerator, blackEdgeModels);
+
+        // GRAY
+        Identifier grayConcreteId = Identifier.ofVanilla("block/gray_concrete");
+        final TextureMap grayConcreteTexture = TextureMap.all(grayConcreteId);
+        registerVanillaStairsVariant(grayConcreteTexture, ModBlocks.GRAY_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(grayConcreteTexture, ModBlocks.GRAY_CONCRETE_SLABS, grayConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.GRAY_CONCRETE_EDGE, grayConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.GRAY_CONCRETE_EDGE, grayConcreteId, blockStateModelGenerator, blackEdgeModels);
+
+        // BLACK
+        Identifier blackConcreteId = Identifier.ofVanilla("block/black_concrete");
+        final TextureMap blackConcreteTexture = TextureMap.all(blackConcreteId);
+        registerVanillaStairsVariant(blackConcreteTexture, ModBlocks.BLACK_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(blackConcreteTexture, ModBlocks.BLACK_CONCRETE_SLABS, blackConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.BLACK_CONCRETE_EDGE, blackConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.BLACK_CONCRETE_EDGE, blackConcreteId, blockStateModelGenerator, whiteEdgeModels);
+
+        // Orange
+        Identifier orangeConcreteId = Identifier.ofVanilla("block/orange_concrete");
+        final TextureMap orangeConcreteTexture = TextureMap.all(orangeConcreteId);
+        registerVanillaStairsVariant(orangeConcreteTexture, ModBlocks.ORANGE_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(orangeConcreteTexture, ModBlocks.ORANGE_CONCRETE_SLABS, orangeConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.ORANGE_CONCRETE_EDGE, orangeConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.ORANGE_CONCRETE_EDGE, orangeConcreteId, blockStateModelGenerator, redEdgeModels);
+
+        // Magenta
+        Identifier magentaConcreteId = Identifier.ofVanilla("block/magenta_concrete");
+        final TextureMap magentaConcreteTexture = TextureMap.all(magentaConcreteId);
+        registerVanillaStairsVariant(magentaConcreteTexture, ModBlocks.MAGENTA_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(magentaConcreteTexture, ModBlocks.MAGENTA_CONCRETE_SLABS, magentaConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.MAGENTA_CONCRETE_EDGE, magentaConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.MAGENTA_CONCRETE_EDGE, magentaConcreteId, blockStateModelGenerator, purpleEdgeModels);
+
+        // Light Blue
+        Identifier lightBlueConcreteId = Identifier.ofVanilla("block/light_blue_concrete");
+        final TextureMap lightBlueConcreteTexture = TextureMap.all(lightBlueConcreteId);
+        registerVanillaStairsVariant(lightBlueConcreteTexture, ModBlocks.LIGHT_BLUE_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(lightBlueConcreteTexture, ModBlocks.LIGHT_BLUE_CONCRETE_SLABS, lightBlueConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.LIGHT_BLUE_CONCRETE_EDGE, lightBlueConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.LIGHT_BLUE_CONCRETE_EDGE, lightBlueConcreteId, blockStateModelGenerator, blueEdgeModels);
+
+        // YELLOW
+        Identifier yellowConcreteId = Identifier.ofVanilla("block/yellow_concrete");
+        final TextureMap yellowConcreteTexture = TextureMap.all(yellowConcreteId);
+        registerVanillaStairsVariant(yellowConcreteTexture, ModBlocks.YELLOW_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(yellowConcreteTexture, ModBlocks.YELLOW_CONCRETE_SLABS, yellowConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.YELLOW_CONCRETE_EDGE, yellowConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.YELLOW_CONCRETE_EDGE, yellowConcreteId, blockStateModelGenerator, redEdgeModels);
+
+        // LIME
+        Identifier limeConcreteId = Identifier.ofVanilla("block/lime_concrete");
+        final TextureMap limeConcreteTexture = TextureMap.all(limeConcreteId);
+        registerVanillaStairsVariant(limeConcreteTexture, ModBlocks.LIME_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(limeConcreteTexture, ModBlocks.LIME_CONCRETE_SLABS, limeConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.LIME_CONCRETE_EDGE, limeConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.LIME_CONCRETE_EDGE, limeConcreteId, blockStateModelGenerator, greenEdgeModels);
+
+        // PINK
+        Identifier pinkConcreteId = Identifier.ofVanilla("block/pink_concrete");
+        final TextureMap pinkConcreteTexture = TextureMap.all(pinkConcreteId);
+        registerVanillaStairsVariant(pinkConcreteTexture, ModBlocks.PINK_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(pinkConcreteTexture, ModBlocks.PINK_CONCRETE_SLABS, pinkConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.PINK_CONCRETE_EDGE, pinkConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.PINK_CONCRETE_EDGE, pinkConcreteId, blockStateModelGenerator, purpleEdgeModels);
+
+        // CYAN
+        Identifier cyanConcreteId = Identifier.ofVanilla("block/cyan_concrete");
+        final TextureMap cyanConcreteTexture = TextureMap.all(cyanConcreteId);
+        registerVanillaStairsVariant(cyanConcreteTexture, ModBlocks.CYAN_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(cyanConcreteTexture, ModBlocks.CYAN_CONCRETE_SLABS, cyanConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.CYAN_CONCRETE_EDGE, cyanConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.CYAN_CONCRETE_EDGE, cyanConcreteId, blockStateModelGenerator, blueEdgeModels);
+
+        // PURPLE
+        Identifier purpleConcreteId = Identifier.ofVanilla("block/purple_concrete");
+        final TextureMap purpleConcreteTexture = TextureMap.all(purpleConcreteId);
+        registerVanillaStairsVariant(purpleConcreteTexture, ModBlocks.PURPLE_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(purpleConcreteTexture, ModBlocks.PURPLE_CONCRETE_SLABS, purpleConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.PURPLE_CONCRETE_EDGE, purpleConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.PURPLE_CONCRETE_EDGE, purpleConcreteId, blockStateModelGenerator, purpleEdgeModels);
 
         // Blue
         Identifier blueConcreteId = Identifier.ofVanilla("block/blue_concrete");
         final TextureMap blueConcreteTexture = TextureMap.all(blueConcreteId);
         registerVanillaStairsVariant(blueConcreteTexture, ModBlocks.BLUE_CONCRETE_STAIRS, blockStateModelGenerator);
         registerVanillaSlabVariant(blueConcreteTexture, ModBlocks.BLUE_CONCRETE_SLABS, blueConcreteId, blockStateModelGenerator);
-        registerEdgeBlockWithUniqueModel(ModBlocks.BLUE_CONCRETE_EDGE, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.BLUE_CONCRETE_EDGE, blueConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.BLUE_CONCRETE_EDGE, blueConcreteId, blockStateModelGenerator, blueEdgeModels);
 
-        Identifier whiteConcreteId = Identifier.ofVanilla("block/white_concrete");
-        final TextureMap whiteConcreteTexture = TextureMap.all(whiteConcreteId);
-        Models.CUBE_ALL.upload(ModBlocks.WHITE_CONCRETE_EDGE, whiteConcreteTexture, blockStateModelGenerator.modelCollector);
-        registerEdgeBlock(ModBlocks.WHITE_CONCRETE_EDGE, whiteConcreteId, blockStateModelGenerator, concreteEdgeModels);
+        // BROWN
+        Identifier brownConcreteId = Identifier.ofVanilla("block/brown_concrete");
+        final TextureMap brownConcreteTexture = TextureMap.all(brownConcreteId);
+        registerVanillaStairsVariant(brownConcreteTexture, ModBlocks.BROWN_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(brownConcreteTexture, ModBlocks.BROWN_CONCRETE_SLABS, brownConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.BROWN_CONCRETE_EDGE, brownConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.BROWN_CONCRETE_EDGE, brownConcreteId, blockStateModelGenerator, blackEdgeModels);
 
+        // GREEN
+        Identifier greenConcreteId = Identifier.ofVanilla("block/green_concrete");
+        final TextureMap greenConcreteTexture = TextureMap.all(greenConcreteId);
+        registerVanillaStairsVariant(greenConcreteTexture, ModBlocks.GREEN_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(greenConcreteTexture, ModBlocks.GREEN_CONCRETE_SLABS, greenConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.GREEN_CONCRETE_EDGE, greenConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.GREEN_CONCRETE_EDGE, greenConcreteId, blockStateModelGenerator, greenEdgeModels);
 
+        // RED
+        Identifier redConcreteId = Identifier.ofVanilla("block/red_concrete");
+        final TextureMap redConcreteTexture = TextureMap.all(redConcreteId);
+        registerVanillaStairsVariant(redConcreteTexture, ModBlocks.RED_CONCRETE_STAIRS, blockStateModelGenerator);
+        registerVanillaSlabVariant(redConcreteTexture, ModBlocks.RED_CONCRETE_SLABS, redConcreteId, blockStateModelGenerator);
+        Models.CUBE_ALL.upload(ModBlocks.RED_CONCRETE_EDGE, redConcreteTexture, blockStateModelGenerator.modelCollector);
+        registerEdgeBlock(ModBlocks.RED_CONCRETE_EDGE, redConcreteId, blockStateModelGenerator, redEdgeModels);
     }
 
     private static void registerVanillaStairsVariant(TextureMap texture, Block block,
@@ -112,6 +259,23 @@ public class ModModelProvider extends FabricModelProvider {
                         vanillaId)
         );
         modelGenerator.registerParentedItemModel(block, slabBottomModelId);
+    }
+
+    private static void registerVanillaWallVariant(TextureMap texture, Block block,
+                                                   BlockStateModelGenerator modelGenerator) {
+        final Identifier postModelId = Models.TEMPLATE_WALL_POST.upload(block, texture, modelGenerator.modelCollector);
+        final Identifier lowSideModelId = Models.TEMPLATE_WALL_SIDE.upload(block, texture, modelGenerator.modelCollector);
+        final Identifier tallSideModelId = Models.TEMPLATE_WALL_SIDE_TALL.upload(block, texture, modelGenerator.modelCollector);
+        modelGenerator.blockStateCollector.accept(
+                BlockStateModelGenerator.createWallBlockState(block,
+                        postModelId,
+                        lowSideModelId,
+                        tallSideModelId)
+        );
+
+        final Identifier inventoryModelId = Models.WALL_INVENTORY.upload(block, texture, modelGenerator.modelCollector);
+
+        modelGenerator.registerParentedItemModel(block, inventoryModelId);
     }
 
     private static Identifier [] registerOuterEdgeModel(String modelName, BlockStateModelGenerator blockStateModelGenerator) {

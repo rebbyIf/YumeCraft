@@ -1,6 +1,0 @@
-{
-  "parent": "yumecraft:block/edge_270",
-  "textures": {
-    "texture": "yumecraft:block/concrete_edge_corner"
-  }
-}

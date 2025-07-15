@@ -1,0 +1,16 @@
+{
+  "structures": [
+    {
+      "structure": "yumecraft:infinite_mall/lamp_post",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 4,
+    "separation": 3,
+    "spread_type": "linear",
+    "salt": 0,
+    "frequency": 1
+  }
+}

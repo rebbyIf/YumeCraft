@@ -28,6 +28,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.WHITEBRICK_SLAB, slabDrops(ModBlocks.WHITEBRICK_SLAB));
         addDrop(ModBlocks.CHISELED_WHITEBRICK_SLAB, slabDrops(ModBlocks.CHISELED_WHITEBRICK_SLAB));
 
+        // Reinforced Iron
+        addDrop(ModBlocks.REINFORCED_IRON);
+        addDrop(ModBlocks.REINFORCED_IRON_WALL);
+
         // Copper Walls
         addDrop(ModBlocks.COPPER_WALL);
         addDrop(ModBlocks.EXPOSED_COPPER_WALL);

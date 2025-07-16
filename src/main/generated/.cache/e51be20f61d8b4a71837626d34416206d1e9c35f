@@ -1,5 +1,6 @@
-// 1.21.1	2025-07-15T16:40:30.3363092	YumeCraft/Tags for minecraft:block
-5337b915e5a2333eb3f2cd69e158aa52edece4e8 data\minecraft\tags\block\walls.json
-59ce4cf272c31bb386a6fa9bef7fa4a215b32578 data\minecraft\tags\block\needs_stone_tool.json
+// 1.21.1	2025-07-16T09:35:26.9104695	YumeCraft/Tags for minecraft:block
+6fc6ef6bb009c3f3ad9f5d306b4b2e9a6129c52a data\minecraft\tags\block\walls.json
+9df4ef644ca202b841411c15d5b9a6f419d25c18 data\minecraft\tags\block\mineable\pickaxe.json
 c639050929e83683e20a304d741a6a96abf754c3 data\minecraft\tags\block\needs_iron_tool.json
-1ea498ca1db46857260bdf7d577dcb84a74c9cc9 data\minecraft\tags\block\mineable\pickaxe.json
+59ce4cf272c31bb386a6fa9bef7fa4a215b32578 data\minecraft\tags\block\needs_stone_tool.json
+a4b3338f3aee4ec2ac9864bfe0aac2e8ed127650 data\minecraft\tags\block\needs_diamond_tool.json

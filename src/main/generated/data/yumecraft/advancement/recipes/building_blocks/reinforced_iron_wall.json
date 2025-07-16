@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_reinforced_iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "yumecraft:reinforced_iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "yumecraft:reinforced_iron_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_reinforced_iron"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "yumecraft:reinforced_iron_wall"
+    ]
+  }
+}

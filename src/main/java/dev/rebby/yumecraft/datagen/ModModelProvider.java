@@ -69,6 +69,11 @@ public class ModModelProvider extends FabricModelProvider {
         chiseledWhitebrickPool.slab(ModBlocks.CHISELED_WHITEBRICK_SLAB);
         chiseledWhitebrickPool.wall(ModBlocks.CHISELED_WHITEBRICK_WALL);
 
+        BlockStateModelGenerator.BlockTexturePool reinforcedIronPool =
+                blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_IRON);
+
+        reinforcedIronPool.wall(ModBlocks.REINFORCED_IRON_WALL);
+
         // Copper Walls
 
         final TextureMap copperBlockTexture = TextureMap.all(Identifier.ofVanilla("block/copper_block"));

@@ -31,6 +31,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.CHISELED_WHITEBRICK_SLAB)
                 .add(ModBlocks.WHITEBRICK_STAIRS)
 
+                // REINFORCED IRON
+                .add(ModBlocks.REINFORCED_IRON)
+                .add(ModBlocks.REINFORCED_IRON_WALL)
+
                 // COPPER WALLS
                 .add(ModBlocks.COPPER_WALL)
                 .add(ModBlocks.EXPOSED_COPPER_WALL)
@@ -70,9 +74,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.BLUE_COBBLE);
 
+        getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.REINFORCED_IRON)
+                .add(ModBlocks.REINFORCED_IRON_WALL);
+
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.WHITEBRICK_WALL)
                 .add(ModBlocks.CHISELED_WHITEBRICK_WALL)
+                .add(ModBlocks.REINFORCED_IRON_WALL)
 
                 // COPPER WALLS
                 .add(ModBlocks.COPPER_WALL)

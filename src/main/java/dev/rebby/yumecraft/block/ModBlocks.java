@@ -1,5 +1,6 @@
 package dev.rebby.yumecraft.block;
 
+import com.google.common.collect.ImmutableList;
 import dev.rebby.yumecraft.YumeCraft;
 import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.sound.ModSounds;
@@ -7,6 +8,7 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -54,6 +56,18 @@ public class ModBlocks {
 
     public static final WallBlock CHISELED_WHITEBRICK_WALL = registerWithItem("chiseled_whitebrick_wall",
             new WallBlock(AbstractBlock.Settings.copy(WHITEBRICK)));
+
+    // Reinforced Iron
+
+    public static final Block REINFORCED_IRON = registerWithItem("reinforced_iron",
+            new Block(AbstractBlock.Settings.create()
+                    .mapColor(MapColor.IRON_GRAY)
+                    .requiresTool()
+                    .strength(25f, 10f)
+                    .sounds(BlockSoundGroup.COPPER)));
+
+    public static final Block REINFORCED_IRON_WALL = registerWithItem("reinforced_iron_wall",
+            new WallBlock(AbstractBlock.Settings.copy(REINFORCED_IRON)));
 
     // Copper Walls
 

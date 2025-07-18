@@ -1,13 +1,12 @@
 {
   "structures": [
     {
-      "structure": "yumecraft:infinite_mall/parking_lot",
+      "structure": "yumecraft:verdant_temple",
       "weight": 1
     }
   ],
   "placement": {
     "type": "yumecraft:grid_pattern",
-    "separation": 3,
     "spread_type": "linear",
     "salt": 0,
     "frequency": 1

@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:noise",
+  "noise": "yumecraft:verdant_temple/noise_1",
+  "xz_scale": 1,
+  "y_scale": 0
+}

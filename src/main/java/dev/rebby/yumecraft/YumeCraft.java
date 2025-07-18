@@ -9,15 +9,15 @@ import dev.rebby.yumecraft.sound.ModSounds;
 import dev.rebby.yumecraft.util.DimensionalTeleportationHandler;
 import dev.rebby.yumecraft.util.LoadingWorldHandler;
 import dev.rebby.yumecraft.util.PlayerHandler;
-import dev.rebby.yumecraft.world.gen.chunk_generator.FractalChunkGenerator;
 import dev.rebby.yumecraft.world.gen.chunk_generator.ModChunkGenerators;
 import dev.rebby.yumecraft.world.gen.density_function.ModDensityFunctions;
 import dev.rebby.yumecraft.world.gen.fractal.FractalTypes;
-import dev.rebby.yumecraft.world.gen.structure.InfiniteStructureTypes;
+import dev.rebby.yumecraft.world.gen.structure.ModStructureTypes;
+import dev.rebby.yumecraft.world.gen.structure.check_value.CheckValueTypes;
+import dev.rebby.yumecraft.world.gen.structure.piece.StructurePieceTypes;
+import dev.rebby.yumecraft.world.gen.structure.placement.ModStructurePlacementTypes;
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,10 @@ public class YumeCraft implements ModInitializer {
 		LoadingWorldHandler.init();
 		DimensionalTeleportationHandler.init();
 
-		InfiniteStructureTypes.init();
+		ModStructureTypes.init();
+		ModStructurePlacementTypes.init();
+		StructurePieceTypes.init();
+		CheckValueTypes.init();
 		FractalTypes.init();
 		ModDensityFunctions.init();
 		ModChunkGenerators.register();

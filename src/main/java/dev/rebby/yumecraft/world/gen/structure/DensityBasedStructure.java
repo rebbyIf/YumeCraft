@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.biome.source.BiomeCoords;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import net.minecraft.world.gen.structure.Structure;
@@ -62,12 +62,11 @@ public class DensityBasedStructure extends Structure {
         return DataResult.success(structure);
     }
 
-
     private final int minY;
     private final int maxY;
     private final int fac;
     private final DensityFunction densityFunction;
-    private DensityFunction densityFunctionImpl;
+    private DensityFunction densityFunctionImpl = null;
     private final Map<String, CheckValue> values;
     private final List<DensityStructurePiece> structures;
     private final NotRandom setRandom;
@@ -86,7 +85,11 @@ public class DensityBasedStructure extends Structure {
         this.structures = structures;
         this.setRandom = new PCGRandom(0);
         this.liquidSettings = liquidSettings;
-        densityFunctionImpl = null;
+    }
+
+    @Override
+    public Optional<Structure.StructurePosition> getValidStructurePosition(Structure.Context context) {
+        return getStructurePosition(context);
     }
 
     @Override
@@ -96,7 +99,7 @@ public class DensityBasedStructure extends Structure {
         return generate(context, context.structureTemplateManager(), pos);
     }
 
-    public Optional<StructurePosition> generate(Context context, StructureTemplateManager structureTemplateManager, BlockPos startPos) {
+    private Optional<StructurePosition> generate(Context context, StructureTemplateManager structureTemplateManager, BlockPos startPos) {
 
 
 
@@ -127,20 +130,53 @@ public class DensityBasedStructure extends Structure {
 
         boolean [][][] completed = new boolean[16/scale][(maxY-minY)/scale][16/scale];
 
-        for (int s = 0; s < structures.size(); s++) {
+        boolean cantPlace = true;
+        int i = 0;
+        for (int x = 0; x < 16; x += scale) {
+            int j = 0;
+            for (int y = 0; y < maxY - minY; y += scale) {
+                int k = 0;
+                for (int z = 0; z < 16; z += scale) {
+                    BlockPos pos = startPos.add(x,y,z);
+                    boolean biomeTest = context.biomePredicate().test(
+                            context.biomeSource().getBiome(
+                                    BiomeCoords.fromBlock(pos.getX()),
+                                    BiomeCoords.fromBlock(pos.getY()),
+                                    BiomeCoords.fromBlock(pos.getZ()),
+                                    context.noiseConfig().getMultiNoiseSampler()
+                            )
+                    );
+                    if (biomeTest) {
+                        cantPlace = false;
+                    }
 
-            DensityStructurePiece structure = structures.get(s);
+                    completed[i][j][k] = !biomeTest;
+
+                    k++;
+                }
+                j++;
+
+            }
+            i++;
+        }
+
+        if (cantPlace) {
+            return Optional.empty();
+        }
+
+        for (DensityStructurePiece structure : structures) {
 
             BlockPos size = structure.getSize();
 
-            int i = 0;
+            i = 0;
             for (int x = 0; x < 16; x += scale) {
                 int j = 0;
-                for (int y = minY; y < maxY; y += scale) {
+                for (int y = 0; y < maxY - minY; y += scale) {
                     int k = 0;
                     for (int z = 0; z < 16; z += scale) {
 
-                        label : {
+                        label:
+                        {
                             if (i + size.getX() > completed.length ||
                                     j + size.getY() > completed[0].length ||
                                     k + size.getZ() > completed[0][0].length) {
@@ -180,6 +216,10 @@ public class DensityBasedStructure extends Structure {
                 i++;
 
             }
+        }
+
+        if (pieces.isEmpty()) {
+            return Optional.empty();
         }
 
         return Optional.of(new StructurePosition(startPos, collector -> {

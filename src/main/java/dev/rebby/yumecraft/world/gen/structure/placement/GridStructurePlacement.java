@@ -20,7 +20,7 @@ public class GridStructurePlacement extends StructurePlacement {
     private final int separation;
 
     public GridStructurePlacement(Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod,
-                                  float frequency, int salt, Optional<ExclusionZone> exclusionZone,
+                                  float frequency, int salt, Optional<StructurePlacement.ExclusionZone> exclusionZone,
                                   int separation) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.separation = separation;

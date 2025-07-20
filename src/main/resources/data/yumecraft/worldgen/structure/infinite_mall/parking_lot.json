@@ -1,11 +1,11 @@
 {
   "type": "yumecraft:repeating_structure",
   "biomes": "yumecraft:infinite_mall_surface",
-  "step": "surface_structures",
+  "step": "underground_structures",
   "terrain_adaptation": "none",
   "spawn_overrides": {},
   "pool": "yumecraft:infinite_mall/parking_lot",
   "height": {
-    "above_bottom": 64
+    "above_bottom": 63
   }
 }

@@ -10,6 +10,10 @@
     "separation": 3,
     "spread_type": "linear",
     "salt": 0,
-    "frequency": 1
+    "frequency": 1,
+    "exclusion_zone": {
+      "other_set": "yumecraft:infinite_mall/mall",
+      "chunk_count": 5
+    }
   }
 }

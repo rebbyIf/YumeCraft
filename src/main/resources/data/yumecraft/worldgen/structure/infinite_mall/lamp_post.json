@@ -6,6 +6,6 @@
   "spawn_overrides": {},
   "pool": "yumecraft:infinite_mall/lamp_post",
   "height": {
-    "above_bottom": 64
+    "above_bottom": 63
   }
 }

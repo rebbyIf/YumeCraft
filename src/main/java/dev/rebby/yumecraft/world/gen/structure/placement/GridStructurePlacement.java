@@ -35,6 +35,8 @@ public class GridStructurePlacement extends StructurePlacement {
         return chunkX % separation == 0 && chunkZ % separation == 0;
     }
 
+
+
     @Override
     public StructurePlacementType<?> getType() {
         return ModStructurePlacementTypes.GRID;

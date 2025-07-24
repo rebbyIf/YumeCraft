@@ -1,17 +1,34 @@
 {
   "type": "yumecraft:infinite_mall",
   "generator": {
-    "type": "minecraft:flat",
-    "settings": {
-      "biome": "yumecraft:infinite_mall_surface",
-      "layers": [
+    "type": "minecraft:noise",
+    "settings": "yumecraft:infinite_mall",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
         {
-          "height": 1,
-          "block": "minecraft:bedrock"
+          "biome": "yumecraft:infinite_mall_surface",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": -0.5,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
         },
         {
-          "height": 63,
-          "block": "minecraft:black_concrete"
+          "biome": "yumecraft:infinite_mall_underground",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
         }
       ]
     }

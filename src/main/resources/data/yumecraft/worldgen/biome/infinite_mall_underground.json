@@ -2,13 +2,10 @@
   "carvers": {},
   "downfall": 0,
   "effects": {
-    "fog_color": 128,
-    "grass_color": 4353130,
-    "foliage_color": 4353130,
-    "sky_color": 128,
-    "water_color": 0,
-    "water_fog_color": 0,
-    "ambient_sound": "yumecraft:music.002"
+    "fog_color": 1677721,
+    "sky_color": 1677721,
+    "water_color": 1677721,
+    "water_fog_color": 1677721
   },
   "features": [
     [],

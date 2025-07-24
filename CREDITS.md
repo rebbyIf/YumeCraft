@@ -1,5 +1,8 @@
 Sounds:
 
+Yume Nikki:
+sounds/music/mus002 - Kikiyama, "BGM_007"
+
 Yume 2kki:
 sounds/music/mus000 - 音師竹内, "ループ「青光」"
 

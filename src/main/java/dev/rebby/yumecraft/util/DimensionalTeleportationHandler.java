@@ -1,6 +1,7 @@
 package dev.rebby.yumecraft.util;
 
 import dev.rebby.yumecraft.YumeCraft;
+import dev.rebby.yumecraft.tag.ModStructureTags;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -85,17 +86,17 @@ public class DimensionalTeleportationHandler {
                     YumeCraft.LOGGER.info("Found sleeping player!");
                     NotRandom random = new PCGRandom(handler.user.age);
                     int d = random.setValue(random.nextLong() + i).nextInt(5);
-                    String dim;
-                    switch (d) {
-                        case 0:
-                            dim = ModDimensions.POINT_NEMO;
-                            break;
-                        case 1:
-                            dim = ModDimensions.VERDANT_TEMPLE;
-                            break;
-                        default:
-                            return;
-                    }
+                    String dim = ModDimensions.INFINITE_MALL;
+//                    switch (d) {
+//                        case 0:
+//                            dim = ModDimensions.POINT_NEMO;
+//                            break;
+//                        case 1:
+//                            dim = ModDimensions.VERDANT_TEMPLE;
+//                            break;
+//                        default:
+//                            return;
+//                    }
 
                     handler.state = handler.state.loadDimension(dim);
                     YumeCraft.LOGGER.info("Loaded Dimension");
@@ -265,6 +266,9 @@ public class DimensionalTeleportationHandler {
             else if (dimId.equals(ModDimensions.VERDANT_TEMPLE)) {
                 newState = new TeleportToSetTopState(user.getBlockPos(), 8, user.getYaw(), user.getPitch(), dimId);
             }
+            else if (dimId.equals(ModDimensions.INFINITE_MALL)) {
+                newState = new InfiniteMallTeleporterState();
+            }
             else {
                 return this;
             }
@@ -288,6 +292,38 @@ public class DimensionalTeleportationHandler {
         @Override
         public State loadDimension(String dimId) {
             return this;
+        }
+    }
+
+    private class InfiniteMallTeleporterState extends State{
+
+        @Override
+        public State teleportToDimension() {
+            return this;
+        }
+
+        @Override
+        public State loadDimension(String dimId) {
+            MinecraftServer server = ((ServerWorld)user.getWorld()).getServer();
+            RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, idOf(dimId));
+            ServerWorld world = server.getWorld(dimKey);
+
+            if (world == null) {
+                return findWorldState();
+            }
+
+            BlockPos pos = user.getBlockPos();
+
+            BlockPos nearestMall = world.locateStructure(ModStructureTags.INFINITE_MALL_MALL, pos, 6, false);
+
+            if (nearestMall != null){
+                Vec3d distance = pos.add(-nearestMall.getX(), -pos.getY(), -nearestMall.getZ()).toCenterPos().normalize().multiply(8*16);
+                pos = nearestMall.add((int)(distance.x), (int)(distance.y), (int)(distance.z));
+            }
+
+            State newState = new TeleportToSetTopState(pos, 5, user.getYaw(), user.getPitch(), dimId);
+
+            return newState.loadDimension(dimId);
         }
     }
 

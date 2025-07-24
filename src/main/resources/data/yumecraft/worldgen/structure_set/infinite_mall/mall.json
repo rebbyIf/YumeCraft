@@ -6,12 +6,10 @@
     }
   ],
   "placement": {
-    "type": "minecraft:random_spread",
-    "spacing": 24,
+    "type": "yumecraft:grid_pattern",
     "separation": 17,
     "spread_type": "linear",
     "salt": 0,
-    "frequency_reduction_method": "default",
-    "frequency": 1
+    "frequency": 0.3
   }
 }

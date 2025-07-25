@@ -2,6 +2,7 @@ package dev.rebby.yumecraft;
 
 import dev.rebby.yumecraft.block.entity.ModBlockEntityTypes;
 import dev.rebby.yumecraft.block.ModBlocks;
+import dev.rebby.yumecraft.config.YumeCraftConfig;
 import dev.rebby.yumecraft.items.ModItemGroups;
 import dev.rebby.yumecraft.items.ModItems;
 import dev.rebby.yumecraft.particle.ModParticles;
@@ -29,6 +30,7 @@ public class YumeCraft implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final YumeCraftConfig CONFIG = YumeCraftConfig.createAndLoad();
 
 	@Override
 	public void onInitialize() {

@@ -23,7 +23,8 @@
 		],
 		"fabric-datagen": [
 			"dev.rebby.yumecraft.YumeCraftDataGenerator"
-		]
+		],
+		"modmenu": [ "dev.rebby.yumecraft.YumeCraftMenuApiImpl" ]
 	},
 	"mixins": [
 		"yumecraft.mixins.json",

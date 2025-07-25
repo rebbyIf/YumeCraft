@@ -21,8 +21,11 @@ repositories {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
 	}
-	maven { url "https://maven.architectury.dev/" }
-	maven { url "https://maven.shedaniel.me/" }
+	maven { url 'https://maven.wispforest.io/releases/' }
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
 }
 
 loom {
@@ -53,13 +56,13 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Shader dependencies
-	//modImplementation ("maven.modrinth:iris:${project.iris_version}")
-	//modImplementation ("maven.modrinth:sodium:${project.sodium_version}")
+	// OWO (Config Dependencies)
+	modImplementation "io.wispforest:owo-lib:${project.owo_version}"
+	include "io.wispforest:owo-sentinel:${project.owo_version}"
+	annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
 
-	//Architectury Compatibility Dependency
-	modApi "dev.architectury:architectury-fabric:${project.architectury_version}"
-	modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
+	// Mod menu
+	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
 	
 }

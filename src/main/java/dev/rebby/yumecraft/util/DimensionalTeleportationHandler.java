@@ -1,7 +1,11 @@
 package dev.rebby.yumecraft.util;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import dev.rebby.yumecraft.YumeCraft;
+import dev.rebby.yumecraft.config.YumeCraftConfigModel;
 import dev.rebby.yumecraft.tag.ModStructureTags;
+import io.wispforest.owo.config.ConfigSynchronizer;
+import io.wispforest.owo.config.Option;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -22,6 +26,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DimensionalTeleportationHandler {
 
@@ -85,10 +90,18 @@ public class DimensionalTeleportationHandler {
             for (DimensionalTeleportationHandler handler : handlers) {
                 if (handler.user.equals(entity)) {
                     YumeCraft.LOGGER.info("Found sleeping player!");
+
+                    Map<Identifier, Integer> map = YumeCraftConfigModel.getDefaultSleepingTeleportation();
+
+                    Map<Option.Key, ?> options = ConfigSynchronizer.getClientOptions(handler.user, YumeCraft.CONFIG);
+                    if (options != null && options.get(YumeCraft.CONFIG.keys.sleepingTeleportation) != null) {
+                        map = (Map<Identifier, Integer>) options.get(YumeCraft.CONFIG.keys.sleepingTeleportation);
+                    }
+
                     Random random = entity.getRandom();
                     int bound = 0;
 
-                    for (Integer i : YumeCraft.CONFIG.sleepingTeleportation().values()) {
+                    for (Integer i : map.values()) {
                         bound += i;
                     }
 
@@ -100,8 +113,8 @@ public class DimensionalTeleportationHandler {
 
                     Identifier dim = Identifier.ofVanilla("empty");
 
-                    for (Identifier id : YumeCraft.CONFIG.sleepingTeleportation().keySet()) {
-                        bound -= YumeCraft.CONFIG.sleepingTeleportation().get(id);
+                    for (Identifier id : map.keySet()) {
+                        bound -= map.get(id);
                         dim = id;
                         if (bound < 0){
                             break;
@@ -111,18 +124,6 @@ public class DimensionalTeleportationHandler {
                     if (dim.equals(Identifier.ofVanilla("empty"))) {
                         return;
                     }
-
-
-//                    switch (d) {
-//                        case 0:
-//                            dim = ModDimensions.POINT_NEMO;
-//                            break;
-//                        case 1:
-//                            dim = ModDimensions.VERDANT_TEMPLE;
-//                            break;
-//                        default:
-//                            return;
-//                    }
 
                     handler.state = handler.state.loadDimension(dim);
                     YumeCraft.LOGGER.info("Loaded Dimension");

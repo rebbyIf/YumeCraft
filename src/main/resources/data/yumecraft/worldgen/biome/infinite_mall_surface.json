@@ -1,0 +1,30 @@
+{
+  "carvers": {},
+  "downfall": 0,
+  "effects": {
+    "fog_color": 128,
+    "grass_color": 4353130,
+    "foliage_color": 4353130,
+    "sky_color": 128,
+    "water_color": 0,
+    "water_fog_color": 0,
+    "ambient_sound": "yumecraft:music.002"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {},
+  "temperature": 0.1
+}

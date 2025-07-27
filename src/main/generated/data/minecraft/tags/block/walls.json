@@ -1,6 +1,15 @@
 {
   "values": [
     "yumecraft:whitebrick_wall",
-    "yumecraft:chiseled_whitebrick_wall"
+    "yumecraft:chiseled_whitebrick_wall",
+    "yumecraft:reinforced_iron_wall",
+    "yumecraft:copper_wall",
+    "yumecraft:exposed_copper_wall",
+    "yumecraft:weathered_copper_wall",
+    "yumecraft:oxidized_copper_wall",
+    "yumecraft:waxed_copper_wall",
+    "yumecraft:waxed_exposed_copper_wall",
+    "yumecraft:waxed_weathered_copper_wall",
+    "yumecraft:waxed_oxidized_copper_wall"
   ]
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "yumecraft:block/edge",
+  "textures": {
+    "texture": "yumecraft:block/black_edge_inventory"
+  }
+}

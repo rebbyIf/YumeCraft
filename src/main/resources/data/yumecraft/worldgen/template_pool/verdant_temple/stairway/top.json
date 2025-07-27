@@ -1,0 +1,47 @@
+{
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "yumecraft:verdant_temple/stairway/top_east",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "yumecraft:verdant_temple/stairway/top_north",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "yumecraft:verdant_temple/stairway/top_south",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "yumecraft:verdant_temple/stairway/top_west",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 24,
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      }
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

@@ -12,6 +12,7 @@ public class ModSounds {
     public static final SoundEvent MUS_000 = registerSoundEvent("music.000");
     public static final SoundEvent MUS_001 = registerSoundEvent("music.001");
     public static final SoundEvent MUS_001_SLOWED_90 = registerSoundEvent("music.001.slowed90");
+    public static final SoundEvent MUS_002 = registerSoundEvent("music.002");
 
     public static final SoundEvent STEP_000 = registerSoundEvent("step.000");
 

@@ -1,0 +1,6 @@
+{
+  "parent": "yumecraft:block/edge_270",
+  "textures": {
+    "texture": "yumecraft:block/blue_edge_end"
+  }
+}

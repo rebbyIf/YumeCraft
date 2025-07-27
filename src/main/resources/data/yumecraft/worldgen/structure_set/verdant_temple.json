@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "yumecraft:verdant_temple",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "yumecraft:grid_pattern",
+    "spread_type": "linear",
+    "salt": 0,
+    "frequency": 1
+  }
+}

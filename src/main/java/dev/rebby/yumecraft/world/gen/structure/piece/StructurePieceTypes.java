@@ -5,27 +5,27 @@ import dev.rebby.yumecraft.YumeCraft;
 import net.minecraft.registry.Registry;
 
 public class StructurePieceTypes {
-    public static final StructurePieceType<DefaultStructure> DEFAULT =
+    public static final StructurePieceType<DefaultDensityStructure> DEFAULT =
             register("default", new StructurePieceType<>(
-                    DefaultStructure.DEFAULT_STRUCTURE_CODEC));
+                    DefaultDensityStructure.DEFAULT_STRUCTURE_CODEC));
 
-    public static final StructurePieceType<AlternatingStructure> ALTERNATING =
+    public static final StructurePieceType<AlternatingDensityStructure> ALTERNATING =
             register("alternating", new StructurePieceType<>(
-                    AlternatingStructure.ALTERNATING_STRUCTURE_CODEC));
+                    AlternatingDensityStructure.ALTERNATING_STRUCTURE_CODEC));
 
-    public static final StructurePieceType<LayeredGridStructure> LAYERED_GRID =
+    public static final StructurePieceType<LayeredGridDensityStructure> LAYERED_GRID =
             register("layered_grid", new StructurePieceType<>(
-                    LayeredGridStructure.LAYERED_GRID_STRUCTURE_CODEC));
+                    LayeredGridDensityStructure.LAYERED_GRID_STRUCTURE_CODEC));
 
-    public static <T extends StructurePiece> StructurePieceType<T> register(String id, StructurePieceType<T> type) {
+    public static <T extends DensityStructurePiece> StructurePieceType<T> register(String id, StructurePieceType<T> type) {
         return Registry.register(StructurePieceType.REGISTRY, YumeCraft.id(id), type);
     }
 
     public static void init() {
         Codec<StructurePieceType<?>> structurePieceTypeCodec = StructurePieceType.REGISTRY.getCodec();
 
-        Codec<StructurePiece> structurePieceCodec = structurePieceTypeCodec.dispatch("type",
-                StructurePiece::getType, StructurePieceType::codec);
+        Codec<DensityStructurePiece> structurePieceCodec = structurePieceTypeCodec.dispatch("type",
+                DensityStructurePiece::getType, StructurePieceType::codec);
 
         YumeCraft.LOGGER.info("Registering Infinite Structure Pieces for " + YumeCraft.MOD_ID);
     }

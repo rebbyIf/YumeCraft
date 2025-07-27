@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "yumecraft:infinite_mall/lamp_post",
+        "processors": "minecraft:empty"
+      }
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

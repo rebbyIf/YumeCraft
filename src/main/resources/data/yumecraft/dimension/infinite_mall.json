@@ -1,0 +1,36 @@
+{
+  "type": "yumecraft:infinite_mall",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "yumecraft:infinite_mall",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "yumecraft:infinite_mall_surface",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": -0.5,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "yumecraft:infinite_mall_underground",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        }
+      ]
+    }
+  }
+}

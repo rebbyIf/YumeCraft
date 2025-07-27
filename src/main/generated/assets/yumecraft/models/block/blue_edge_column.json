@@ -1,0 +1,6 @@
+{
+  "parent": "yumecraft:block/edge",
+  "textures": {
+    "texture": "yumecraft:block/blue_edge_column"
+  }
+}

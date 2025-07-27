@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "yumecraft:infinite_mall/mall",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "yumecraft:grid_pattern",
+    "separation": 17,
+    "spread_type": "linear",
+    "salt": 0,
+    "frequency": 0.3
+  }
+}

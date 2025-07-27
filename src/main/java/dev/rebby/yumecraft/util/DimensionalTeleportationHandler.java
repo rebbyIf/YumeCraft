@@ -1,6 +1,11 @@
 package dev.rebby.yumecraft.util;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import dev.rebby.yumecraft.YumeCraft;
+import dev.rebby.yumecraft.config.YumeCraftConfigModel;
+import dev.rebby.yumecraft.tag.ModStructureTags;
+import io.wispforest.owo.config.ConfigSynchronizer;
+import io.wispforest.owo.config.Option;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -11,13 +16,17 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.random.LocalRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DimensionalTeleportationHandler {
 
@@ -39,8 +48,7 @@ public class DimensionalTeleportationHandler {
         handlers = new ArrayList<>();
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
-            if (entity instanceof ServerPlayerEntity) {
-                ServerPlayerEntity player = (ServerPlayerEntity) entity;
+            if (entity instanceof ServerPlayerEntity player) {
                 handlers.removeIf(handler -> handler.user.equals(entity));
                 handlers.add(new DimensionalTeleportationHandler((player), world));
             }
@@ -79,22 +87,42 @@ public class DimensionalTeleportationHandler {
 
             YumeCraft.LOGGER.info("Finding sleeping players in size {}", handlers.size());
 
-            for (int i = 0; i < handlers.size(); i++) {
-                DimensionalTeleportationHandler handler = handlers.get(i);
+            for (DimensionalTeleportationHandler handler : handlers) {
                 if (handler.user.equals(entity)) {
                     YumeCraft.LOGGER.info("Found sleeping player!");
-                    NotRandom random = new PCGRandom(handler.user.age);
-                    int d = random.setValue(random.nextLong() + i).nextInt(5);
-                    String dim;
-                    switch (d) {
-                        case 0:
-                            dim = ModDimensions.POINT_NEMO;
+
+                    Map<Identifier, Integer> map = YumeCraftConfigModel.getDefaultSleepingTeleportation();
+
+                    Map<Option.Key, ?> options = ConfigSynchronizer.getClientOptions(handler.user, YumeCraft.CONFIG);
+                    if (options != null && options.get(YumeCraft.CONFIG.keys.sleepingTeleportation) != null) {
+                        map = (Map<Identifier, Integer>) options.get(YumeCraft.CONFIG.keys.sleepingTeleportation);
+                    }
+
+                    Random random = entity.getRandom();
+                    int bound = 0;
+
+                    for (Integer i : map.values()) {
+                        bound += i;
+                    }
+
+                    if (bound == 0) {
+                        bound = 1;
+                    }
+
+                    bound = random.nextInt(bound);
+
+                    Identifier dim = Identifier.ofVanilla("empty");
+
+                    for (Identifier id : map.keySet()) {
+                        bound -= map.get(id);
+                        dim = id;
+                        if (bound < 0){
                             break;
-                        case 1:
-                            dim = ModDimensions.VERDANT_TEMPLE;
-                            break;
-                        default:
-                            return;
+                        }
+                    }
+
+                    if (dim.equals(Identifier.ofVanilla("empty"))) {
+                        return;
                     }
 
                     handler.state = handler.state.loadDimension(dim);
@@ -167,10 +195,6 @@ public class DimensionalTeleportationHandler {
 
     }
 
-    public static Identifier idOf(String path) {
-        return Identifier.of(YumeCraft.MOD_ID, path);
-    }
-
     private static BlockPos getFlattestGroundFromTop(ServerWorld world, BlockPos pos, int distance, int c){
         int min = getMaxCurveFromTop(world, pos, c);
         BlockPos minPos = pos;
@@ -237,7 +261,7 @@ public class DimensionalTeleportationHandler {
 
         public abstract State teleportToDimension();
 
-        public abstract State loadDimension(String dimId);
+        public abstract State loadDimension(Identifier dimId);
 
         public State enterDimension() {
             return findWorldState();
@@ -255,15 +279,17 @@ public class DimensionalTeleportationHandler {
         }
 
         @Override
-        public State loadDimension(String dimId) {
+        public State loadDimension(Identifier dimId) {
             State newState;
 
             if (dimId.equals(ModDimensions.POINT_NEMO)) {
-                newState = new TeleportToSetTopState(new BlockPos(0,0,0), 12,
-                        user.getYaw(), user.getPitch(), dimId);
+                newState = new TeleportToSetTopState(new BlockPos(0,0,0), 12, dimId);
             }
             else if (dimId.equals(ModDimensions.VERDANT_TEMPLE)) {
-                newState = new TeleportToSetTopState(user.getBlockPos(), 8, user.getYaw(), user.getPitch(), dimId);
+                newState = new TeleportToSetTopState(user.getBlockPos(), 8, dimId);
+            }
+            else if (dimId.equals(ModDimensions.INFINITE_MALL)) {
+                newState = new InfiniteMallTeleporterState();
             }
             else {
                 return this;
@@ -286,23 +312,52 @@ public class DimensionalTeleportationHandler {
         }
 
         @Override
-        public State loadDimension(String dimId) {
+        public State loadDimension(Identifier dimId) {
             return this;
+        }
+    }
+
+    private class InfiniteMallTeleporterState extends State{
+
+        @Override
+        public State teleportToDimension() {
+            return this;
+        }
+
+        @Override
+        public State loadDimension(Identifier dimId) {
+            MinecraftServer server = ((ServerWorld)user.getWorld()).getServer();
+            RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, dimId);
+            ServerWorld world = server.getWorld(dimKey);
+
+            if (world == null) {
+                return findWorldState();
+            }
+
+            BlockPos pos = user.getBlockPos();
+
+            BlockPos nearestMall = world.locateStructure(ModStructureTags.INFINITE_MALL_MALL, pos, 6, false);
+
+            if (nearestMall != null){
+                Vec3d distance = pos.add(-nearestMall.getX(), -pos.getY(), -nearestMall.getZ()).toCenterPos().normalize().multiply(8*16);
+                pos = nearestMall.add((int)(distance.x), (int)(distance.y), (int)(distance.z));
+            }
+
+            State newState = new TeleportToSetTopState(pos, 5, dimId);
+
+            return newState.loadDimension(dimId);
         }
     }
 
     private class TeleportToSetTopState extends State {
 
-        private BlockPos setPos;
-        private int distance;
-        private float yaw, pitch;
-        private String dimId;
+        private final BlockPos setPos;
+        private final int distance;
+        private final Identifier dimId;
 
-        private TeleportToSetTopState(BlockPos setPos, int distance, float yaw, float pitch, String dimId) {
+        private TeleportToSetTopState(BlockPos setPos, int distance, Identifier dimId) {
             this.setPos = setPos;
             this.distance = distance;
-            this.yaw = yaw;
-            this.pitch = pitch;
             this.dimId = dimId;
         }
 
@@ -310,7 +365,7 @@ public class DimensionalTeleportationHandler {
         public State teleportToDimension() {
 
             MinecraftServer server = ((ServerWorld)user.getWorld()).getServer();
-            RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, idOf(dimId));
+            RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, dimId);
             ServerWorld worldTo = server.getWorld(dimKey);
 
             YumeCraft.LOGGER.info("trying to teleport...");
@@ -338,12 +393,12 @@ public class DimensionalTeleportationHandler {
         }
 
         @Override
-        public State loadDimension(String dimId) {
+        public State loadDimension(Identifier dimId) {
 
             YumeCraft.LOGGER.info("Trying to load {}...", dimId);
 
             MinecraftServer server = ((ServerWorld)user.getWorld()).getServer();
-            RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, idOf(dimId));
+            RegistryKey<World> dimKey = RegistryKey.of(RegistryKeys.WORLD, dimId);
             ServerWorld world = server.getWorld(dimKey);
 
             if (world == null || user.getWorld().getRegistryKey().equals(dimKey)) {

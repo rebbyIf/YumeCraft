@@ -14,8 +14,11 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
+        // Point Nemo
         addDrop(ModBlocks.BLUESTONE);
         addDrop(ModBlocks.BLUE_COBBLE);
+
+        // Verdant Temple
         addDrop(ModBlocks.WHITEBRICK);
         addDrop(ModBlocks.WHITEBRICK_STAIRS);
         addDrop(ModBlocks.WHITEBRICK_WALL);
@@ -24,5 +27,30 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.WHITEBRICK_SLAB, slabDrops(ModBlocks.WHITEBRICK_SLAB));
         addDrop(ModBlocks.CHISELED_WHITEBRICK_SLAB, slabDrops(ModBlocks.CHISELED_WHITEBRICK_SLAB));
+
+        // Reinforced Iron
+        addDrop(ModBlocks.REINFORCED_IRON);
+        addDrop(ModBlocks.REINFORCED_IRON_WALL);
+
+        // Copper Walls
+        addDrop(ModBlocks.COPPER_WALL);
+        addDrop(ModBlocks.EXPOSED_COPPER_WALL);
+        addDrop(ModBlocks.WEATHERED_COPPER_WALL);
+        addDrop(ModBlocks.OXIDIZED_COPPER_WALL);
+
+        addDrop(ModBlocks.WAXED_COPPER_WALL);
+        addDrop(ModBlocks.WAXED_EXPOSED_COPPER_WALL);
+        addDrop(ModBlocks.WAXED_WEATHERED_COPPER_WALL);
+        addDrop(ModBlocks.WAXED_OXIDIZED_COPPER_WALL);
+
+        /*
+         * Concrete Blocks
+         */
+
+        // BLUE
+        addDrop(ModBlocks.BLUE_CONCRETE_STAIRS);
+        addDrop(ModBlocks.BLUE_CONCRETE_SLABS);
+        addDrop(ModBlocks.BLUE_CONCRETE_SLABS, slabDrops(ModBlocks.BLUE_CONCRETE_SLABS));
+        addDrop(ModBlocks.BLUE_CONCRETE_EDGE);
     }
 }

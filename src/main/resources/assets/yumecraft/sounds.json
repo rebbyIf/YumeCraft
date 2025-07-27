@@ -1,6 +1,6 @@
 {
   "music.000": {
-    "subtitle": "ループ「青光」 By 音師竹内",
+    "subtitle": "ループ「青光」 by 音師竹内",
     "sounds" : [
       {
         "name": "yumecraft:music/mus_000",
@@ -10,7 +10,7 @@
     ]
   },
   "music.001": {
-    "subtitle": "sound2a_ By LSD",
+    "subtitle": "sound2a_ by LSD",
     "sounds" : [
       {
         "name": "yumecraft:music/mus_001",
@@ -20,11 +20,21 @@
     ]
   },
   "music.001.slowed90": {
-    "subtitle": "sound2a_ By LSD",
+    "subtitle": "sound2a_ by LSD",
     "sounds" : [
       {
         "name": "yumecraft:music/mus_001",
         "pitch": 0.9,
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "music.002": {
+    "subtitle": "なにをまもっているの？～盾民族の世界～ by Kikiyama",
+    "sounds" : [
+      {
+        "name": "yumecraft:music/mus_002",
         "stream": true,
         "preload": true
       }

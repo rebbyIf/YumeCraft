@@ -1,0 +1,840 @@
+{
+  "type": "yumecraft:density_based",
+  "biomes": "#yumecraft:verdant_temple",
+  "step": "raw_generation",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {},
+  "min_y": 4,
+  "max_y": 256,
+  "factor": 2,
+  "density_function": "yumecraft:verdant_temple/final_2",
+  "values": {
+    "1": {
+      "type": "yumecraft:default",
+      "minimum": -10.0,
+      "maximum": 0.0
+    },
+    "0": {
+      "type": "yumecraft:default",
+      "minimum": 0.0,
+      "maximum": 10.0
+    },
+    "2": {
+      "type": "yumecraft:default",
+      "minimum": 0.0,
+      "maximum": 0.4
+    },
+    "2y": {
+      "type": "yumecraft:axis_for_value",
+      "minimum": 0.0,
+      "maximum": 0.4,
+      "axis": "y"
+    },
+    "3": {
+      "type": "yumecraft:default",
+      "minimum": 0.4,
+      "maximum": 10.0
+    }
+  },
+
+  "structures": [
+
+    {
+      "type": "yumecraft:layered_grid",
+      "name": "Grand Pillar",
+      "base_elements": "yumecraft:verdant_temple/grand_pillar/base",
+      "middle_elements": "yumecraft:verdant_temple/grand_pillar/middle",
+      "top_elements": "yumecraft:verdant_temple/grand_pillar/top",
+      "bounding_size": [6,3,6],
+      "size": [4,2,4],
+      "location": [1,0,1],
+      "min_y": 0,
+      "max_y": 120,
+      "grid": [
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1"
+      ]
+    },
+    {
+      "type": "yumecraft:layered_grid",
+      "name": "Grand Pillar Alternate",
+      "base_elements": "yumecraft:verdant_temple/grand_pillar/base",
+      "middle_elements": "yumecraft:verdant_temple/grand_pillar/middle",
+      "top_elements": "yumecraft:verdant_temple/grand_pillar/top",
+      "bounding_size": [6,3,6],
+      "size": [4,2,4],
+      "location": [1,0,1],
+      "min_y": 0,
+      "max_y": 120,
+      "y_offset": 1,
+      "grid": [
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Garden",
+      "elements": "yumecraft:verdant_temple/garden",
+      "bounding_size": [6,3,6],
+      "size": [4,2,4],
+      "location": [1,0,1],
+      "grid": [
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Garden Alt",
+      "elements": "yumecraft:verdant_temple/garden",
+      "bounding_size": [6,3,6],
+      "size": [4,2,4],
+      "location": [1,0,1],
+      "y_offset": 1,
+      "grid": [
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+        "0", "0", "0", "0", "0", "0",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1",
+        "1", "1", "1", "1", "1", "1"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Inner temple pool",
+      "elements": "yumecraft:verdant_temple/inner_temple/decoration",
+      "bounding_size": [6,4,6],
+      "size": [4,3,4],
+      "location": [1,0,1],
+      "grid": [
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3",
+        "3", "3", "3", "3", "3", "3"
+      ]
+    },
+
+    {
+      "type": "yumecraft:default",
+      "name": "Inner temple alternate base",
+      "elements": "yumecraft:verdant_temple/inner_temple/alternate_base",
+      "bounding_size": [4,4,4],
+      "size": [2,3,2],
+      "location": [1,0,1],
+      "grid": [
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3",
+        "3", "3", "3", "3"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Northwest inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/northwest",
+      "bounding_size": [3,4,3],
+      "size": [1,3,1],
+      "location": [1,0,1],
+      "grid": [
+        "2y", "2y", "0",
+        "2y", "3", "3",
+        "0", "3", "0",
+
+        "0", "0", "0",
+        "0", "3", "3",
+        "0", "3", "0",
+
+        "0", "0", "0",
+        "0", "3", "3",
+        "0", "3", "0",
+
+        "0", "0", "0",
+        "0", "3", "3",
+        "0", "3", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Southwest inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/southwest",
+      "bounding_size": [3,4,3],
+      "size": [1,3,1],
+      "location": [1,0,1],
+      "grid": [
+        "0", "2y", "2y",
+        "3", "3", "2y",
+        "0", "3", "0",
+
+        "0", "0", "0",
+        "3", "3", "0",
+        "0", "3", "0",
+
+        "0", "0", "0",
+        "3", "3", "0",
+        "0", "3", "0",
+
+        "0", "0", "0",
+        "3", "3", "0",
+        "0", "3", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Southeast inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/southeast",
+      "bounding_size": [3,4,3],
+      "size": [1,3,1],
+      "location": [1,0,1],
+      "grid": [
+        "0", "3", "0",
+        "3", "3", "2y",
+        "0", "2y", "2y",
+
+        "0", "3", "0",
+        "3", "3", "0",
+        "0", "0", "0",
+
+        "0", "3", "0",
+        "3", "3", "0",
+        "0", "0", "0",
+
+        "0", "3", "0",
+        "3", "3", "0",
+        "0", "0", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Northeast inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/northeast",
+      "bounding_size": [3,4,3],
+      "size": [1,3,1],
+      "location": [1,0,1],
+      "grid": [
+        "0", "3", "0",
+        "2y", "3", "3",
+        "2y", "2y", "0",
+
+        "0", "3", "0",
+        "0", "3", "3",
+        "0", "0", "0",
+
+        "0", "3", "0",
+        "0", "3", "3",
+        "0", "0", "0",
+
+        "0", "3", "0",
+        "0", "3", "3",
+        "0", "0", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "North inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/north",
+      "bounding_size": [1,4,3],
+      "size": [1,3,1],
+      "location": [0,0,1],
+      "grid": [
+        "2y", "3", "3",
+
+        "0", "3", "3",
+
+        "0", "3", "3",
+
+        "0", "3", "3"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "South inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/south",
+      "bounding_size": [1,4,3],
+      "size": [1,3,1],
+      "location": [0,0,1],
+      "grid": [
+        "3", "3", "2y",
+
+        "3", "3", "0",
+
+        "3", "3", "0",
+
+        "3", "3", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "West inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/west",
+      "bounding_size": [3,4,1],
+      "size": [1,3,1],
+      "location": [1,0,0],
+      "grid": [
+        "2y",
+        "3",
+        "3",
+
+        "0",
+        "3",
+        "3",
+
+        "0",
+        "3",
+        "3",
+
+        "0",
+        "3",
+        "3"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "East inner temple",
+      "elements": "yumecraft:verdant_temple/inner_temple/east",
+      "bounding_size": [3,4,1],
+      "size": [1,3,1],
+      "location": [1,0,0],
+      "grid": [
+        "3",
+        "3",
+        "2y",
+
+        "3",
+        "3",
+        "0",
+
+        "3",
+        "3",
+        "0",
+
+        "3",
+        "3",
+        "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "name": "Inner temple base",
+      "elements": "yumecraft:verdant_temple/inner_temple/base",
+      "bounding_size": [1,4,1],
+      "size": [1,3,1],
+      "location": [0,0,0],
+      "grid": [
+        "3",
+
+        "3",
+
+        "3",
+
+        "3"
+      ]
+    },
+    {
+      "type": "yumecraft:alternating",
+      "elements": "yumecraft:verdant_temple/stairway/main",
+      "bounding_size": [3,4,3],
+      "size": [1,2,1],
+      "location": [1,1,1],
+      "grid": [
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0",
+
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0",
+
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0",
+
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:alternating",
+      "elements": "yumecraft:verdant_temple/stairway/top",
+      "bounding_size": [3,4,3],
+      "size": [1,2,1],
+      "location": [1,1,1],
+      "grid": [
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0",
+
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0",
+
+        "0", "0", "0",
+        "0", "0", "0",
+        "0", "0", "0",
+
+        "-", "1", "-",
+        "1", "1", "1",
+        "-", "1", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_southwest",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-",
+
+        "-", "1", "-",
+        "0", "0", "1",
+        "0", "0", "-",
+
+        "-", "-", "-",
+        "0", "0", "-",
+        "0", "0", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_northwest",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-",
+
+        "-", "1", "-",
+        "1", "0", "0",
+        "-", "0", "0",
+
+        "-", "-", "-",
+        "-", "0", "0",
+        "-", "0", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_northeast",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-",
+
+        "-", "0", "0",
+        "1", "0", "0",
+        "-", "1", "-",
+
+        "-", "0", "0",
+        "-", "0", "0",
+        "-", "-", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_southeast",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-",
+
+        "0", "0", "-",
+        "0", "0", "1",
+        "-", "1", "-",
+
+        "0", "0", "-",
+        "0", "0", "-",
+        "-", "-", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_southwest",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "-", "-",
+        "0", "0", "-",
+        "0", "0", "-",
+
+        "-", "1", "-",
+        "0", "0", "1",
+        "0", "0", "-",
+
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_northwest",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "-", "-",
+        "-", "0", "0",
+        "-", "0", "0",
+
+        "-", "1", "-",
+        "1", "0", "0",
+        "-", "0", "0",
+
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_northeast",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "-", "0", "0",
+        "-", "0", "0",
+        "-", "-", "-",
+
+        "-", "0", "0",
+        "1", "0", "0",
+        "-", "1", "-",
+
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_southeast",
+      "bounding_size": [3,3,3],
+      "location": [1,1,1],
+      "grid": [
+        "0", "0", "-",
+        "0", "0", "-",
+        "-", "-", "-",
+
+        "0", "0", "-",
+        "0", "0", "1",
+        "-", "1", "-",
+
+        "-", "-", "-",
+        "-", "1", "-",
+        "-", "-", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_south",
+      "bounding_size": [1,3,3],
+      "location": [0,1,1],
+      "grid": [
+        "-", "1", "-",
+
+        "0", "0", "1",
+
+        "0", "0", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_south",
+      "bounding_size": [1,3,3],
+      "location": [0,1,1],
+      "grid": [
+        "0", "0", "-",
+
+        "0", "0", "1",
+
+        "-", "1", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_north",
+      "bounding_size": [1,3,3],
+      "location": [0,1,1],
+      "grid": [
+        "-", "1", "-",
+
+        "1", "0", "0",
+
+        "-", "0", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_north",
+      "bounding_size": [1,3,3],
+      "location": [0,1,1],
+      "grid": [
+        "-", "0", "0",
+
+        "1", "0", "0",
+
+        "-", "1", "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_west",
+      "bounding_size": [3,3,1],
+      "location": [1,1,0],
+      "grid": [
+        "-",
+        "1",
+        "-",
+
+        "1",
+        "0",
+        "0",
+
+        "-",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_west",
+      "bounding_size": [3,3,1],
+      "location": [1,1,0],
+      "grid": [
+        "-",
+        "0",
+        "0",
+
+        "1",
+        "0",
+        "0",
+
+        "-",
+        "1",
+        "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower_east",
+      "bounding_size": [3,3,1],
+      "location": [1,1,0],
+      "grid": [
+        "-",
+        "1",
+        "-",
+
+        "0",
+        "0",
+        "1",
+
+        "0",
+        "0",
+        "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper_east",
+      "bounding_size": [3,3,1],
+      "location": [1,1,0],
+      "grid": [
+        "0",
+        "0",
+        "-",
+
+        "0",
+        "0",
+        "1",
+
+        "-",
+        "1",
+        "-"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/south",
+      "bounding_size": [1,1,3],
+      "location": [0,0,1],
+      "grid": [
+        "0", "0", "1"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/north",
+      "bounding_size": [1,1,3],
+      "location": [0,0,1],
+      "grid": [
+        "1", "0", "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/west",
+      "bounding_size": [3,1,1],
+      "location": [1,0,0],
+      "grid": [
+        "1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/east",
+      "bounding_size": [3,1,1],
+      "location": [1,0,0],
+      "grid": [
+        "0",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/lower",
+      "bounding_size": [1,3,1],
+      "location": [0,1,0],
+      "grid": [
+        "1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/upper",
+      "bounding_size": [1,3,1],
+      "location": [0,1,0],
+      "grid": [
+        "0",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "type": "yumecraft:default",
+      "elements": "yumecraft:verdant_temple/base",
+      "bounding_size": [1,1,1],
+      "location": [0,0,0],
+      "grid": [
+        "0"
+      ]
+    }
+  ]
+}

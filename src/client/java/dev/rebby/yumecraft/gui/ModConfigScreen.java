@@ -69,14 +69,14 @@ public class ModConfigScreen extends BaseOwoScreen<FlowLayout> {
                 .child(Components.button(Text.of("Save"),
                         buttonComponent ->
                                 saveLocalConfigList())
-                        .tooltip(Text.of("Saves Config to server.\nWARNING: IN MULTIPLAYER CONFIGURATIONS CAN ONLY BE APPLIED WHEN" +
+                        .tooltip(Text.of("Saves Config to server.\nWARNING: CONFIGURATIONS CAN ONLY BE APPLIED WHEN" +
                                 "\nCONNECTING OR RECONNECTING TO A SERVER.")))
                         .child(Components.button(Text.of("Default"),
                                 buttonComponent -> {
                                     YumeCraft.CONFIG.sleepingTeleportation(YumeCraftConfigModel.getDefaultSleepingTeleportation());
                                     this.close();
                                 })
-                                .tooltip(Text.of("Resets Config to default and then closes.\nWARNING: IN MULTIPLAYER CONFIGURATIONS CAN ONLY BE APPLIED WHEN" +
+                                .tooltip(Text.of("Resets Config to default and then closes.\nWARNING: CONFIGURATIONS CAN ONLY BE APPLIED WHEN" +
                                         "\nCONNECTING OR RECONNECTING TO A SERVER.")))
         .child(Components.button(Text.of("Close"),
                 buttonComponent -> this.close())));
@@ -85,7 +85,7 @@ public class ModConfigScreen extends BaseOwoScreen<FlowLayout> {
         FlowLayout dimensionList = Containers.verticalFlow(Sizing.fill(90), Sizing.content());
         dimensionList.child(Components.label(Text.of("Sleep Teleportation List"))
                 .tooltip(Text.of("List of possible places to teleport when you sleep. " +
-                        "Any non yumecraft dimension teleports you to nowhere."))
+                        "\nAny non yumecraft dimension teleports you to nowhere."))
                 .margins(Insets.of(10,10,1,0)));
 
         for (Pair<Identifier, Integer> pair : localConfigDimensionList) {

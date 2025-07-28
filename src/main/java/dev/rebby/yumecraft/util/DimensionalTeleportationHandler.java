@@ -9,6 +9,7 @@ import io.wispforest.owo.config.Option;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.MinecraftServer;
@@ -20,9 +21,11 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.LocalRandom;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.profiling.jfr.event.ServerTickTimeEvent;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionOptionsRegistryHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -240,9 +243,13 @@ public class DimensionalTeleportationHandler {
     }
 
     private State findWorldState(World world) {
+        return findWorldState(world.getRegistryKey().getValue());
+    }
+
+    private State findWorldState(Identifier dimId) {
         YumeCraft.LOGGER.info("Finding world state...");
-        String namespace = world.getRegistryKey().getValue().getNamespace();
-        String path = world.getRegistryKey().getValue().getPath();
+        String namespace = dimId.getNamespace();
+        String path = dimId.getPath();
         YumeCraft.LOGGER.info("{}:{}", namespace, path);
 
         if (namespace.equals("minecraft") && path.equals("overworld")) {
@@ -290,6 +297,9 @@ public class DimensionalTeleportationHandler {
             }
             else if (dimId.equals(ModDimensions.INFINITE_MALL)) {
                 newState = new InfiniteMallTeleporterState();
+            }
+            else if (!dimId.equals(Identifier.ofVanilla("overworld"))) {
+                newState = new TeleportToSetTopState(user.getBlockPos(), 4, dimId);
             }
             else {
                 return this;
@@ -371,7 +381,7 @@ public class DimensionalTeleportationHandler {
             YumeCraft.LOGGER.info("trying to teleport...");
 
             if (worldTo == null || user.getWorld().getRegistryKey().equals(dimKey)) {
-                return this;
+                return findWorldState();
             }
 
             Vec3d teleportedLoc = getFlattestGroundFromTop(worldTo, setPos, distance, 2)
@@ -402,7 +412,7 @@ public class DimensionalTeleportationHandler {
             ServerWorld world = server.getWorld(dimKey);
 
             if (world == null || user.getWorld().getRegistryKey().equals(dimKey)) {
-                return this;
+                return findWorldState();
             }
 
             YumeCraft.LOGGER.info("Can load {}!", dimId);

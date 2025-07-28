@@ -85,7 +85,8 @@ public class ModConfigScreen extends BaseOwoScreen<FlowLayout> {
         FlowLayout dimensionList = Containers.verticalFlow(Sizing.fill(90), Sizing.content());
         dimensionList.child(Components.label(Text.of("Sleep Teleportation List"))
                 .tooltip(Text.of("List of possible places to teleport when you sleep. " +
-                        "\nAny non yumecraft dimension teleports you to nowhere."))
+                        "\nAny non yumecraft dimension teleports you to the top." +
+                        "\n(minecraft:empty teleports you to nowhere)"))
                 .margins(Insets.of(10,10,1,0)));
 
         for (Pair<Identifier, Integer> pair : localConfigDimensionList) {
